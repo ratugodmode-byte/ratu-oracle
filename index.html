@@ -949,17 +949,17 @@
 
   <div class="modal-backdrop" id="passportModal" aria-hidden="true">
     <div class="modal wide">
-      <div class="modal-head"><h2>Protection Sphere #089 Passport</h2><button class="close" data-close aria-label="Close">&times;</button></div>
+      <div class="modal-head"><h2 id="passportTitle">Sphere Passport</h2><button class="close" data-close aria-label="Close">&times;</button></div>
       <div class="dashboard" style="grid-template-columns:260px 1fr 220px">
         <div class="passport-thumb" style="height:330px"><div class="sigil"></div></div>
         <div>
-          <p><strong>Status:</strong> Active</p>
-          <p><strong>Intention:</strong> Protection and Courage</p>
-          <p><strong>QR URL:</strong> ratuoracle.com/passport/protection-sphere-089</p>
-          <p><strong>Owner journey:</strong> Created by Mira, gifted to Daniel, traded to Aisha, now listed by Sarah.</p>
-          <div class="story-list" style="margin-top:18px">
-            <article class="story"><span class="avatar">SM</span><div><p>I carried this during a tough time at work. It gave me the strength and calm I needed.</p><small>May 20, 2024</small></div><div class="story-img"></div></article>
-            <article class="story"><span class="avatar">DK</span><div><p>After meditating with this Sphere for 2 weeks, I felt more confident and fearless.</p><small>May 18, 2024</small></div><div class="story-img"></div></article>
+          <p><strong>Status:</strong> <span id="passportStatus">Active</span></p>
+          <p><strong>Category:</strong> <span id="passportCategory">Protection</span></p>
+          <p><strong>Intention:</strong> <span id="passportIntention">Protection and Courage</span></p>
+          <p><strong>QR URL:</strong> <span id="passportQrUrl">/passport/sphere</span></p>
+          <p><strong>Owner journey:</strong> <span id="passportJourney">This Sphere is ready for its first owner story.</span></p>
+          <div class="story-list" id="passportStories" style="margin-top:18px">
+            <div class="empty-state" style="padding:20px"><strong>No experiences yet</strong>Be the first to write this Sphere's story.</div>
           </div>
         </div>
         <div>
@@ -1018,6 +1018,13 @@
     const marketGrid = document.getElementById("marketGrid");
     const experienceSphereSelect = document.getElementById("experienceSphereSelect");
     const latestStories = document.getElementById("latestStories");
+    const passportTitle = document.getElementById("passportTitle");
+    const passportStatus = document.getElementById("passportStatus");
+    const passportCategory = document.getElementById("passportCategory");
+    const passportIntention = document.getElementById("passportIntention");
+    const passportQrUrl = document.getElementById("passportQrUrl");
+    const passportJourney = document.getElementById("passportJourney");
+    const passportStories = document.getElementById("passportStories");
     const state = {
       spheres: [],
       activeCategory: "all"
@@ -1104,6 +1111,39 @@
         const date = new Date(experience.created_at).toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" });
         return `<article class="story"><span class="avatar">${initials || "RO"}</span><div><p>${escapeHtml(experience.story)}</p><small>${escapeHtml(experience.author_name || "Ratu Member")} - ${date}</small></div><div class="story-img"></div></article>`;
       }).join("");
+    }
+
+    async function showSpherePassport(sphereId) {
+      const sphere = state.spheres.find(item => item.id === sphereId);
+      if (!sphere) {
+        showToast("Could not find that Sphere in the loaded marketplace data.");
+        return;
+      }
+
+      passportTitle.textContent = `${sphere.title} Passport`;
+      passportStatus.textContent = sphere.status || "active";
+      passportCategory.textContent = sphere.category || "Unknown";
+      passportIntention.textContent = sphere.intention || "No intention has been written yet.";
+      passportQrUrl.textContent = `/passport/${sphere.id}`;
+      passportJourney.textContent = `Created from the ${sphere.category || "Chant"} marketplace. Add experiences to build its owner journey.`;
+      passportStories.innerHTML = '<div class="empty-state" style="padding:20px"><strong>Loading experiences...</strong></div>';
+      openModal("passport");
+
+      try {
+        const data = await apiFetch(`/.netlify/functions/experiences?sphere_id=${encodeURIComponent(sphere.id)}`);
+        const experiences = data.experiences || [];
+        if (!experiences.length) {
+          passportStories.innerHTML = '<div class="empty-state" style="padding:20px"><strong>No experiences yet</strong>Be the first to write this Sphere\\'s story.</div>';
+          return;
+        }
+        passportStories.innerHTML = experiences.map(experience => {
+          const initials = String(experience.author_name || "RO").split(" ").map(part => part[0]).join("").slice(0, 2).toUpperCase();
+          const date = new Date(experience.created_at).toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" });
+          return `<article class="story"><span class="avatar">${initials || "RO"}</span><div><p>${escapeHtml(experience.story)}</p><small>${date}</small></div><div class="story-img"></div></article>`;
+        }).join("");
+      } catch (error) {
+        passportStories.innerHTML = `<div class="empty-state" style="padding:20px"><strong>Could not load experiences</strong>${escapeHtml(error.message)}</div>`;
+      }
     }
 
     function escapeHtml(value) {
@@ -1209,6 +1249,13 @@
 
       if (open) {
         event.preventDefault();
+        if (open.dataset.open === "passport") {
+          const product = open.closest(".product[data-sphere-id]");
+          if (product) {
+            showSpherePassport(product.dataset.sphereId);
+            return;
+          }
+        }
         openModal(open.dataset.open);
       }
       if (close || backdrop) closeModals();
