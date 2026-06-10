@@ -1133,7 +1133,7 @@
         const data = await apiFetch(`/.netlify/functions/experiences?sphere_id=${encodeURIComponent(sphere.id)}`);
         const experiences = data.experiences || [];
         if (!experiences.length) {
-          passportStories.innerHTML = '<div class="empty-state" style="padding:20px"><strong>No experiences yet</strong>Be the first to write this Sphere\\'s story.</div>';
+          passportStories.innerHTML = "<div class=\"empty-state\" style=\"padding:20px\"><strong>No experiences yet</strong>Be the first to write this Sphere's story.</div>";
           return;
         }
         passportStories.innerHTML = experiences.map(experience => {
