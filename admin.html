@@ -165,6 +165,47 @@
       background-size: cover;
       background-position: center;
     }
+    .promo-preview {
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background:
+        linear-gradient(135deg, rgba(68, 34, 107, .94), rgba(184, 122, 44, .72)),
+        #44226b;
+      color: white;
+      padding: 18px;
+      display: grid;
+      gap: 12px;
+      min-height: 220px;
+      align-content: start;
+    }
+    .promo-preview h3 { color: white; margin: 0; }
+    .promo-preview p { margin: 0; color: rgba(255,255,255,.86); line-height: 1.5; }
+    .promo-links { display: flex; gap: 8px; flex-wrap: wrap; }
+    .promo-pill {
+      display: inline-flex;
+      min-height: 32px;
+      align-items: center;
+      justify-content: center;
+      border-radius: 999px;
+      padding: 0 12px;
+      background: rgba(255,255,255,.14);
+      border: 1px solid rgba(255,255,255,.34);
+      color: white;
+      font-weight: 800;
+      font-size: 12px;
+      text-decoration: none;
+    }
+    .keyword-box {
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: white;
+      padding: 12px;
+      display: grid;
+      gap: 8px;
+      color: var(--muted);
+      line-height: 1.45;
+      font-size: 13px;
+    }
     .tabs {
       display: flex;
       gap: 8px;
@@ -461,19 +502,50 @@
     }
 
     async function loadAdmin() {
-      const [statsData, sphereData, experienceData, settingsData] = await Promise.all([
+      const [statsResult, adminSpheresResult, adminExperiencesResult, settingsResult] = await Promise.allSettled([
         api("/.netlify/functions/admin-stats"),
         api("/.netlify/functions/admin-spheres"),
         api("/.netlify/functions/admin-experiences"),
         api("/.netlify/functions/site-settings", { headers: { "X-Admin-Secret": state.secret } })
       ]);
-      renderStats(statsData.stats || {});
-      state.spheres = sphereData.spheres || [];
-      state.experiences = experienceData.experiences || [];
-      state.settings = settingsData.settings || {};
+
+      let publicFallbackMessage = "";
+
+      if (adminSpheresResult.status === "fulfilled") {
+        state.spheres = adminSpheresResult.value.spheres || [];
+      } else {
+        const publicSpheres = await api("/.netlify/functions/spheres");
+        state.spheres = publicSpheres.spheres || [];
+        publicFallbackMessage = "Showing public sphere data. Upload/deploy admin function files to enable full admin controls.";
+      }
+
+      if (adminExperiencesResult.status === "fulfilled") {
+        state.experiences = adminExperiencesResult.value.experiences || [];
+      } else {
+        const publicExperiences = await api("/.netlify/functions/experiences");
+        state.experiences = publicExperiences.experiences || [];
+        publicFallbackMessage = "Showing public experience data. Upload/deploy admin function files to enable full admin controls.";
+      }
+
+      if (statsResult.status === "fulfilled") {
+        renderStats(statsResult.value.stats || {});
+      } else {
+        renderStats({
+          spheres: state.spheres.length,
+          experiences: state.experiences.length,
+          open_listings: state.spheres.filter(sphere => sphere.listing_status === "open" || sphere.status === "active").length,
+          users: 0
+        });
+        publicFallbackMessage = publicFallbackMessage || "Showing public database data because admin stats is not deployed yet.";
+      }
+
+      state.settings = settingsResult.status === "fulfilled" ? settingsResult.value.settings || {} : {};
       renderSpheres();
       renderExperiences();
       renderSettings();
+      if (publicFallbackMessage) {
+        setStatus(els.sphereStatus, publicFallbackMessage, "error");
+      }
     }
 
     async function unlock() {
