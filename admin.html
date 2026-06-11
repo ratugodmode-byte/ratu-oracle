@@ -1,0 +1,520 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Ratu Oracle Admin</title>
+  <style>
+    :root {
+      --ink: #1f1728;
+      --muted: #6e6374;
+      --plum: #44226b;
+      --plum-2: #6d3b98;
+      --gold: #b87a2c;
+      --line: #eadfd2;
+      --paper: #fffaf4;
+      --soft: #f7efe5;
+      --danger: #9f2f2f;
+      --ok: #31704b;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      color: var(--ink);
+      background:
+        radial-gradient(circle at top left, rgba(184, 122, 44, .16), transparent 34rem),
+        linear-gradient(180deg, #fffdf9 0%, #f8efe5 100%);
+    }
+    button, input, textarea, select { font: inherit; }
+    button { cursor: pointer; }
+    a { color: inherit; }
+    .shell { max-width: 1240px; margin: 0 auto; padding: 24px; }
+    .topbar {
+      border-bottom: 1px solid var(--line);
+      background: rgba(255, 250, 244, .9);
+      position: sticky;
+      top: 0;
+      z-index: 5;
+      backdrop-filter: blur(16px);
+    }
+    .nav {
+      min-height: 72px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+    }
+    h1, h2, h3 {
+      font-family: Georgia, "Times New Roman", serif;
+      font-weight: 500;
+      letter-spacing: 0;
+    }
+    h1 { margin: 0; font-size: 30px; }
+    h2 { margin: 0 0 14px; font-size: 24px; }
+    h3 { margin: 0 0 8px; font-size: 20px; }
+    .sub { margin: 4px 0 0; color: var(--muted); }
+    .btn {
+      min-height: 38px;
+      border-radius: 6px;
+      border: 1px solid #b89b82;
+      background: white;
+      color: var(--ink);
+      font-weight: 800;
+      padding: 0 14px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      text-transform: uppercase;
+      font-size: 12px;
+      letter-spacing: .04em;
+    }
+    .btn.primary {
+      background: linear-gradient(135deg, var(--plum), var(--plum-2));
+      color: white;
+      border-color: var(--plum);
+    }
+    .btn.danger {
+      background: var(--danger);
+      color: white;
+      border-color: var(--danger);
+    }
+    .btn.small { min-height: 32px; padding: 0 10px; }
+    .grid { display: grid; gap: 18px; }
+    .stats { grid-template-columns: repeat(4, 1fr); }
+    .layout { grid-template-columns: 340px 1fr; align-items: start; }
+    .panel {
+      background: rgba(255, 255, 255, .78);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      box-shadow: 0 16px 40px rgba(57, 31, 23, .1);
+      padding: 18px;
+    }
+    .stat strong {
+      display: block;
+      color: var(--plum);
+      font-size: 30px;
+      line-height: 1;
+    }
+    .stat span { color: var(--muted); font-size: 13px; }
+    label {
+      display: grid;
+      gap: 6px;
+      color: #3a303e;
+      font-size: 13px;
+      font-weight: 800;
+    }
+    input, textarea, select {
+      width: 100%;
+      border: 1px solid #dac8b9;
+      border-radius: 6px;
+      background: white;
+      padding: 11px;
+      color: var(--ink);
+    }
+    textarea { min-height: 112px; resize: vertical; }
+    .form { display: grid; gap: 12px; }
+    .row { display: flex; gap: 10px; flex-wrap: wrap; align-items: center; }
+    .status {
+      margin-top: 12px;
+      border-radius: 8px;
+      padding: 11px 12px;
+      background: white;
+      border: 1px solid var(--line);
+      color: var(--muted);
+      font-size: 14px;
+    }
+    .status.error { color: var(--danger); border-color: #d49b9b; background: #fff4f2; }
+    .status.ok { color: var(--ok); border-color: #a8c8b2; background: #f3fff7; }
+    .list { display: grid; gap: 12px; }
+    .item {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 14px;
+      align-items: start;
+      border: 1px solid var(--line);
+      background: white;
+      border-radius: 8px;
+      padding: 14px;
+    }
+    .item p { margin: 4px 0; color: var(--muted); line-height: 1.45; }
+    .item small { color: var(--muted); }
+    .item-actions {
+      display: grid;
+      gap: 8px;
+      justify-items: end;
+      min-width: 150px;
+    }
+    .qr {
+      width: 116px;
+      height: 116px;
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      background: var(--paper);
+      padding: 6px;
+    }
+    .preview-bg {
+      min-height: 140px;
+      border-radius: 8px;
+      border: 1px solid var(--line);
+      background:
+        linear-gradient(90deg, rgba(255, 250, 244, .9), rgba(255, 250, 244, .24)),
+        var(--preview-bg, linear-gradient(135deg, #3a243b, #ad8155));
+      background-size: cover;
+      background-position: center;
+    }
+    .tabs {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin: 18px 0;
+    }
+    .tab {
+      border: 1px solid var(--line);
+      background: white;
+      border-radius: 999px;
+      padding: 9px 13px;
+      font-weight: 800;
+      font-size: 13px;
+    }
+    .tab.active { background: var(--plum); color: white; border-color: var(--plum); }
+    .hidden { display: none; }
+    @media (max-width: 900px) {
+      .stats, .layout { grid-template-columns: 1fr; }
+      .item { grid-template-columns: 1fr; }
+      .item-actions { justify-items: stretch; }
+    }
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <div class="shell nav">
+      <div>
+        <h1>Ratu Oracle Admin</h1>
+        <p class="sub">Manage Chant Spheres, experiences, QR codes, and homepage settings.</p>
+      </div>
+      <div class="row">
+        <a class="btn" href="/">View Site</a>
+        <button class="btn" id="refreshBtn">Refresh</button>
+      </div>
+    </div>
+  </header>
+
+  <main class="shell grid">
+    <section class="panel" id="loginPanel">
+      <h2>Admin Access</h2>
+      <div class="form">
+        <label>Admin secret
+          <input id="secretInput" type="password" placeholder="Enter ADMIN_SECRET">
+        </label>
+        <button class="btn primary" id="unlockBtn">Unlock Dashboard</button>
+      </div>
+      <div class="status" id="loginStatus">Add ADMIN_SECRET in Netlify environment variables, then use it here.</div>
+    </section>
+
+    <section id="adminApp" class="hidden grid">
+      <div class="grid stats">
+        <div class="panel stat"><strong id="statSpheres">0</strong><span>Chant Spheres</span></div>
+        <div class="panel stat"><strong id="statExperiences">0</strong><span>Experiences</span></div>
+        <div class="panel stat"><strong id="statListings">0</strong><span>Open Listings</span></div>
+        <div class="panel stat"><strong id="statUsers">0</strong><span>Users</span></div>
+      </div>
+
+      <div class="tabs" role="tablist">
+        <button class="tab active" data-tab="spheres">Spheres</button>
+        <button class="tab" data-tab="experiences">Experiences</button>
+        <button class="tab" data-tab="settings">Settings</button>
+      </div>
+
+      <section class="grid layout admin-tab" id="tab-spheres">
+        <aside class="panel">
+          <h2>QR Generator</h2>
+          <p class="sub">Select a sphere from the list to preview its QR code.</p>
+          <div class="status" id="qrStatus">No sphere selected.</div>
+          <div style="margin-top:14px"><img class="qr" id="selectedQr" alt="Selected sphere QR"></div>
+          <p class="sub" id="selectedQrUrl"></p>
+        </aside>
+        <div class="panel">
+          <h2>Manage Chant Spheres</h2>
+          <div class="list" id="sphereList"></div>
+        </div>
+      </section>
+
+      <section class="grid layout admin-tab hidden" id="tab-experiences">
+        <aside class="panel">
+          <h2>Write Experience</h2>
+          <form class="form" id="experienceForm">
+            <label>Sphere
+              <select id="experienceSphere" name="sphereId" required></select>
+            </label>
+            <label>Visibility
+              <select name="visibility">
+                <option value="public">Public</option>
+                <option value="followers">Followers only</option>
+                <option value="private">Private</option>
+              </select>
+            </label>
+            <label>Story
+              <textarea name="story" placeholder="Write the experience story..." required></textarea>
+            </label>
+            <button class="btn primary" type="submit">Publish Experience</button>
+          </form>
+        </aside>
+        <div class="panel">
+          <h2>Manage Experiences</h2>
+          <div class="list" id="experienceList"></div>
+        </div>
+      </section>
+
+      <section class="grid layout admin-tab hidden" id="tab-settings">
+        <aside class="panel">
+          <h2>Homepage Background</h2>
+          <form class="form" id="settingsForm">
+            <label>Hero background image URL
+              <input id="heroBackgroundUrl" name="hero_background_url" placeholder="https://example.com/image.jpg">
+            </label>
+            <button class="btn primary" type="submit">Save Background</button>
+          </form>
+          <div class="status" id="settingsStatus">Use an image URL from Cloudinary, R2, Shopify files, or another public image host.</div>
+        </aside>
+        <div class="panel">
+          <h2>Preview</h2>
+          <div class="preview-bg" id="backgroundPreview"></div>
+        </div>
+      </section>
+    </section>
+  </main>
+
+  <script>
+    const state = {
+      secret: sessionStorage.getItem("ratuAdminSecret") || "",
+      spheres: [],
+      experiences: [],
+      settings: {}
+    };
+
+    const els = {
+      loginPanel: document.getElementById("loginPanel"),
+      adminApp: document.getElementById("adminApp"),
+      secretInput: document.getElementById("secretInput"),
+      loginStatus: document.getElementById("loginStatus"),
+      statSpheres: document.getElementById("statSpheres"),
+      statExperiences: document.getElementById("statExperiences"),
+      statListings: document.getElementById("statListings"),
+      statUsers: document.getElementById("statUsers"),
+      sphereList: document.getElementById("sphereList"),
+      experienceList: document.getElementById("experienceList"),
+      experienceSphere: document.getElementById("experienceSphere"),
+      selectedQr: document.getElementById("selectedQr"),
+      selectedQrUrl: document.getElementById("selectedQrUrl"),
+      qrStatus: document.getElementById("qrStatus"),
+      heroBackgroundUrl: document.getElementById("heroBackgroundUrl"),
+      backgroundPreview: document.getElementById("backgroundPreview"),
+      settingsStatus: document.getElementById("settingsStatus")
+    };
+
+    function escapeHtml(value) {
+      return String(value ?? "").replace(/[&<>"']/g, char => ({
+        "&": "&amp;",
+        "<": "&lt;",
+        ">": "&gt;",
+        '"': "&quot;",
+        "'": "&#039;"
+      }[char]));
+    }
+
+    async function api(path, options = {}) {
+      const response = await fetch(path, {
+        ...options,
+        headers: {
+          "Content-Type": "application/json",
+          "X-Admin-Secret": state.secret,
+          ...(options.headers || {})
+        }
+      });
+      const data = await response.json().catch(() => ({}));
+      if (!response.ok) throw new Error(data.error || `Request failed with status ${response.status}.`);
+      return data;
+    }
+
+    function setStatus(element, message, type = "") {
+      element.textContent = message;
+      element.className = `status ${type}`;
+    }
+
+    function money(cents, currency = "USD") {
+      if (cents === null || cents === undefined) return "Trade";
+      return new Intl.NumberFormat("en-US", { style: "currency", currency }).format(cents / 100);
+    }
+
+    function qrTarget(sphere) {
+      return `${window.location.origin}/?sphere=${encodeURIComponent(sphere.id)}`;
+    }
+
+    function showQr(sphereId) {
+      const sphere = state.spheres.find(item => item.id === sphereId);
+      if (!sphere) return;
+      const target = qrTarget(sphere);
+      els.selectedQr.src = `/.netlify/functions/qr-code?text=${encodeURIComponent(target)}`;
+      els.selectedQrUrl.textContent = target;
+      setStatus(els.qrStatus, `QR ready for ${sphere.title}.`, "ok");
+    }
+
+    function renderStats(stats) {
+      els.statSpheres.textContent = stats.spheres || 0;
+      els.statExperiences.textContent = stats.experiences || 0;
+      els.statListings.textContent = stats.open_listings || 0;
+      els.statUsers.textContent = stats.users || 0;
+    }
+
+    function renderSpheres() {
+      if (!state.spheres.length) {
+        els.sphereList.innerHTML = '<div class="status">No spheres yet.</div>';
+        els.experienceSphere.innerHTML = '<option value="">No spheres available</option>';
+        return;
+      }
+
+      els.experienceSphere.innerHTML = state.spheres
+        .map(sphere => `<option value="${sphere.id}">${escapeHtml(sphere.title)}</option>`)
+        .join("");
+
+      els.sphereList.innerHTML = state.spheres.map(sphere => `
+        <article class="item">
+          <div>
+            <h3>${escapeHtml(sphere.title)}</h3>
+            <p><strong>${escapeHtml(sphere.category)}</strong> / ${escapeHtml(sphere.status)}</p>
+            <p>${escapeHtml(sphere.intention || "No intention written.")}</p>
+            <small>${money(sphere.price_cents, sphere.currency)} / ${sphere.experiences_count || 0} experiences / ${new Date(sphere.created_at).toLocaleString()}</small>
+          </div>
+          <div class="item-actions">
+            <button class="btn small" data-qr="${sphere.id}">QR</button>
+            <a class="btn small" href="/?sphere=${encodeURIComponent(sphere.id)}" target="_blank" rel="noreferrer">View</a>
+            <button class="btn danger small" data-delete-sphere="${sphere.id}">Delete</button>
+          </div>
+        </article>
+      `).join("");
+    }
+
+    function renderExperiences() {
+      if (!state.experiences.length) {
+        els.experienceList.innerHTML = '<div class="status">No experiences yet.</div>';
+        return;
+      }
+
+      els.experienceList.innerHTML = state.experiences.map(experience => `
+        <article class="item">
+          <div>
+            <h3>${escapeHtml(experience.sphere_title)}</h3>
+            <p>${escapeHtml(experience.story)}</p>
+            <small>${escapeHtml(experience.author_name)} / ${escapeHtml(experience.visibility)} / ${new Date(experience.created_at).toLocaleString()}</small>
+          </div>
+          <div class="item-actions">
+            <button class="btn danger small" data-delete-experience="${experience.id}">Delete</button>
+          </div>
+        </article>
+      `).join("");
+    }
+
+    function renderSettings() {
+      const url = state.settings.hero_background_url || "";
+      els.heroBackgroundUrl.value = url;
+      els.backgroundPreview.style.setProperty("--preview-bg", url ? `url("${url.replace(/"/g, "%22")}") center / cover` : "linear-gradient(135deg, #3a243b, #ad8155)");
+    }
+
+    async function loadAdmin() {
+      const [statsData, sphereData, experienceData, settingsData] = await Promise.all([
+        api("/.netlify/functions/admin-stats"),
+        api("/.netlify/functions/admin-spheres"),
+        api("/.netlify/functions/admin-experiences"),
+        api("/.netlify/functions/site-settings", { headers: { "X-Admin-Secret": state.secret } })
+      ]);
+      renderStats(statsData.stats || {});
+      state.spheres = sphereData.spheres || [];
+      state.experiences = experienceData.experiences || [];
+      state.settings = settingsData.settings || {};
+      renderSpheres();
+      renderExperiences();
+      renderSettings();
+    }
+
+    async function unlock() {
+      state.secret = els.secretInput.value.trim();
+      sessionStorage.setItem("ratuAdminSecret", state.secret);
+      try {
+        await loadAdmin();
+        els.loginPanel.classList.add("hidden");
+        els.adminApp.classList.remove("hidden");
+      } catch (error) {
+        setStatus(els.loginStatus, error.message, "error");
+      }
+    }
+
+    document.getElementById("unlockBtn").addEventListener("click", unlock);
+    document.getElementById("refreshBtn").addEventListener("click", () => loadAdmin().catch(error => alert(error.message)));
+    els.secretInput.value = state.secret;
+
+    document.querySelectorAll("[data-tab]").forEach(button => {
+      button.addEventListener("click", () => {
+        document.querySelectorAll("[data-tab]").forEach(tab => tab.classList.remove("active"));
+        document.querySelectorAll(".admin-tab").forEach(tab => tab.classList.add("hidden"));
+        button.classList.add("active");
+        document.getElementById(`tab-${button.dataset.tab}`).classList.remove("hidden");
+      });
+    });
+
+    document.addEventListener("click", async event => {
+      const qrButton = event.target.closest("[data-qr]");
+      const deleteSphereButton = event.target.closest("[data-delete-sphere]");
+      const deleteExperienceButton = event.target.closest("[data-delete-experience]");
+
+      if (qrButton) showQr(qrButton.dataset.qr);
+
+      if (deleteSphereButton) {
+        const sphere = state.spheres.find(item => item.id === deleteSphereButton.dataset.deleteSphere);
+        if (!confirm(`Delete "${sphere?.title || "this sphere"}"? This also removes its listings, passport, and experiences.`)) return;
+        await api("/.netlify/functions/admin-delete-sphere", {
+          method: "POST",
+          body: JSON.stringify({ id: deleteSphereButton.dataset.deleteSphere })
+        });
+        await loadAdmin();
+      }
+
+      if (deleteExperienceButton) {
+        if (!confirm("Delete this experience?")) return;
+        await api("/.netlify/functions/admin-delete-experience", {
+          method: "POST",
+          body: JSON.stringify({ id: deleteExperienceButton.dataset.deleteExperience })
+        });
+        await loadAdmin();
+      }
+    });
+
+    document.getElementById("experienceForm").addEventListener("submit", async event => {
+      event.preventDefault();
+      const payload = Object.fromEntries(new FormData(event.currentTarget).entries());
+      await api("/.netlify/functions/admin-experiences", {
+        method: "POST",
+        body: JSON.stringify(payload)
+      });
+      event.currentTarget.reset();
+      await loadAdmin();
+    });
+
+    document.getElementById("settingsForm").addEventListener("submit", async event => {
+      event.preventDefault();
+      const settings = Object.fromEntries(new FormData(event.currentTarget).entries());
+      await api("/.netlify/functions/site-settings", {
+        method: "POST",
+        body: JSON.stringify({ settings })
+      });
+      state.settings = settings;
+      renderSettings();
+      setStatus(els.settingsStatus, "Homepage background saved.", "ok");
+    });
+
+    if (state.secret) unlock();
+  </script>
+</body>
+</html>
