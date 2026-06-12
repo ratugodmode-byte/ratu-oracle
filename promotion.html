@@ -1,0 +1,399 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Free Online Tarot Reading | Ratu Oracle</title>
+  <meta name="description" content="Explore free online tarot reading, chant spheres, amulets, talismans, and spiritual stories from Ratu Oracle.">
+  <style>
+    :root {
+      --ink: #1f1728;
+      --muted: #6e6374;
+      --plum: #44226b;
+      --plum-2: #6d3b98;
+      --gold: #b87a2c;
+      --line: #eadfd2;
+      --paper: #fffaf4;
+      --soft: #f7efe5;
+      --shadow: 0 18px 58px rgba(48, 29, 17, .14);
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      color: var(--ink);
+      background:
+        radial-gradient(circle at 82% 10%, rgba(184, 122, 44, .22), transparent 30rem),
+        radial-gradient(circle at 12% 24%, rgba(68, 34, 107, .12), transparent 28rem),
+        linear-gradient(180deg, #fffdf9 0%, #f8efe5 100%);
+      min-height: 100vh;
+    }
+    a { color: inherit; }
+    .shell { width: min(1120px, calc(100% - 32px)); margin: 0 auto; }
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 4;
+      border-bottom: 1px solid var(--line);
+      background: rgba(255, 250, 244, .88);
+      backdrop-filter: blur(16px);
+    }
+    .nav {
+      min-height: 72px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+    }
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+      color: var(--ink);
+      font-weight: 900;
+      letter-spacing: .08em;
+    }
+    .brand-mark {
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      color: var(--gold);
+      border: 1px solid rgba(184, 122, 44, .28);
+    }
+    .btn {
+      min-height: 40px;
+      border-radius: 6px;
+      border: 1px solid #b89b82;
+      background: white;
+      color: var(--ink);
+      font-weight: 850;
+      padding: 0 16px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      text-transform: uppercase;
+      font-size: 12px;
+      letter-spacing: .04em;
+      text-decoration: none;
+    }
+    .btn.primary {
+      background: linear-gradient(135deg, var(--plum), var(--plum-2));
+      border-color: var(--plum);
+      color: white;
+    }
+    .hero {
+      min-height: calc(100vh - 72px);
+      display: grid;
+      grid-template-columns: minmax(0, 1.05fr) minmax(320px, .72fr);
+      gap: 34px;
+      align-items: center;
+      padding: 54px 0 36px;
+    }
+    h1, h2, h3 {
+      font-family: Georgia, "Times New Roman", serif;
+      font-weight: 500;
+      letter-spacing: 0;
+    }
+    h1 {
+      margin: 0;
+      font-size: clamp(42px, 6vw, 78px);
+      line-height: .96;
+      color: #2d1744;
+    }
+    .lede {
+      margin: 20px 0 0;
+      color: #34293b;
+      font-size: 19px;
+      line-height: 1.72;
+      max-width: 680px;
+    }
+    .actions { margin-top: 28px; display: flex; gap: 12px; flex-wrap: wrap; }
+    .keywords {
+      margin-top: 24px;
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+    .keyword {
+      border: 1px solid rgba(184, 122, 44, .3);
+      background: rgba(255, 255, 255, .72);
+      border-radius: 999px;
+      color: #4b4050;
+      padding: 8px 11px;
+      font-size: 13px;
+      font-weight: 750;
+    }
+    .card {
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: rgba(255, 255, 255, .76);
+      box-shadow: var(--shadow);
+      padding: 20px;
+    }
+    .feature-card {
+      min-height: 460px;
+      background:
+        linear-gradient(145deg, rgba(68, 34, 107, .95), rgba(184, 122, 44, .74)),
+        #44226b;
+      color: white;
+      display: grid;
+      align-content: space-between;
+      overflow: hidden;
+      position: relative;
+    }
+    .feature-card:before {
+      content: "";
+      position: absolute;
+      width: 260px;
+      height: 260px;
+      right: -70px;
+      top: -70px;
+      border-radius: 50%;
+      border: 1px solid rgba(255,255,255,.28);
+    }
+    .feature-card h2 {
+      position: relative;
+      z-index: 1;
+      margin: 0;
+      color: white;
+      font-size: 34px;
+      line-height: 1.05;
+    }
+    .feature-card p {
+      position: relative;
+      z-index: 1;
+      margin: 12px 0 0;
+      color: rgba(255,255,255,.86);
+      line-height: 1.6;
+    }
+    .mini-grid {
+      position: relative;
+      z-index: 1;
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 10px;
+      margin-top: 22px;
+    }
+    .mini {
+      border: 1px solid rgba(255,255,255,.26);
+      border-radius: 8px;
+      background: rgba(255,255,255,.12);
+      padding: 12px;
+      min-height: 92px;
+    }
+    .mini strong { display: block; margin-bottom: 6px; }
+    .mini span { color: rgba(255,255,255,.78); font-size: 13px; line-height: 1.4; }
+    .video {
+      margin-top: 18px;
+      border-radius: 8px;
+      overflow: hidden;
+      border: 1px solid var(--line);
+      background: #1f1728;
+      aspect-ratio: 16 / 9;
+      display: none;
+    }
+    .video iframe { width: 100%; height: 100%; border: 0; display: block; }
+    .section {
+      padding: 0 0 44px;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+    }
+    .section .card h3 { margin: 0 0 8px; color: #2d1744; font-size: 23px; }
+    .section .card p { margin: 0; color: var(--muted); line-height: 1.6; }
+    .status {
+      margin-top: 18px;
+      border-radius: 8px;
+      border: 1px solid var(--line);
+      background: white;
+      color: var(--muted);
+      padding: 12px 14px;
+      line-height: 1.5;
+    }
+    footer {
+      border-top: 1px solid var(--line);
+      padding: 24px 0;
+      color: var(--muted);
+      background: rgba(255,255,255,.46);
+    }
+    @media (max-width: 900px) {
+      .hero, .section { grid-template-columns: 1fr; }
+      .hero { min-height: auto; }
+    }
+    @media (max-width: 560px) {
+      .nav { flex-wrap: wrap; padding: 12px 0; }
+      .mini-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <div class="shell nav">
+      <a class="brand" href="/">
+        <span class="brand-mark" aria-hidden="true">RO</span>
+        <span>RATU ORACLE</span>
+      </a>
+      <nav class="actions" style="margin:0">
+        <a class="btn" href="/">Home</a>
+        <a class="btn" href="/#marketplace">Marketplace</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="shell">
+    <section class="hero">
+      <div>
+        <h1 id="promoTitle">Free Online Tarot Reading</h1>
+        <p class="lede" id="promoDescription">A Ratu Oracle page for free online tarot readings, spiritual stories, amulets, talismans, and protective intentions.</p>
+        <div class="actions" id="promoActions"></div>
+        <div class="keywords" id="promoKeywords"></div>
+        <div class="status" id="promoStatus">Loading promotion page...</div>
+      </div>
+
+      <aside class="card feature-card">
+        <div>
+          <h2>Readings, amulets, talismans, and stories in one place.</h2>
+          <p>Use this page as a public link hub for people looking for free tarot readings, spiritual protection, intention objects, and Ratu Oracle experiences.</p>
+        </div>
+        <div class="mini-grid">
+          <div class="mini"><strong>Tarot</strong><span>Invite people into free online readings and guidance.</span></div>
+          <div class="mini"><strong>Amulets</strong><span>Connect protection, love, clarity, wealth, and healing intentions.</span></div>
+          <div class="mini"><strong>Talismans</strong><span>Share meaning, activation, and personal stories.</span></div>
+          <div class="mini"><strong>Community</strong><span>Guide visitors into Chant Spheres and experiences.</span></div>
+        </div>
+      </aside>
+    </section>
+
+    <section class="video" id="youtubeWrap">
+      <iframe id="youtubeFrame" title="Ratu Oracle video" allowfullscreen></iframe>
+    </section>
+
+    <section class="section">
+      <article class="card">
+        <h3>Free Reading</h3>
+        <p>Use your main button to send visitors to a free reading form, booking page, or offer page.</p>
+      </article>
+      <article class="card">
+        <h3>Ko-fi Support</h3>
+        <p>Add your Ko-fi link so supporters can tip, donate, or support your spiritual work.</p>
+      </article>
+      <article class="card">
+        <h3>Search Metadata</h3>
+        <p>The admin dashboard saves keywords and metadata to help this page speak clearly to tarot, amulet, and talisman audiences.</p>
+      </article>
+    </section>
+  </main>
+
+  <footer>
+    <div class="shell">© 2026 Ratu Oracle. Every Chant Sphere carries a story.</div>
+  </footer>
+
+  <script>
+    function escapeHtml(value) {
+      return String(value ?? "").replace(/[&<>"']/g, char => ({
+        "&": "&amp;",
+        "<": "&lt;",
+        ">": "&gt;",
+        '"': "&quot;",
+        "'": "&#039;"
+      }[char]));
+    }
+
+    function safeUrl(value) {
+      const url = String(value || "").trim();
+      if (!/^https?:\/\//i.test(url)) return "";
+      return url;
+    }
+
+    function youtubeEmbedUrl(value) {
+      const url = safeUrl(value);
+      if (!url) return "";
+      try {
+        const parsed = new URL(url);
+        if (parsed.hostname.includes("youtu.be")) {
+          const id = parsed.pathname.replace("/", "");
+          return id ? `https://www.youtube.com/embed/${id}` : "";
+        }
+        if (parsed.hostname.includes("youtube.com")) {
+          const id = parsed.searchParams.get("v");
+          if (id) return `https://www.youtube.com/embed/${id}`;
+          if (parsed.pathname.startsWith("/shorts/")) return `https://www.youtube.com/embed/${parsed.pathname.split("/")[2]}`;
+          if (parsed.pathname.startsWith("/embed/")) return url;
+        }
+      } catch (error) {
+        return "";
+      }
+      return "";
+    }
+
+    function setMeta(name, content) {
+      const value = String(content || "").trim();
+      if (!value) return;
+      let tag = document.querySelector(`meta[name="${name}"]`);
+      if (!tag) {
+        tag = document.createElement("meta");
+        tag.name = name;
+        document.head.appendChild(tag);
+      }
+      tag.content = value;
+    }
+
+    function applyPromotion(settings = {}) {
+      const title = settings.promo_title || "Free Online Tarot Reading";
+      const description = settings.promo_description || "A Ratu Oracle page for free online tarot readings, spiritual stories, amulets, talismans, and protective intentions.";
+      const primaryUrl = safeUrl(settings.promo_primary_url);
+      const primaryLabel = settings.promo_primary_label || "Book a Free Reading";
+      const youtubeUrl = safeUrl(settings.promo_youtube_url);
+      const kofiUrl = safeUrl(settings.promo_kofi_url);
+      const keywords = String(settings.promo_keywords || "free online tarot reading, amulet, talisman, spiritual protection")
+        .split(",")
+        .map(item => item.trim())
+        .filter(Boolean)
+        .slice(0, 16);
+
+      document.getElementById("promoTitle").textContent = title;
+      document.getElementById("promoDescription").textContent = description;
+      document.title = settings.promo_meta_title || `${title} | Ratu Oracle`;
+      setMeta("description", settings.promo_meta_description || description);
+
+      document.getElementById("promoActions").innerHTML = [
+        primaryUrl ? `<a class="btn primary" href="${escapeHtml(primaryUrl)}" target="_blank" rel="noreferrer">${escapeHtml(primaryLabel)}</a>` : "",
+        youtubeUrl ? `<a class="btn" href="${escapeHtml(youtubeUrl)}" target="_blank" rel="noreferrer">Watch YouTube</a>` : "",
+        kofiUrl ? `<a class="btn" href="${escapeHtml(kofiUrl)}" target="_blank" rel="noreferrer">Support on Ko-fi</a>` : ""
+      ].join("");
+
+      document.getElementById("promoKeywords").innerHTML = keywords
+        .map(keyword => `<span class="keyword">${escapeHtml(keyword)}</span>`)
+        .join("");
+
+      const embed = youtubeEmbedUrl(youtubeUrl);
+      if (embed) {
+        document.getElementById("youtubeFrame").src = embed;
+        document.getElementById("youtubeWrap").style.display = "block";
+      }
+
+      document.getElementById("promoStatus").textContent = "Promotion page loaded from Ratu Oracle settings.";
+    }
+
+    async function loadPromotion() {
+      try {
+        const response = await fetch("/.netlify/functions/site-settings");
+        const data = await response.json();
+        if (!response.ok) throw new Error(data.error || "Could not load promotion settings.");
+        applyPromotion(data.settings || {});
+      } catch (error) {
+        applyPromotion({});
+        document.getElementById("promoStatus").textContent = "Default page shown. Save Promotion settings in the admin dashboard after deploy.";
+      }
+    }
+
+    loadPromotion();
+  </script>
+</body>
+</html>
