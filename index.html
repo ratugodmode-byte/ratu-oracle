@@ -507,6 +507,46 @@
     .community-stats strong { display: block; color: var(--plum); font-size: 21px; }
     .community-stats span { font-size: 12px; color: var(--muted); }
 
+    .promo-widget {
+      display: none;
+      grid-template-columns: minmax(0, 1fr) auto;
+      gap: 18px;
+      align-items: center;
+      padding: 20px;
+      background:
+        linear-gradient(135deg, rgba(68, 34, 107, .94), rgba(184, 122, 44, .72)),
+        #44226b;
+      color: white;
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+    }
+    .promo-widget.is-visible { display: grid; }
+    .promo-widget h2 {
+      margin: 0 0 8px;
+      color: white;
+      font-family: Georgia, "Times New Roman", serif;
+      font-weight: 500;
+      font-size: 28px;
+    }
+    .promo-widget p { margin: 0; color: rgba(255,255,255,.86); line-height: 1.55; }
+    .promo-widget .promo-actions { display: flex; gap: 10px; flex-wrap: wrap; justify-content: flex-end; }
+    .promo-widget .promo-link {
+      min-height: 38px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 999px;
+      padding: 0 14px;
+      color: white;
+      text-decoration: none;
+      font-weight: 800;
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: .04em;
+      border: 1px solid rgba(255,255,255,.38);
+      background: rgba(255,255,255,.15);
+    }
+
     .trust {
       display: grid; grid-template-columns: repeat(4, 1fr);
       gap: 14px;
@@ -618,6 +658,27 @@
       background: var(--line);
       flex: 1;
     }
+    .form-status {
+      display: none;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: white;
+      color: var(--muted);
+      padding: 11px 12px;
+      font-size: 13px;
+      line-height: 1.45;
+    }
+    .form-status.show { display: block; }
+    .form-status.error {
+      border-color: #c98282;
+      background: #fff4f2;
+      color: #7f2626;
+    }
+    .form-status.ok {
+      border-color: #a6c8b0;
+      background: #f3fff7;
+      color: #2f6d48;
+    }
     .toast {
       position: fixed;
       right: 24px;
@@ -652,6 +713,8 @@
       .dashboard { grid-template-columns: 1fr; }
       .trust { grid-template-columns: repeat(2, 1fr); }
       .footer-grid { grid-template-columns: repeat(2, 1fr); }
+      .promo-widget { grid-template-columns: 1fr; }
+      .promo-widget .promo-actions { justify-content: flex-start; }
     }
     @media (max-width: 640px) {
       .shell { padding: 0 16px; }
@@ -856,6 +919,16 @@
       </div>
     </section>
 
+    <section class="shell" id="promotion">
+      <div class="promo-widget" id="promoWidget">
+        <div>
+          <h2 id="promoWidgetTitle">Free Online Tarot Reading</h2>
+          <p id="promoWidgetDescription">Share your reading, video, Ko-fi link, talisman story, or spiritual offer with the Ratu Oracle community.</p>
+        </div>
+        <div class="promo-actions" id="promoWidgetLinks"></div>
+      </div>
+    </section>
+
     <section class="shell">
       <div class="panel trust">
         <div class="trust-item"><div class="trust-icon"><svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10Z"/><path d="m9 12 2 2 4-5"/></svg></div><div><h4>Safe and Trusted</h4><p>Every transaction is secured and protected.</p></div></div>
@@ -892,6 +965,7 @@
         </svg>
         Continue with Google
       </button>
+      <div class="form-status" id="authStatus"></div>
       <div class="auth-divider">or use email</div>
       <form class="form-grid" data-demo-form="Account access saved for preview.">
         <label>Email<input type="email" placeholder="you@example.com" required></label>
@@ -918,6 +992,7 @@
           <label>Listing type<select name="listingType"><option>Keep private</option><option>Sell</option><option>Trade</option><option>Sell or trade</option></select></label>
           <label>Price<input name="price" type="number" min="0" step="0.01" placeholder="32.00"></label>
         </div>
+        <div class="form-status" id="createSphereStatus"></div>
         <button class="btn primary" type="submit">Generate Passport and QR</button>
       </form>
     </div>
@@ -964,7 +1039,7 @@
         </div>
         <div>
           <div style="background:white;border:1px solid var(--line);border-radius:8px;padding:16px;text-align:center">
-            <div class="qr" style="position:static;margin:0 auto 12px;width:118px;height:118px;border-width:8px"></div>
+            <img id="passportQrImage" alt="Sphere QR code" style="display:block;margin:0 auto 12px;width:118px;height:118px;border:1px solid var(--line);border-radius:6px;background:#fffaf4;padding:6px">
             <strong>Scan Passport</strong>
             <p style="color:var(--muted);font-size:13px">Every sphere gets its own public QR story page.</p>
           </div>
@@ -1023,8 +1098,11 @@
     const passportCategory = document.getElementById("passportCategory");
     const passportIntention = document.getElementById("passportIntention");
     const passportQrUrl = document.getElementById("passportQrUrl");
+    const passportQrImage = document.getElementById("passportQrImage");
     const passportJourney = document.getElementById("passportJourney");
     const passportStories = document.getElementById("passportStories");
+    const authStatus = document.getElementById("authStatus");
+    const createSphereStatus = document.getElementById("createSphereStatus");
     const state = {
       spheres: [],
       activeCategory: "all"
@@ -1050,6 +1128,18 @@
     function setApiStatus(message, isError = false) {
       apiStatus.textContent = message;
       apiStatus.classList.toggle("error", isError);
+    }
+
+    function setFormStatus(element, message, type = "") {
+      if (!element) return;
+      element.textContent = message;
+      element.className = `form-status show ${type}`.trim();
+    }
+
+    function clearFormStatus(element) {
+      if (!element) return;
+      element.textContent = "";
+      element.className = "form-status";
     }
 
     function money(cents, currency = "USD") {
@@ -1124,7 +1214,9 @@
       passportStatus.textContent = sphere.status || "active";
       passportCategory.textContent = sphere.category || "Unknown";
       passportIntention.textContent = sphere.intention || "No intention has been written yet.";
-      passportQrUrl.textContent = `/passport/${sphere.id}`;
+      const qrTarget = `${window.location.origin}/?sphere=${encodeURIComponent(sphere.id)}`;
+      passportQrUrl.textContent = qrTarget;
+      passportQrImage.src = `/.netlify/functions/qr-code?text=${encodeURIComponent(qrTarget)}`;
       passportJourney.textContent = `Created from the ${sphere.category || "Chant"} marketplace. Add experiences to build its owner journey.`;
       passportStories.innerHTML = '<div class="empty-state" style="padding:20px"><strong>Loading experiences...</strong></div>';
       openModal("passport");
@@ -1156,6 +1248,87 @@
       }[char]));
     }
 
+    function applySiteSettings(settings = {}) {
+      const backgroundUrl = String(settings.hero_background_url || "").trim();
+      if (backgroundUrl) {
+        const safeUrl = backgroundUrl.replace(/"/g, "%22");
+        document.querySelector(".hero").style.background = `
+          linear-gradient(90deg, rgba(255, 250, 244, .98) 0%, rgba(255, 250, 244, .82) 43%, rgba(255, 250, 244, .22) 74%),
+          radial-gradient(circle at 73% 35%, rgba(255, 243, 208, .72), transparent 20rem),
+          url("${safeUrl}") center right / cover
+        `;
+      }
+
+      const promoTitle = String(settings.promo_title || "").trim();
+      const promoDescription = String(settings.promo_description || "").trim();
+      const promoPrimaryUrl = safeExternalUrl(settings.promo_primary_url);
+      const promoPrimaryLabel = String(settings.promo_primary_label || "Open Link").trim();
+      const promoYoutubeUrl = safeExternalUrl(settings.promo_youtube_url);
+      const promoTiktokUrl = safeExternalUrl(settings.promo_tiktok_url);
+      const promoKofiUrl = safeExternalUrl(settings.promo_kofi_url);
+      const promoNetlifyUrl = safeExternalUrl(settings.promo_netlify_url);
+      const promoWidget = document.getElementById("promoWidget");
+      const promoLinks = document.getElementById("promoWidgetLinks");
+
+      if (promoTitle || promoDescription || promoPrimaryUrl || promoYoutubeUrl || promoTiktokUrl || promoKofiUrl || promoNetlifyUrl) {
+        document.getElementById("promoWidgetTitle").textContent = promoTitle || "Free Online Tarot Reading";
+        document.getElementById("promoWidgetDescription").textContent = promoDescription || "Share your reading, video, talisman story, or spiritual offer with the Ratu Oracle community.";
+        promoLinks.innerHTML = [
+          promoPrimaryUrl ? `<a class="promo-link" href="${escapeHtml(promoPrimaryUrl)}" target="_blank" rel="noreferrer">${escapeHtml(promoPrimaryLabel)}</a>` : "",
+          promoYoutubeUrl ? `<a class="promo-link" href="${escapeHtml(promoYoutubeUrl)}" target="_blank" rel="noreferrer">YouTube</a>` : "",
+          promoTiktokUrl ? `<a class="promo-link" href="${escapeHtml(promoTiktokUrl)}" target="_blank" rel="noreferrer">TikTok</a>` : "",
+          promoKofiUrl ? `<a class="promo-link" href="${escapeHtml(promoKofiUrl)}" target="_blank" rel="noreferrer">Ko-fi</a>` : "",
+          promoNetlifyUrl ? `<a class="promo-link" href="${escapeHtml(promoNetlifyUrl)}" target="_blank" rel="noreferrer">Free Reading</a>` : "",
+          `<a class="promo-link" href="/promotion.html">Full Page</a>`
+        ].join("");
+        promoWidget.classList.add("is-visible");
+      }
+
+      updateMetaTag("description", settings.promo_meta_description || promoDescription);
+      updateMetaProperty("og:title", settings.promo_meta_title || promoTitle);
+      updateMetaProperty("og:description", settings.promo_meta_description || promoDescription);
+      if (settings.promo_meta_title) document.title = settings.promo_meta_title;
+    }
+
+    function safeExternalUrl(url) {
+      const value = String(url || "").trim();
+      if (!/^https?:\/\//i.test(value)) return "";
+      return value;
+    }
+
+    function updateMetaTag(name, content) {
+      const value = String(content || "").trim();
+      if (!value) return;
+      let tag = document.querySelector(`meta[name="${name}"]`);
+      if (!tag) {
+        tag = document.createElement("meta");
+        tag.setAttribute("name", name);
+        document.head.appendChild(tag);
+      }
+      tag.setAttribute("content", value);
+    }
+
+    function updateMetaProperty(property, content) {
+      const value = String(content || "").trim();
+      if (!value) return;
+      let tag = document.querySelector(`meta[property="${property}"]`);
+      if (!tag) {
+        tag = document.createElement("meta");
+        tag.setAttribute("property", property);
+        document.head.appendChild(tag);
+      }
+      tag.setAttribute("content", value);
+    }
+
+    async function loadSiteSettings() {
+      try {
+        const data = await apiFetch("/.netlify/functions/site-settings");
+        applySiteSettings(data.settings || {});
+      } catch (error) {
+        console.warn("Site settings could not be loaded", error);
+      }
+    }
+
     async function loadDatabaseData() {
       try {
         await apiFetch("/.netlify/functions/health");
@@ -1164,6 +1337,8 @@
         state.spheres = data.spheres || [];
         renderMarketplace();
         renderExperienceOptions();
+        const sphereFromQr = new URLSearchParams(window.location.search).get("sphere");
+        if (sphereFromQr) window.setTimeout(() => showSpherePassport(sphereFromQr), 150);
         if (!state.spheres.length) {
           setApiStatus("Neon is connected, but your database is empty. Create your first Chant Sphere.");
         } else {
@@ -1286,28 +1461,46 @@
       });
     });
 
-    document.querySelector("[data-google-auth]").addEventListener("click", () => {
-      window.location.href = "/.netlify/functions/auth-google-start";
+    document.querySelector("[data-google-auth]").addEventListener("click", async () => {
+      clearFormStatus(authStatus);
+      setFormStatus(authStatus, "Connecting to Google...");
+      try {
+        const data = await apiFetch("/.netlify/functions/auth-google-start?json=1");
+        window.location.href = data.url;
+      } catch (error) {
+        setFormStatus(authStatus, error.message, "error");
+      }
     });
 
     document.getElementById("createSphereForm").addEventListener("submit", async event => {
       event.preventDefault();
       const form = event.currentTarget;
+      const submitButton = form.querySelector('button[type="submit"]');
       const formData = new FormData(form);
       const payload = Object.fromEntries(formData.entries());
 
       try {
-        await apiFetch("/.netlify/functions/create-sphere", {
+        clearFormStatus(createSphereStatus);
+        setFormStatus(createSphereStatus, "Saving your Sphere to Neon...");
+        submitButton.disabled = true;
+        const result = await apiFetch("/.netlify/functions/create-sphere", {
           method: "POST",
           body: JSON.stringify(payload)
         });
-        closeModals();
+        setFormStatus(createSphereStatus, `Saved: ${result.sphere?.title || "Sphere"} is now in the marketplace.`, "ok");
         form.reset();
         showToast("Sphere saved to Neon.");
         await loadDatabaseData();
+        window.setTimeout(() => {
+          closeModals();
+          clearFormStatus(createSphereStatus);
+        }, 900);
       } catch (error) {
         showToast(error.message);
+        setFormStatus(createSphereStatus, error.message, "error");
         setApiStatus(error.message, true);
+      } finally {
+        submitButton.disabled = false;
       }
     });
 
@@ -1351,6 +1544,7 @@
 
     loadDemoAccount();
     loadSession();
+    loadSiteSettings();
     loadDatabaseData();
   </script>
 </body>

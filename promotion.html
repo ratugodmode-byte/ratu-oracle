@@ -199,6 +199,37 @@
       display: none;
     }
     .video iframe { width: 100%; height: 100%; border: 0; display: block; }
+    .embed-grid {
+      padding: 0 0 44px;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+    }
+    .embed-card {
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: rgba(255,255,255,.78);
+      box-shadow: var(--shadow);
+      padding: 16px;
+      min-height: 360px;
+      overflow: hidden;
+    }
+    .embed-card h2 { margin: 0 0 12px; color: #2d1744; font-size: 25px; }
+    .embed-card iframe {
+      width: 100%;
+      height: 420px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: white;
+    }
+    .embed-card .fallback { color: var(--muted); line-height: 1.5; }
+    .translate-box {
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: white;
+      padding: 10px 12px;
+      min-height: 42px;
+    }
     .section {
       padding: 0 0 44px;
       display: grid;
@@ -207,6 +238,36 @@
     }
     .section .card h3 { margin: 0 0 8px; color: #2d1744; font-size: 23px; }
     .section .card p { margin: 0; color: var(--muted); line-height: 1.6; }
+    .article {
+      margin-bottom: 44px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: rgba(255,255,255,.8);
+      box-shadow: var(--shadow);
+      padding: 26px;
+      display: none;
+    }
+    .article h2 { margin: 0 0 14px; color: #2d1744; font-size: 34px; }
+    .article div { color: #3a303e; line-height: 1.75; white-space: pre-wrap; }
+    .community-write {
+      margin-bottom: 44px;
+      display: grid;
+      grid-template-columns: .85fr 1.15fr;
+      gap: 16px;
+      align-items: start;
+    }
+    label { display: grid; gap: 6px; color: #3a303e; font-size: 13px; font-weight: 800; }
+    input, textarea, select {
+      width: 100%;
+      border: 1px solid #dac8b9;
+      border-radius: 6px;
+      background: white;
+      padding: 11px;
+      color: var(--ink);
+      font: inherit;
+    }
+    textarea { min-height: 132px; resize: vertical; }
+    .form { display: grid; gap: 12px; }
     .status {
       margin-top: 18px;
       border-radius: 8px;
@@ -223,7 +284,7 @@
       background: rgba(255,255,255,.46);
     }
     @media (max-width: 900px) {
-      .hero, .section { grid-template-columns: 1fr; }
+      .hero, .section, .embed-grid, .community-write { grid-template-columns: 1fr; }
       .hero { min-height: auto; }
     }
     @media (max-width: 560px) {
@@ -253,6 +314,9 @@
         <p class="lede" id="promoDescription">A Ratu Oracle page for free online tarot readings, spiritual stories, amulets, talismans, and protective intentions.</p>
         <div class="actions" id="promoActions"></div>
         <div class="keywords" id="promoKeywords"></div>
+        <div class="translate-box" style="margin-top:18px">
+          <div id="google_translate_element"></div>
+        </div>
         <div class="status" id="promoStatus">Loading promotion page...</div>
       </div>
 
@@ -272,6 +336,51 @@
 
     <section class="video" id="youtubeWrap">
       <iframe id="youtubeFrame" title="Ratu Oracle video" allowfullscreen></iframe>
+    </section>
+
+    <section class="embed-grid">
+      <article class="embed-card" id="tiktokCard">
+        <h2>TikTok</h2>
+        <div id="tiktokEmbed" class="fallback">Add a TikTok link in the dashboard to show it here.</div>
+      </article>
+      <article class="embed-card" id="kofiCard">
+        <h2>Ko-fi Shop</h2>
+        <iframe id="kofiFrame" title="Ko-fi shop"></iframe>
+        <p class="fallback" id="kofiFallback">If the shop cannot embed, use the Ko-fi button above.</p>
+      </article>
+      <article class="embed-card" id="netlifyCard">
+        <h2>Free Tarot Reading Page</h2>
+        <iframe id="netlifyFrame" title="Free online tarot reading page"></iframe>
+        <p class="fallback" id="netlifyFallback">Add your free online tarot reading page link in the dashboard.</p>
+      </article>
+    </section>
+
+    <article class="article" id="articleSection">
+      <h2 id="articleTitle"></h2>
+      <div id="articleBody"></div>
+    </article>
+
+    <section class="community-write">
+      <aside class="card">
+        <h2>Community Stories</h2>
+        <p class="fallback">Visitors can write a public experience connected to one of your Chant Spheres. It saves through the same Neon experience system.</p>
+      </aside>
+      <div class="card">
+        <h2>Write Something</h2>
+        <form class="form" id="communityForm">
+          <label>Sphere
+            <select id="communitySphere" name="sphereId" required>
+              <option value="">Loading spheres...</option>
+            </select>
+          </label>
+          <label>Your story
+            <textarea name="story" placeholder="Share your tarot reading, amulet, talisman, or Chant Sphere experience..." required></textarea>
+          </label>
+          <input type="hidden" name="visibility" value="public">
+          <button class="btn primary" type="submit">Share Story</button>
+        </form>
+        <div class="status" id="communityStatus">Write a respectful story for the Ratu Oracle community.</div>
+      </div>
     </section>
 
     <section class="section">
@@ -332,6 +441,24 @@
       return "";
     }
 
+    function renderTikTok(url) {
+      const safe = safeUrl(url);
+      const holder = document.getElementById("tiktokEmbed");
+      if (!safe) return;
+      holder.innerHTML = `
+        <blockquote class="tiktok-embed" cite="${escapeHtml(safe)}" data-video-id="${escapeHtml(safe.split("/").pop())}" style="max-width:605px; min-width:260px;">
+          <section><a target="_blank" rel="noreferrer" href="${escapeHtml(safe)}">Watch on TikTok</a></section>
+        </blockquote>
+      `;
+      const oldScript = document.getElementById("tiktokEmbedScript");
+      if (oldScript) oldScript.remove();
+      const script = document.createElement("script");
+      script.id = "tiktokEmbedScript";
+      script.src = "https://www.tiktok.com/embed.js";
+      script.async = true;
+      document.body.appendChild(script);
+    }
+
     function setMeta(name, content) {
       const value = String(content || "").trim();
       if (!value) return;
@@ -350,7 +477,9 @@
       const primaryUrl = safeUrl(settings.promo_primary_url);
       const primaryLabel = settings.promo_primary_label || "Book a Free Reading";
       const youtubeUrl = safeUrl(settings.promo_youtube_url);
+      const tiktokUrl = safeUrl(settings.promo_tiktok_url);
       const kofiUrl = safeUrl(settings.promo_kofi_url);
+      const netlifyUrl = safeUrl(settings.promo_netlify_url);
       const keywords = String(settings.promo_keywords || "free online tarot reading, amulet, talisman, spiritual protection")
         .split(",")
         .map(item => item.trim())
@@ -365,7 +494,9 @@
       document.getElementById("promoActions").innerHTML = [
         primaryUrl ? `<a class="btn primary" href="${escapeHtml(primaryUrl)}" target="_blank" rel="noreferrer">${escapeHtml(primaryLabel)}</a>` : "",
         youtubeUrl ? `<a class="btn" href="${escapeHtml(youtubeUrl)}" target="_blank" rel="noreferrer">Watch YouTube</a>` : "",
-        kofiUrl ? `<a class="btn" href="${escapeHtml(kofiUrl)}" target="_blank" rel="noreferrer">Support on Ko-fi</a>` : ""
+        tiktokUrl ? `<a class="btn" href="${escapeHtml(tiktokUrl)}" target="_blank" rel="noreferrer">Watch TikTok</a>` : "",
+        kofiUrl ? `<a class="btn" href="${escapeHtml(kofiUrl)}" target="_blank" rel="noreferrer">Shop Ko-fi</a>` : "",
+        netlifyUrl ? `<a class="btn" href="${escapeHtml(netlifyUrl)}" target="_blank" rel="noreferrer">Free Tarot Page</a>` : ""
       ].join("");
 
       document.getElementById("promoKeywords").innerHTML = keywords
@@ -378,8 +509,63 @@
         document.getElementById("youtubeWrap").style.display = "block";
       }
 
+      renderTikTok(tiktokUrl);
+
+      if (kofiUrl) {
+        document.getElementById("kofiFrame").src = kofiUrl;
+        document.getElementById("kofiFallback").innerHTML = `If this shop does not display here, <a href="${escapeHtml(kofiUrl)}" target="_blank" rel="noreferrer">open Ko-fi directly</a>.`;
+      }
+
+      if (netlifyUrl) {
+        document.getElementById("netlifyFrame").src = netlifyUrl;
+        document.getElementById("netlifyFallback").innerHTML = `If this page does not display here, <a href="${escapeHtml(netlifyUrl)}" target="_blank" rel="noreferrer">open the free reading page</a>.`;
+      }
+
+      const articleTitle = String(settings.promo_article_title || "").trim();
+      const articleBody = String(settings.promo_article_body || "").trim();
+      if (articleTitle || articleBody) {
+        document.getElementById("articleTitle").textContent = articleTitle || "Ratu Oracle Article";
+        document.getElementById("articleBody").textContent = articleBody;
+        document.getElementById("articleSection").style.display = "block";
+      }
+
       document.getElementById("promoStatus").textContent = "Promotion page loaded from Ratu Oracle settings.";
     }
+
+    async function loadCommunitySpheres() {
+      const select = document.getElementById("communitySphere");
+      try {
+        const response = await fetch("/.netlify/functions/spheres");
+        const data = await response.json();
+        if (!response.ok) throw new Error(data.error || "Could not load spheres.");
+        const spheres = data.spheres || [];
+        select.innerHTML = spheres.length
+          ? spheres.map(sphere => `<option value="${escapeHtml(sphere.id)}">${escapeHtml(sphere.title)}</option>`).join("")
+          : '<option value="">No spheres available yet</option>';
+      } catch (error) {
+        select.innerHTML = '<option value="">Could not load spheres</option>';
+      }
+    }
+
+    document.getElementById("communityForm").addEventListener("submit", async event => {
+      event.preventDefault();
+      const status = document.getElementById("communityStatus");
+      const payload = Object.fromEntries(new FormData(event.currentTarget).entries());
+      status.textContent = "Saving your story...";
+      try {
+        const response = await fetch("/.netlify/functions/experiences", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(payload)
+        });
+        const data = await response.json().catch(() => ({}));
+        if (!response.ok) throw new Error(data.error || "Could not save story.");
+        event.currentTarget.reset();
+        status.textContent = "Story saved. Thank you for sharing.";
+      } catch (error) {
+        status.textContent = error.message;
+      }
+    });
 
     async function loadPromotion() {
       try {
@@ -393,7 +579,14 @@
       }
     }
 
+    function googleTranslateElementInit() {
+      new google.translate.TranslateElement({ pageLanguage: "en", layout: google.translate.TranslateElement.InlineLayout.SIMPLE }, "google_translate_element");
+    }
+    window.googleTranslateElementInit = googleTranslateElementInit;
+
     loadPromotion();
+    loadCommunitySpheres();
   </script>
+  <script src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
 </body>
 </html>

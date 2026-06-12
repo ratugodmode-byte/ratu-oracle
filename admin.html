@@ -266,6 +266,7 @@
       <div class="tabs" role="tablist">
         <button class="tab active" data-tab="spheres">Spheres</button>
         <button class="tab" data-tab="experiences">Experiences</button>
+        <button class="tab" data-tab="promotion">Promotion</button>
         <button class="tab" data-tab="settings">Settings</button>
       </div>
 
@@ -345,6 +346,72 @@
         </div>
       </section>
 
+      <section class="grid layout admin-tab hidden" id="tab-promotion">
+        <aside class="panel">
+          <h2>Promotion Link Page</h2>
+          <form class="form" id="promotionForm">
+            <label>Widget title
+              <input id="promoTitle" name="promo_title" placeholder="Free Online Tarot Reading">
+            </label>
+            <label>Short description
+              <textarea id="promoDescription" name="promo_description" placeholder="Invite people who want free online tarot readings, amulets, talismans, and spiritual guidance."></textarea>
+            </label>
+            <label>Main link
+              <input id="promoPrimaryUrl" name="promo_primary_url" placeholder="https://your-link.com">
+            </label>
+            <label>Main button label
+              <input id="promoPrimaryLabel" name="promo_primary_label" placeholder="Book a Free Reading">
+            </label>
+            <label>YouTube video link
+              <input id="promoYoutubeUrl" name="promo_youtube_url" placeholder="https://www.youtube.com/watch?v=...">
+            </label>
+            <label>TikTok video link
+              <input id="promoTiktokUrl" name="promo_tiktok_url" placeholder="https://www.tiktok.com/@ratuoracle/video/7645541227214982408">
+            </label>
+            <label>Ko-fi or support link
+              <input id="promoKofiUrl" name="promo_kofi_url" placeholder="https://ko-fi.com/godm0de/shop">
+            </label>
+            <label>Free tarot page link
+              <input id="promoNetlifyUrl" name="promo_netlify_url" placeholder="https://statuesque-kitsune-459769.netlify.app/">
+            </label>
+            <label>Keywords
+              <textarea id="promoKeywords" name="promo_keywords" placeholder="free online tarot reading, amulet, talisman, spiritual protection"></textarea>
+            </label>
+            <label>Article title
+              <input id="promoArticleTitle" name="promo_article_title" placeholder="How Free Online Tarot Reading Connects With Amulets and Talismans">
+            </label>
+            <label>Article body
+              <textarea id="promoArticleBody" name="promo_article_body" placeholder="Write a public article for visitors. This can explain your tarot reading offer, amulets, talismans, and Chant Sphere stories."></textarea>
+            </label>
+            <label>SEO meta title
+              <input id="promoMetaTitle" name="promo_meta_title" placeholder="Free Online Tarot Reading and Spiritual Amulets">
+            </label>
+            <label>SEO meta description
+              <textarea id="promoMetaDescription" name="promo_meta_description" placeholder="Discover free online tarot reading, chant spheres, talismans, amulets, and spiritual stories from Ratu Oracle."></textarea>
+            </label>
+            <div class="row">
+              <button class="btn" type="button" id="generatePromoAi">Generate Keywords</button>
+              <button class="btn primary" type="submit">Save Promotion</button>
+            </div>
+          </form>
+          <div class="status" id="promotionStatus">This creates a small public widget and saves metadata for search-friendly content.</div>
+        </aside>
+        <div class="panel">
+          <h2>Widget Preview</h2>
+          <div class="promo-preview" id="promoPreview">
+            <h3 id="promoPreviewTitle">Free Online Tarot Reading</h3>
+            <p id="promoPreviewDescription">Write your offer, video link, Ko-fi link, and keywords here.</p>
+            <div class="promo-links" id="promoPreviewLinks"></div>
+          </div>
+          <div class="row" style="margin-top:12px">
+            <a class="btn primary" href="/promotion.html" target="_blank" rel="noreferrer">Open Public Page</a>
+            <a class="btn" href="/promotion" target="_blank" rel="noreferrer">Open /promotion</a>
+          </div>
+          <h2 style="margin-top:18px">AI Keyword Helper</h2>
+          <div class="keyword-box" id="promoAiOutput">Click Generate Keywords to create search phrases and metadata ideas. Google/AI API automation can be connected later with API keys.</div>
+        </div>
+      </section>
+
       <section class="grid layout admin-tab hidden" id="tab-settings">
         <aside class="panel">
           <h2>Homepage Background</h2>
@@ -390,7 +457,25 @@
       qrStatus: document.getElementById("qrStatus"),
       heroBackgroundUrl: document.getElementById("heroBackgroundUrl"),
       backgroundPreview: document.getElementById("backgroundPreview"),
-      settingsStatus: document.getElementById("settingsStatus")
+      settingsStatus: document.getElementById("settingsStatus"),
+      promotionStatus: document.getElementById("promotionStatus"),
+      promoTitle: document.getElementById("promoTitle"),
+      promoDescription: document.getElementById("promoDescription"),
+      promoPrimaryUrl: document.getElementById("promoPrimaryUrl"),
+      promoPrimaryLabel: document.getElementById("promoPrimaryLabel"),
+      promoYoutubeUrl: document.getElementById("promoYoutubeUrl"),
+      promoTiktokUrl: document.getElementById("promoTiktokUrl"),
+      promoKofiUrl: document.getElementById("promoKofiUrl"),
+      promoNetlifyUrl: document.getElementById("promoNetlifyUrl"),
+      promoKeywords: document.getElementById("promoKeywords"),
+      promoArticleTitle: document.getElementById("promoArticleTitle"),
+      promoArticleBody: document.getElementById("promoArticleBody"),
+      promoMetaTitle: document.getElementById("promoMetaTitle"),
+      promoMetaDescription: document.getElementById("promoMetaDescription"),
+      promoPreviewTitle: document.getElementById("promoPreviewTitle"),
+      promoPreviewDescription: document.getElementById("promoPreviewDescription"),
+      promoPreviewLinks: document.getElementById("promoPreviewLinks"),
+      promoAiOutput: document.getElementById("promoAiOutput")
     };
 
     function escapeHtml(value) {
@@ -501,6 +586,82 @@
       els.backgroundPreview.style.setProperty("--preview-bg", url ? `url("${url.replace(/"/g, "%22")}") center / cover` : "linear-gradient(135deg, #3a243b, #ad8155)");
     }
 
+    function renderPromotion() {
+      const settings = state.settings || {};
+      els.promoTitle.value = settings.promo_title || "";
+      els.promoDescription.value = settings.promo_description || "";
+      els.promoPrimaryUrl.value = settings.promo_primary_url || "";
+      els.promoPrimaryLabel.value = settings.promo_primary_label || "";
+      els.promoYoutubeUrl.value = settings.promo_youtube_url || "";
+      els.promoTiktokUrl.value = settings.promo_tiktok_url || "";
+      els.promoKofiUrl.value = settings.promo_kofi_url || "";
+      els.promoNetlifyUrl.value = settings.promo_netlify_url || "";
+      els.promoKeywords.value = settings.promo_keywords || "";
+      els.promoArticleTitle.value = settings.promo_article_title || "";
+      els.promoArticleBody.value = settings.promo_article_body || "";
+      els.promoMetaTitle.value = settings.promo_meta_title || "";
+      els.promoMetaDescription.value = settings.promo_meta_description || "";
+      updatePromotionPreview();
+    }
+
+    function safeLink(url) {
+      const value = String(url || "").trim();
+      if (!value) return "";
+      if (!/^https?:\/\//i.test(value)) return "";
+      return value;
+    }
+
+    function updatePromotionPreview() {
+      const title = els.promoTitle.value.trim() || "Free Online Tarot Reading";
+      const description = els.promoDescription.value.trim() || "Share readings, videos, talisman stories, and spiritual links with the Ratu Oracle community.";
+      const primaryUrl = safeLink(els.promoPrimaryUrl.value);
+      const primaryLabel = els.promoPrimaryLabel.value.trim() || "Open Link";
+      const youtubeUrl = safeLink(els.promoYoutubeUrl.value);
+      const tiktokUrl = safeLink(els.promoTiktokUrl.value);
+      const kofiUrl = safeLink(els.promoKofiUrl.value);
+      const netlifyUrl = safeLink(els.promoNetlifyUrl.value);
+
+      els.promoPreviewTitle.textContent = title;
+      els.promoPreviewDescription.textContent = description;
+      els.promoPreviewLinks.innerHTML = [
+        primaryUrl ? `<a class="promo-pill" href="${escapeHtml(primaryUrl)}" target="_blank" rel="noreferrer">${escapeHtml(primaryLabel)}</a>` : "",
+        youtubeUrl ? `<a class="promo-pill" href="${escapeHtml(youtubeUrl)}" target="_blank" rel="noreferrer">YouTube</a>` : "",
+        tiktokUrl ? `<a class="promo-pill" href="${escapeHtml(tiktokUrl)}" target="_blank" rel="noreferrer">TikTok</a>` : "",
+        kofiUrl ? `<a class="promo-pill" href="${escapeHtml(kofiUrl)}" target="_blank" rel="noreferrer">Ko-fi</a>` : "",
+        netlifyUrl ? `<a class="promo-pill" href="${escapeHtml(netlifyUrl)}" target="_blank" rel="noreferrer">Free Reading Page</a>` : ""
+      ].join("");
+    }
+
+    function generatePromotionKeywords() {
+      const title = els.promoTitle.value.trim() || "Free Online Tarot Reading";
+      const base = [
+        "free online tarot reading",
+        "online tarot reading free",
+        "spiritual guidance online",
+        "amulet for protection",
+        "talisman meaning",
+        "personalized spiritual talisman",
+        "oracle reading online",
+        "energy protection amulet",
+        "love tarot reading",
+        "spiritual marketplace"
+      ];
+      const titleWords = title.toLowerCase().split(/\s+/).filter(word => word.length > 3);
+      const generated = [...new Set([...base, ...titleWords.map(word => `${word} tarot reading`), ...titleWords.map(word => `${word} amulet`)])].slice(0, 16);
+      const metaTitle = title.length > 12 ? title : "Free Online Tarot Reading and Spiritual Amulets";
+      const metaDescription = `Explore ${title.toLowerCase()}, chant spheres, amulets, talismans, spiritual stories, and community experiences from Ratu Oracle.`;
+
+      els.promoKeywords.value = generated.join(", ");
+      els.promoMetaTitle.value = metaTitle;
+      els.promoMetaDescription.value = metaDescription.slice(0, 160);
+      els.promoAiOutput.innerHTML = `
+        <strong>Suggested keywords:</strong> ${escapeHtml(generated.join(", "))}<br>
+        <strong>Meta title:</strong> ${escapeHtml(metaTitle)}<br>
+        <strong>Meta description:</strong> ${escapeHtml(metaDescription.slice(0, 160))}
+      `;
+      updatePromotionPreview();
+    }
+
     async function loadAdmin() {
       const [statsResult, adminSpheresResult, adminExperiencesResult, settingsResult] = await Promise.allSettled([
         api("/.netlify/functions/admin-stats"),
@@ -543,6 +704,7 @@
       renderSpheres();
       renderExperiences();
       renderSettings();
+      renderPromotion();
       if (publicFallbackMessage) {
         setStatus(els.sphereStatus, publicFallbackMessage, "error");
       }
@@ -641,6 +803,25 @@
       state.settings = settings;
       renderSettings();
       setStatus(els.settingsStatus, "Homepage background saved.", "ok");
+    });
+
+    document.getElementById("promotionForm").addEventListener("input", updatePromotionPreview);
+    document.getElementById("generatePromoAi").addEventListener("click", generatePromotionKeywords);
+
+    document.getElementById("promotionForm").addEventListener("submit", async event => {
+      event.preventDefault();
+      const promotionSettings = Object.fromEntries(new FormData(event.currentTarget).entries());
+      try {
+        await api("/.netlify/functions/site-settings", {
+          method: "POST",
+          body: JSON.stringify({ settings: promotionSettings })
+        });
+        state.settings = { ...state.settings, ...promotionSettings };
+        renderPromotion();
+        setStatus(els.promotionStatus, "Promotion widget and metadata saved.", "ok");
+      } catch (error) {
+        setStatus(els.promotionStatus, error.message, "error");
+      }
     });
 
     if (state.secret) unlock();
