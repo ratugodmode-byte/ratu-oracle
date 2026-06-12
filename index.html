@@ -898,9 +898,7 @@
       <div class="mini-panel">
         <h2 class="title">Latest Experiences</h2>
         <div class="story-list" id="latestStories" style="margin-top:16px">
-          <article class="story"><span class="avatar">SM</span><div><p>I carried this during a tough time at work. It gave me the strength and calm I needed.</p><small>Sarah M. - May 20, 2024</small></div><div class="story-img"></div></article>
-          <article class="story"><span class="avatar">DK</span><div><p>After meditating with this Sphere for 2 weeks, I felt more confident and fearless.</p><small>Daniel K. - May 18, 2024</small></div><div class="story-img"></div></article>
-          <article class="story"><span class="avatar">AR</span><div><p>This Sphere protected me during my travels. I felt safe and guided.</p><small>Aisha R. - May 15, 2024</small></div><div class="story-img"></div></article>
+          <div class="empty-state" style="padding:18px"><strong>Loading latest experiences...</strong></div>
         </div>
         <button class="btn ghost" style="margin-top:14px" data-open="story">Write Experience</button>
       </div>
@@ -1195,7 +1193,10 @@
     }
 
     function renderStories(experiences) {
-      if (!experiences.length) return;
+      if (!experiences.length) {
+        latestStories.innerHTML = '<div class="empty-state" style="padding:18px"><strong>No experiences yet</strong>Write the first real experience from the community.</div>';
+        return;
+      }
       latestStories.innerHTML = experiences.slice(0, 3).map(experience => {
         const initials = String(experience.author_name || "RO").split(" ").map(part => part[0]).join("").slice(0, 2).toUpperCase();
         const date = new Date(experience.created_at).toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" });
