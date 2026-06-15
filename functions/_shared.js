@@ -32,7 +32,7 @@ export function requireMethod(event, methods) {
 
 export function getSql() {
   if (!process.env.DATABASE_URL) {
-    throw new Error("DATABASE_URL is not set. Add it in Netlify site settings > Environment variables.");
+    throw new Error("DATABASE_URL is not set. Add it in Vercel Project Settings > Environment Variables.");
   }
   return neon(process.env.DATABASE_URL);
 }

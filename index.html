@@ -352,7 +352,17 @@
       display: grid;
       place-items: center;
       overflow: hidden;
+      background-size: cover;
+      background-position: center;
     }
+    .product-art.has-image:before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, rgba(24, 14, 22, .04), rgba(24, 14, 22, .28));
+      pointer-events: none;
+    }
+    .product-art.has-image .mini-card { display: none; }
     .product-art.love { background: radial-gradient(circle at 28% 25%, #f3a9ba, transparent 80px), linear-gradient(135deg, #7b243e, #f1c0cd); }
     .product-art.wealth { background: radial-gradient(circle at 54% 44%, #e8c05a, transparent 75px), linear-gradient(135deg, #263f36, #a58b4a); }
     .product-art.protection { background: radial-gradient(circle at 54% 44%, #d7b35a, transparent 75px), linear-gradient(135deg, #152139, #697b90); }
@@ -1149,6 +1159,20 @@
       return String(category || "Protection").toLowerCase();
     }
 
+    function sphereImageUrl(sphere) {
+      const uploaded = String(sphere.image_url || "").trim();
+      if (uploaded) return uploaded;
+      const category = artClass(sphere.category);
+      const fallbackImages = {
+        love: "assets/spheres/solomon-love-harmony.png",
+        healing: "assets/spheres/unity-card-24.png",
+        protection: "assets/spheres/protection-card-28.png",
+        clarity: "assets/spheres/divine-light-card-10.png",
+        wealth: "assets/spheres/solomon-love-harmony.png"
+      };
+      return fallbackImages[category] || "assets/spheres/divine-light-card-10.png";
+    }
+
     function renderMarketplace() {
       const visible = state.spheres.filter(sphere => state.activeCategory === "all" || sphere.category === state.activeCategory);
       marketGrid.innerHTML = "";
@@ -1167,9 +1191,11 @@
         const price = money(sphere.listing_price_cents ?? sphere.price_cents, sphere.currency || "USD");
         const experiences = Number(sphere.experiences_count || 0);
         const owners = Number(sphere.owners_count || 1);
+        const imageUrl = sphereImageUrl(sphere);
+        const imageStyle = imageUrl ? ` style="background-image: url('${escapeHtml(imageUrl).replace(/'/g, "%27")}')"` : "";
         return `
           <article class="product" data-category="${sphere.category}" data-sphere-id="${sphere.id}">
-            <div class="product-art ${artClass(sphere.category)}"><div class="heart">&hearts;</div><div class="mini-card"><div class="sigil"></div></div></div>
+            <div class="product-art ${artClass(sphere.category)} ${imageUrl ? "has-image" : ""}"${imageStyle}><div class="heart">&hearts;</div><div class="mini-card"><div class="sigil"></div></div></div>
             <div class="product-body">
               <h3>${escapeHtml(sphere.title)}</h3>
               <span class="tag">${escapeHtml(sphere.category)}</span>
@@ -1352,7 +1378,7 @@
         marketGrid.innerHTML = `
           <div class="empty-state">
             <strong>Marketplace data is not connected yet</strong>
-            Add DATABASE_URL in Netlify and create the Neon schema, then refresh this page.
+            Add DATABASE_URL in Vercel Project Settings -> Environment Variables, make sure the Neon schema exists, then redeploy or refresh.
           </div>
         `;
       }
