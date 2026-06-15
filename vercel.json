@@ -1,0 +1,39 @@
+{
+  "rewrites": [
+    {
+      "source": "/.netlify/functions/:function",
+      "destination": "/api/:function"
+    },
+    {
+      "source": "/admin",
+      "destination": "/admin.html"
+    },
+    {
+      "source": "/dashboard",
+      "destination": "/admin.html"
+    },
+    {
+      "source": "/promotion",
+      "destination": "/promotion.html"
+    }
+  ],
+  "headers": [
+    {
+      "source": "/(.*)",
+      "headers": [
+        {
+          "key": "X-Frame-Options",
+          "value": "DENY"
+        },
+        {
+          "key": "X-Content-Type-Options",
+          "value": "nosniff"
+        },
+        {
+          "key": "Referrer-Policy",
+          "value": "strict-origin-when-cross-origin"
+        }
+      ]
+    }
+  ]
+}

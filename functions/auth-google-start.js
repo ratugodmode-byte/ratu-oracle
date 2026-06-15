@@ -23,6 +23,20 @@ export async function handler(event) {
       state
     });
 
+    if (event.queryStringParameters?.json === "1") {
+      return {
+        statusCode: 200,
+        headers: {
+          "Content-Type": "application/json",
+          "Cache-Control": "no-store"
+        },
+        multiValueHeaders: {
+          "Set-Cookie": [`ratu_oauth_state=${state}; Path=/; Max-Age=600; HttpOnly; Secure; SameSite=Lax`]
+        },
+        body: JSON.stringify({ url: `https://accounts.google.com/o/oauth2/v2/auth?${params.toString()}` })
+      };
+    }
+
     return redirect(`https://accounts.google.com/o/oauth2/v2/auth?${params.toString()}`, [
       `ratu_oauth_state=${state}; Path=/; Max-Age=600; HttpOnly; Secure; SameSite=Lax`
     ]);

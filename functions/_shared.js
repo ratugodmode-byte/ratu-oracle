@@ -3,7 +3,7 @@ import crypto from "node:crypto";
 
 const headers = {
   "Access-Control-Allow-Origin": "*",
-  "Access-Control-Allow-Headers": "Content-Type",
+  "Access-Control-Allow-Headers": "Content-Type, X-Admin-Secret",
   "Access-Control-Allow-Methods": "GET,POST,OPTIONS",
   "Content-Type": "application/json"
 };
@@ -79,6 +79,28 @@ export function databaseError(error) {
     error: message,
     hint: "Check DATABASE_URL and make sure the Ratu Oracle schema has been created in Neon."
   });
+}
+
+export function requireAdmin(event) {
+  const configuredSecret = process.env.ADMIN_SECRET;
+  if (!configuredSecret) {
+    return json(500, { error: "ADMIN_SECRET is not set. Add it in Netlify environment variables." });
+  }
+  const providedSecret = event.headers["x-admin-secret"] || event.headers["X-Admin-Secret"];
+  if (!providedSecret || providedSecret !== configuredSecret) {
+    return json(401, { error: "Admin secret is missing or incorrect." });
+  }
+  return null;
+}
+
+export async function ensureSettingsTable(sql) {
+  await sql`
+    create table if not exists site_settings (
+      key text primary key,
+      value text,
+      updated_at timestamptz not null default now()
+    )
+  `;
 }
 
 export function getRequiredEnv(name) {
