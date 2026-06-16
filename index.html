@@ -374,8 +374,8 @@
     .tab.active { background: var(--plum); color: white; }
     .market-grid {
       display: grid;
-      grid-template-columns: repeat(5, 1fr);
-      gap: 20px;
+      grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+      gap: 22px;
       padding: 20px;
     }
     .product {
@@ -386,17 +386,21 @@
       box-shadow: 0 12px 26px rgba(37, 18, 12, .08);
       display: flex;
       flex-direction: column;
-      min-height: 348px;
+      min-height: 430px;
     }
     .product-art {
-      height: 190px;
+      height: 285px;
       position: relative;
       display: grid;
       place-items: center;
       overflow: hidden;
       background-size: cover;
-      background-position: center;
+      background-position: center top;
     }
+    .product-art.love.has-image { background-size: cover; background-position: center center; }
+    .product-art.clarity.has-image,
+    .product-art.healing.has-image,
+    .product-art.protection.has-image { background-size: cover; background-position: center 16%; }
     .product-art.has-image:before {
       content: "";
       position: absolute;
@@ -434,8 +438,8 @@
       display: grid; place-items: center;
       font-size: 19px;
     }
-    .product-body { padding: 13px 14px 14px; display: flex; flex: 1; flex-direction: column; }
-    .product h3 { margin: 0 0 4px; font-family: Georgia, serif; font-size: 18px; font-weight: 500; }
+    .product-body { padding: 16px 16px 17px; display: flex; flex: 1; flex-direction: column; }
+    .product h3 { margin: 0 0 5px; font-family: Georgia, serif; font-size: 19px; line-height: 1.14; font-weight: 500; }
     .tag { color: var(--rose); font-size: 12px; font-weight: 700; }
     .meta { display: flex; gap: 13px; margin: 10px 0 12px; color: #3d3341; font-size: 13px; }
     .price { color: var(--plum); font-weight: 800; font-size: 18px; margin-bottom: 12px; }
@@ -1471,7 +1475,7 @@
         renderMarketplace();
         renderExperienceOptions();
         renderStories([]);
-        setApiStatus("Preview marketplace shown. To save live spheres and experiences, add DATABASE_URL in Vercel Project Settings -> Environment Variables and make sure the Neon schema exists.", true);
+        setApiStatus("Featured Chant Spheres are ready. Use the free reading to find which Sphere fits your energy now.");
       }
     }
 
