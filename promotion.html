@@ -493,15 +493,15 @@
     }
 
     function applyPromotion(settings = {}) {
-      const title = settings.promo_title || "Free Online Tarot Reading";
-      const description = settings.promo_description || "A Ratu Oracle page for free online tarot readings, spiritual stories, amulets, talismans, and protective intentions.";
-      const primaryUrl = safeUrl(settings.promo_primary_url);
-      const primaryLabel = settings.promo_primary_label || "Book a Free Reading";
+      const title = settings.promo_title || "Find Your Chant Sphere";
+      const description = settings.promo_description || "Use the free Ratu Oracle reading to reveal the source of the problem, challenge, action, and likely result, then choose the Chant Sphere, amulet, talisman, or Solomon charm that fits your current energy.";
+      const primaryUrl = safeUrl(settings.promo_primary_url || "https://statuesque-kitsune-459769.netlify.app/");
+      const primaryLabel = settings.promo_primary_label || "Start Free Reading";
       const youtubeUrl = safeUrl(settings.promo_youtube_url);
       const tiktokUrl = safeUrl(settings.promo_tiktok_url);
-      const kofiUrl = safeUrl(settings.promo_kofi_url);
-      const netlifyUrl = safeUrl(settings.promo_netlify_url);
-      const keywords = String(settings.promo_keywords || "free online tarot reading, amulet, talisman, spiritual protection")
+      const kofiUrl = safeUrl(settings.promo_kofi_url || "https://ko-fi.com/godm0de/shop");
+      const netlifyUrl = safeUrl(settings.promo_netlify_url || "https://statuesque-kitsune-459769.netlify.app/");
+      const keywords = String(settings.promo_keywords || "free online tarot reading, chant sphere, amulet, talisman, Solomon charm, energy healing, spiritual protection")
         .split(",")
         .map(item => item.trim())
         .filter(Boolean)

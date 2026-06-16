@@ -84,7 +84,7 @@ export function databaseError(error) {
 export function requireAdmin(event) {
   const configuredSecret = process.env.ADMIN_SECRET;
   if (!configuredSecret) {
-    return json(500, { error: "ADMIN_SECRET is not set. Add it in Netlify environment variables." });
+    return json(500, { error: "ADMIN_SECRET is not set. Add it in Vercel Project Settings > Environment Variables." });
   }
   const providedSecret = event.headers["x-admin-secret"] || event.headers["X-Admin-Secret"];
   if (!providedSecret || providedSecret !== configuredSecret) {
