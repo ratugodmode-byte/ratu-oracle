@@ -497,6 +497,16 @@
       background: linear-gradient(145deg, #222943, #ad8842);
       color: #f3d79b;
       display: grid; place-items: center;
+      background-size: cover;
+      background-position: center top;
+      overflow: hidden;
+    }
+    .passport-thumb img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center top;
+      display: block;
     }
     .passport-thumb .sigil { width: 74px; height: 74px; }
     .badge {
@@ -1080,7 +1090,7 @@
     <div class="modal wide">
       <div class="modal-head"><h2 id="passportTitle">Sphere Passport</h2><button class="close" data-close aria-label="Close">&times;</button></div>
       <div class="dashboard" style="grid-template-columns:260px 1fr 220px">
-        <div class="passport-thumb" style="height:330px"><div class="sigil"></div></div>
+        <div class="passport-thumb" style="height:330px"><img id="passportCardImage" alt="Sphere card"></div>
         <div>
           <p><strong>Status:</strong> <span id="passportStatus">Active</span></p>
           <p><strong>Category:</strong> <span id="passportCategory">Protection</span></p>
@@ -1151,6 +1161,7 @@
     const passportStatus = document.getElementById("passportStatus");
     const passportCategory = document.getElementById("passportCategory");
     const passportIntention = document.getElementById("passportIntention");
+    const passportCardImage = document.getElementById("passportCardImage");
     const passportQrUrl = document.getElementById("passportQrUrl");
     const passportQrImage = document.getElementById("passportQrImage");
     const passportJourney = document.getElementById("passportJourney");
@@ -1167,6 +1178,7 @@
         price_cents: 3500,
         currency: "USD",
         image_url: "assets/spheres/solomon-love-harmony.png",
+        passport_story: "This charm gathers the heart, the voice, and the will into one gentle current. It is suited for moments when love needs patience, devotion, and honest repair.",
         experiences_count: 0,
         owners_count: 1
       },
@@ -1179,6 +1191,7 @@
         price_cents: 3200,
         currency: "USD",
         image_url: "assets/spheres/divine-light-card-10.png",
+        passport_story: "This Sphere lifts thought toward clearer purpose, then carries that light down into feeling and action. It is suited for courage, blessing, and a clean first step.",
         experiences_count: 0,
         owners_count: 1
       },
@@ -1191,6 +1204,7 @@
         price_cents: 3200,
         currency: "USD",
         image_url: "assets/spheres/unity-card-24.png",
+        passport_story: "This Sphere brings divided parts back into agreement, from the quiet inner self to the choices made in daily life. It is suited for healing separation, confusion, and emotional distance.",
         experiences_count: 0,
         owners_count: 1
       },
@@ -1203,6 +1217,7 @@
         price_cents: 3200,
         currency: "USD",
         image_url: "assets/spheres/protection-card-28.png",
+        passport_story: "This Sphere strengthens the boundary between the inner flame and heavy outside influence. It is suited for protection, release, and standing steady without carrying what is not yours.",
         experiences_count: 0,
         owners_count: 1
       }
@@ -1337,12 +1352,21 @@
       passportStatus.textContent = sphere.status || "active";
       passportCategory.textContent = sphere.category || "Unknown";
       passportIntention.textContent = sphere.intention || "No intention has been written yet.";
+      const imageUrl = sphereImageUrl(sphere);
+      passportCardImage.src = imageUrl;
+      passportCardImage.alt = `${sphere.title} card`;
       const qrTarget = `${window.location.origin}/?sphere=${encodeURIComponent(sphere.id)}`;
       passportQrUrl.textContent = qrTarget;
       passportQrImage.src = `/.netlify/functions/qr-code?text=${encodeURIComponent(qrTarget)}`;
-      passportJourney.textContent = `Created from the ${sphere.category || "Chant"} marketplace. Add experiences to build its owner journey.`;
-      passportStories.innerHTML = '<div class="empty-state" style="padding:20px"><strong>Loading experiences...</strong></div>';
+      passportJourney.textContent = sphere.passport_story || buildPassportStory(sphere);
       openModal("passport");
+
+      if (String(sphere.id || "").startsWith("preview-")) {
+        passportStories.innerHTML = `<div class="empty-state" style="padding:20px"><strong>Reading note</strong>${escapeHtml(previewExperienceNote(sphere))}</div>`;
+        return;
+      }
+
+      passportStories.innerHTML = '<div class="empty-state" style="padding:20px"><strong>Loading experiences...</strong></div>';
 
       try {
         const data = await apiFetch(`/.netlify/functions/experiences?sphere_id=${encodeURIComponent(sphere.id)}`);
@@ -1357,8 +1381,23 @@
           return `<article class="story"><span class="avatar">${initials || "RO"}</span><div><p>${escapeHtml(experience.story)}</p><small>${date}</small></div><div class="story-img"></div></article>`;
         }).join("");
       } catch (error) {
-        passportStories.innerHTML = `<div class="empty-state" style="padding:20px"><strong>Could not load experiences</strong>${escapeHtml(error.message)}</div>`;
+        passportStories.innerHTML = `<div class="empty-state" style="padding:20px"><strong>Experience stories coming soon</strong>This passport can already be read and shared. When live stories are connected, they will appear here.</div>`;
       }
+    }
+
+    function buildPassportStory(sphere) {
+      const category = sphere.category || "Chant";
+      return `This ${category} Sphere is read through three levels: clear intention above, balanced feeling within, and grounded action below. Its path is to turn the owner's present energy into a steadier choice.`;
+    }
+
+    function previewExperienceNote(sphere) {
+      const notes = {
+        Love: "A suitable Sphere when the reading points to relationship repair, devotion, or the need to soften pride without losing self-respect.",
+        Clarity: "A suitable Sphere when the reading points to uncertainty, scattered desire, or the need to choose from a cleaner inner light.",
+        Healing: "A suitable Sphere when the reading points to divided feelings, old hurt, or the need to become whole before moving forward.",
+        Protection: "A suitable Sphere when the reading points to draining influence, fear, or the need to stand firm in your own field."
+      };
+      return notes[sphere.category] || "A suitable Sphere when the reading asks for alignment between intention, feeling, and action.";
     }
 
     function escapeHtml(value) {
