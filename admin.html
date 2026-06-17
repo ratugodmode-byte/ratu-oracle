@@ -4,6 +4,8 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Ratu Oracle Admin Dashboard</title>
+  <link rel="icon" type="image/svg+xml" href="assets/logo/chant-sphere-logo.svg">
+  <link rel="apple-touch-icon" href="assets/logo/chant-sphere-logo.svg">
   <style>
     :root {
       --ink: #1f1728;
@@ -595,7 +597,7 @@
     function renderSettings() {
       const url = state.settings.hero_background_url || "assets/backgrounds/chant-sphere-market-bg.png";
       els.heroBackgroundUrl.value = url;
-      els.heroCardVisible.value = state.settings.hero_card_visible || "false";
+      els.heroCardVisible.value = state.settings.hero_card_visible || "true";
       els.backgroundPreview.style.setProperty("--preview-bg", url && url !== "none" ? `url("${url.replace(/"/g, "%22")}") center / cover` : "linear-gradient(135deg, #3a243b, #ad8155)");
     }
 

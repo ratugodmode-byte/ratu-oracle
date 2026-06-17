@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-labelledby="title desc">
+  <title id="title">Ratu Oracle Chant Sphere logo</title>
+  <desc id="desc">A gold lotus and radiant chant sphere mark on a plum background.</desc>
+  <defs>
+    <radialGradient id="bg" cx="50%" cy="42%" r="70%">
+      <stop offset="0%" stop-color="#6d3b98"/>
+      <stop offset="58%" stop-color="#44226b"/>
+      <stop offset="100%" stop-color="#1f1728"/>
+    </radialGradient>
+    <linearGradient id="gold" x1="18%" y1="10%" x2="82%" y2="88%">
+      <stop offset="0%" stop-color="#fff2bf"/>
+      <stop offset="38%" stop-color="#d9a64c"/>
+      <stop offset="70%" stop-color="#b87a2c"/>
+      <stop offset="100%" stop-color="#ffe1a0"/>
+    </linearGradient>
+    <filter id="glow" x="-25%" y="-25%" width="150%" height="150%">
+      <feGaussianBlur stdDeviation="5" result="blur"/>
+      <feMerge>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+  <rect width="512" height="512" rx="112" fill="url(#bg)"/>
+  <circle cx="256" cy="244" r="126" fill="none" stroke="url(#gold)" stroke-width="15"/>
+  <circle cx="256" cy="244" r="62" fill="none" stroke="url(#gold)" stroke-width="9" opacity=".92"/>
+  <path d="M256 92v304M104 244h304M149 137l214 214M363 137 149 351" stroke="url(#gold)" stroke-width="9" stroke-linecap="round" opacity=".86"/>
+  <circle cx="256" cy="244" r="16" fill="#fff2bf" filter="url(#glow)"/>
+  <path d="M256 350c-54-50-82-88-82-116 0-31 25-56 56-56 10 0 19 3 26 8 8-5 17-8 27-8 31 0 56 25 56 56 0 28-28 66-83 116Z" fill="none" stroke="url(#gold)" stroke-width="12" stroke-linejoin="round" opacity=".8"/>
+  <path d="M136 386c36 9 69-1 98-30-36-9-69 1-98 30Zm240 0c-36 9-69-1-98-30 36-9 69 1 98 30ZM256 414c-38-25-57-55-57-91 35 16 54 46 57 91Zm0 0c38-25 57-55 57-91-35 16-54 46-57 91Z" fill="none" stroke="url(#gold)" stroke-width="13" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M205 80 256 42l51 38M205 432l51 38 51-38" fill="none" stroke="#fff2bf" stroke-width="10" stroke-linecap="round" stroke-linejoin="round" opacity=".9"/>
+</svg>
