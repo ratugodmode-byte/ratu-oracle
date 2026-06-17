@@ -1266,18 +1266,26 @@
       return String(category || "Protection").toLowerCase();
     }
 
-    function sphereImageUrl(sphere) {
+    const defaultSphereImages = [
+      "assets/spheres/solomon-love-harmony.png",
+      "assets/spheres/divine-light-card-10.png",
+      "assets/spheres/unity-card-24.png",
+      "assets/spheres/protection-card-28.png"
+    ];
+
+    function stableImageIndex(sphere) {
+      const key = String(sphere.id || sphere.sphere_id || sphere.title || "");
+      let hash = 0;
+      for (let i = 0; i < key.length; i += 1) {
+        hash = ((hash << 5) - hash + key.charCodeAt(i)) | 0;
+      }
+      return Math.abs(hash) % defaultSphereImages.length;
+    }
+
+    function sphereImageUrl(sphere, index = 0) {
       const uploaded = String(sphere.image_url || "").trim();
       if (uploaded) return uploaded;
-      const category = artClass(sphere.category);
-      const fallbackImages = {
-        love: "assets/spheres/solomon-love-harmony.png",
-        healing: "assets/spheres/unity-card-24.png",
-        protection: "assets/spheres/protection-card-28.png",
-        clarity: "assets/spheres/divine-light-card-10.png",
-        wealth: "assets/spheres/solomon-love-harmony.png"
-      };
-      return fallbackImages[category] || "assets/spheres/divine-light-card-10.png";
+      return defaultSphereImages[(stableImageIndex(sphere) + index) % defaultSphereImages.length];
     }
 
     function renderMarketplace() {
@@ -1294,11 +1302,12 @@
         return;
       }
 
-      marketGrid.innerHTML = visible.map(sphere => {
+      marketGrid.innerHTML = visible.map((sphere, index) => {
         const price = money(sphere.listing_price_cents ?? sphere.price_cents, sphere.currency || "USD");
         const experiences = Number(sphere.experiences_count || 0);
         const owners = Number(sphere.owners_count || 1);
-        const imageUrl = sphereImageUrl(sphere);
+        const imageUrl = sphereImageUrl(sphere, index);
+        sphere._display_image_url = imageUrl;
         const imageStyle = imageUrl ? ` style="background-image: url('${escapeHtml(imageUrl).replace(/'/g, "%27")}')"` : "";
         return `
           <article class="product" data-category="${sphere.category}" data-sphere-id="${sphere.id}">
@@ -1348,7 +1357,7 @@
       passportStatus.textContent = sphere.status || "active";
       passportCategory.textContent = sphere.category || "Unknown";
       passportIntention.textContent = sphere.intention || "No intention has been written yet.";
-      const imageUrl = sphereImageUrl(sphere);
+      const imageUrl = sphere._display_image_url || sphereImageUrl(sphere);
       passportCardImage.src = imageUrl;
       passportCardImage.alt = `${sphere.title} card`;
       const qrTarget = `${window.location.origin}/?sphere=${encodeURIComponent(sphere.id)}`;
