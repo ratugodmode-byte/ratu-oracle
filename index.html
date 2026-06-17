@@ -382,9 +382,9 @@
     .tab.active { background: var(--plum); color: white; }
     .market-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
-      gap: 22px;
-      padding: 20px;
+      grid-template-columns: repeat(auto-fit, minmax(178px, 1fr));
+      gap: 18px;
+      padding: 18px;
     }
     .product {
       background: white;
@@ -394,21 +394,24 @@
       box-shadow: 0 12px 26px rgba(37, 18, 12, .08);
       display: flex;
       flex-direction: column;
-      min-height: 430px;
+      min-height: 352px;
     }
     .product-art {
-      height: 285px;
+      height: 220px;
       position: relative;
       display: grid;
       place-items: center;
       overflow: hidden;
-      background-size: cover;
-      background-position: center top;
+      background-size: contain;
+      background-repeat: no-repeat;
+      background-position: center center;
+      background-color: #fbf5e8;
     }
-    .product-art.love.has-image { background-size: cover; background-position: center center; }
+    .product-art.love.has-image { background-size: contain; background-position: center center; }
     .product-art.clarity.has-image,
     .product-art.healing.has-image,
-    .product-art.protection.has-image { background-size: cover; background-position: center 16%; }
+    .product-art.protection.has-image,
+    .product-art.wealth.has-image { background-size: contain; background-position: center center; }
     .product-art.has-image:before {
       content: "";
       position: absolute;
@@ -446,8 +449,8 @@
       display: grid; place-items: center;
       font-size: 19px;
     }
-    .product-body { padding: 16px 16px 17px; display: flex; flex: 1; flex-direction: column; }
-    .product h3 { margin: 0 0 5px; font-family: Georgia, serif; font-size: 19px; line-height: 1.14; font-weight: 500; }
+    .product-body { padding: 13px 14px 15px; display: flex; flex: 1; flex-direction: column; }
+    .product h3 { margin: 0 0 5px; font-family: Georgia, serif; font-size: 17px; line-height: 1.15; font-weight: 500; }
     .tag { color: var(--rose); font-size: 12px; font-weight: 700; }
     .meta { display: flex; gap: 13px; margin: 10px 0 12px; color: #3d3341; font-size: 13px; }
     .price { color: var(--plum); font-weight: 800; font-size: 18px; margin-bottom: 12px; }
@@ -1273,7 +1276,11 @@
         image_url: "assets/spheres/solomon-love-harmony.png",
         intention: "For attraction, devotion, reconciliation, mutual respect, and a steady bond between heart, word, and action.",
         passport_story: "This charm is for love that needs order, tenderness, and honest repair. It joins desire with discipline so affection can become devotion, harmony, and faithful action.",
-        reading_note: "Choose this when the reading points to relationship repair, emotional distance, loyalty, or the need to soften pride."
+        reading_note: "Choose this when the reading points to relationship repair, emotional distance, loyalty, or the need to soften pride.",
+        experiences: [
+          { author_name: "Mira", story: "I carried this charm during a difficult conversation and felt my pride soften into patience. The connection became calmer and more truthful." },
+          { author_name: "Daniel", story: "This Sphere helped me stop chasing affection and return to devotion, respect, and steady action." }
+        ]
       },
       {
         title: "Divine Light Chant Sphere",
@@ -1281,7 +1288,11 @@
         image_url: "assets/spheres/divine-light-card-10.png",
         intention: "For inner light, clean desire, blessing, clear decision, and the courage to lift a situation into its highest path.",
         passport_story: "This Sphere carries the current of illumination: thought becomes clear, the heart becomes sincere, and the will learns where to move next. It is suited for uncertain moments when guidance must become action.",
-        reading_note: "Choose this when the reading shows confusion, hesitation, a blocked choice, or a need for higher direction."
+        reading_note: "Choose this when the reading shows confusion, hesitation, a blocked choice, or a need for higher direction.",
+        experiences: [
+          { author_name: "Aisha", story: "After my reading, this Sphere matched the feeling of needing one clean decision. I stopped circling the same question and chose the next step." },
+          { author_name: "Ren", story: "The words on the card felt like a lamp being placed inside the heart. It helped me act with less fear." }
+        ]
       },
       {
         title: "Unity Whole Chant Sphere",
@@ -1289,7 +1300,11 @@
         image_url: "assets/spheres/unity-card-24.png",
         intention: "For integration, emotional repair, restored flow, and the return of scattered parts into one peaceful center.",
         passport_story: "This Sphere helps divided feelings return to agreement. It is for restoring flow between mind, heart, body, and daily choices so the person can stand whole again.",
-        reading_note: "Choose this when the reading shows exhaustion, fragmentation, repeated patterns, or a need to return to balance."
+        reading_note: "Choose this when the reading shows exhaustion, fragmentation, repeated patterns, or a need to return to balance.",
+        experiences: [
+          { author_name: "Lina", story: "I used this Sphere when my thoughts and feelings were pulling in opposite directions. It helped me come back to one center." },
+          { author_name: "Sam", story: "The reading showed old hurt. This Sphere felt like a gentle closing of gaps I had carried for too long." }
+        ]
       },
       {
         title: "Spirit Protection Chant Sphere",
@@ -1297,7 +1312,35 @@
         image_url: "assets/spheres/protection-card-28.png",
         intention: "For strong boundaries, release from heavy influence, clean spiritual space, and the freedom to stand steady.",
         passport_story: "This Sphere strengthens the boundary around the inner flame. It is for clearing what does not belong, closing leaks in attention, and standing firm without fear.",
-        reading_note: "Choose this when the reading points to pressure, envy, heavy surroundings, fear, or energy that needs to be cleared."
+        reading_note: "Choose this when the reading points to pressure, envy, heavy surroundings, fear, or energy that needs to be cleared.",
+        experiences: [
+          { author_name: "Aria", story: "This Sphere helped me stop absorbing the mood of everyone around me. I felt clearer, quieter, and more protected." },
+          { author_name: "Noor", story: "I chose it after a reading about draining influence. It reminded me to release what was never mine to carry." }
+        ]
+      },
+      {
+        title: "Good Decree Chant Sphere",
+        category: "Protection",
+        image_url: "assets/spheres/decree-card-8.png",
+        intention: "For rightful support, firm command, protection of good work, and the strength to uphold a clean decision.",
+        passport_story: "This Sphere is for aligned command. It gathers thought, speech, and action into one straight line so a good decree can be protected, spoken clearly, and carried into the world.",
+        reading_note: "Choose this when the reading shows pressure from authority, a contract, a conflict, or the need to stand behind a rightful decision.",
+        experiences: [
+          { author_name: "Kai", story: "I used this before sending an important message. It helped me speak without anger and still keep my boundary." },
+          { author_name: "Rhea", story: "The Sphere felt like a pillar behind me. I stopped asking for permission to protect my own work." }
+        ]
+      },
+      {
+        title: "Success Path Chant Sphere",
+        category: "Wealth",
+        image_url: "assets/spheres/success-path-card-20.png",
+        intention: "For a new path of light, ease, prosperity, open doors, and steady movement toward the right opportunity.",
+        passport_story: "This Sphere turns desire into a walked path. It is for choosing the road that opens cleanly, receiving without confusion, and moving toward success with grace rather than force.",
+        reading_note: "Choose this when the reading shows a new opportunity, financial movement, career change, or the need to choose the path with less resistance.",
+        experiences: [
+          { author_name: "Maya", story: "After the reading, this Sphere matched exactly: stop forcing the old road and walk through the open door." },
+          { author_name: "Jules", story: "I kept it near while rebuilding my shop page. The work felt lighter and more organized." }
+        ]
       }
     ];
     const defaultSphereImages = sphereArchetypes.map(item => item.image_url);
@@ -1338,8 +1381,37 @@
       };
     }
 
+    function sphereSlug(title) {
+      return String(title || "sphere").toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
+    }
+
+    function displaySphereCollection() {
+      const base = state.spheres.length ? state.spheres : fallbackSpheres;
+      const visibleBase = base.map((sphere, index) => sphereDisplayData(sphere, index));
+      const usedTitles = new Set(visibleBase.map(sphere => String(sphere.title || "").trim().toLowerCase()));
+      const supplements = sphereArchetypes
+        .filter(archetype => !usedTitles.has(archetype.title.toLowerCase()))
+        .map((archetype, index) => ({
+          id: `preview-${sphereSlug(archetype.title)}`,
+          title: archetype.title,
+          category: archetype.category,
+          intention: archetype.intention,
+          status: "preview",
+          price_cents: archetype.category === "Love" ? 3500 : 3200,
+          currency: "USD",
+          image_url: archetype.image_url,
+          passport_story: archetype.passport_story,
+          reading_note: archetype.reading_note,
+          experiences: archetype.experiences || [],
+          experiences_count: (archetype.experiences || []).length,
+          owners_count: 1,
+          _supplement_index: index
+        }));
+      return [...visibleBase, ...supplements];
+    }
+
     function renderMarketplace() {
-      const displaySpheres = state.spheres.map((sphere, index) => sphereDisplayData(sphere, index));
+      const displaySpheres = displaySphereCollection();
       const visible = displaySpheres.filter(sphere => state.activeCategory === "all" || sphere.category === state.activeCategory);
       marketGrid.innerHTML = "";
 
@@ -1401,8 +1473,9 @@
     }
 
     async function showSpherePassport(sphereId) {
-      const sphereIndex = state.spheres.findIndex(item => item.id === sphereId);
-      const sphere = sphereIndex >= 0 ? sphereDisplayData(state.spheres[sphereIndex], sphereIndex) : null;
+      const displaySpheres = displaySphereCollection();
+      const sphereIndex = displaySpheres.findIndex(item => item.id === sphereId);
+      const sphere = sphereIndex >= 0 ? displaySpheres[sphereIndex] : null;
       if (!sphere) {
         showToast("Could not find that Sphere in the loaded marketplace data.");
         return;
@@ -1422,7 +1495,7 @@
       openModal("passport");
 
       if (String(sphere.id || "").startsWith("preview-")) {
-        passportStories.innerHTML = `<div class="empty-state" style="padding:20px"><strong>Reading note</strong>${escapeHtml(previewExperienceNote(sphere))}</div>`;
+        passportStories.innerHTML = renderPassportExperiencePreview(sphere);
         return;
       }
 
@@ -1432,7 +1505,7 @@
         const data = await apiFetch(`/.netlify/functions/experiences?sphere_id=${encodeURIComponent(sphere.id)}`);
         const experiences = data.experiences || [];
         if (!experiences.length) {
-          passportStories.innerHTML = `<div class="empty-state" style="padding:20px"><strong>Reading note</strong>${escapeHtml(sphere.reading_note || previewExperienceNote(sphere))}</div>`;
+          passportStories.innerHTML = renderPassportExperiencePreview(sphere);
           return;
         }
         passportStories.innerHTML = experiences.map(experience => {
@@ -1441,8 +1514,18 @@
           return `<article class="story"><span class="avatar">${initials || "RO"}</span><div><p>${escapeHtml(experience.story)}</p><small>${date}</small></div><div class="story-img"></div></article>`;
         }).join("");
       } catch (error) {
-        passportStories.innerHTML = `<div class="empty-state" style="padding:20px"><strong>Experience stories coming soon</strong>This passport can already be read and shared. When live stories are connected, they will appear here.</div>`;
+        passportStories.innerHTML = renderPassportExperiencePreview(sphere);
       }
+    }
+
+    function renderPassportExperiencePreview(sphere) {
+      const stories = Array.isArray(sphere.experiences) ? sphere.experiences : [];
+      const note = `<div class="empty-state" style="padding:20px"><strong>Reading note</strong>${escapeHtml(sphere.reading_note || previewExperienceNote(sphere))}</div>`;
+      if (!stories.length) return note;
+      return note + stories.map(experience => {
+        const initials = String(experience.author_name || "RO").split(" ").map(part => part[0]).join("").slice(0, 2).toUpperCase();
+        return `<article class="story"><span class="avatar">${initials || "RO"}</span><div><p>${escapeHtml(experience.story)}</p><small>${escapeHtml(experience.author_name || "Ratu Member")}</small></div><div class="story-img"></div></article>`;
+      }).join("");
     }
 
     function buildPassportStory(sphere) {
