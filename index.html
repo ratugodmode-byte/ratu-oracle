@@ -382,9 +382,9 @@
     .tab.active { background: var(--plum); color: white; }
     .market-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(178px, 1fr));
-      gap: 18px;
-      padding: 18px;
+      grid-template-columns: repeat(auto-fit, minmax(168px, 1fr));
+      gap: 16px;
+      padding: 16px;
     }
     .product {
       background: white;
@@ -394,10 +394,10 @@
       box-shadow: 0 12px 26px rgba(37, 18, 12, .08);
       display: flex;
       flex-direction: column;
-      min-height: 352px;
+      min-height: 318px;
     }
     .product-art {
-      height: 220px;
+      height: 180px;
       position: relative;
       display: grid;
       place-items: center;
@@ -449,8 +449,8 @@
       display: grid; place-items: center;
       font-size: 19px;
     }
-    .product-body { padding: 13px 14px 15px; display: flex; flex: 1; flex-direction: column; }
-    .product h3 { margin: 0 0 5px; font-family: Georgia, serif; font-size: 17px; line-height: 1.15; font-weight: 500; }
+    .product-body { padding: 12px 13px 14px; display: flex; flex: 1; flex-direction: column; }
+    .product h3 { margin: 0 0 5px; font-family: Georgia, serif; font-size: 16px; line-height: 1.15; font-weight: 500; }
     .tag { color: var(--rose); font-size: 12px; font-weight: 700; }
     .meta { display: flex; gap: 13px; margin: 10px 0 12px; color: #3d3341; font-size: 13px; }
     .price { color: var(--plum); font-weight: 800; font-size: 18px; margin-bottom: 12px; }
@@ -1353,10 +1353,8 @@
 
     function isGenericSphere(sphere) {
       const title = String(sphere.title || "").trim().toLowerCase();
-      const intention = String(sphere.intention || "").trim().toLowerCase();
       return !String(sphere.image_url || "").trim()
-        && (/^sphere\s*#?\d+$/.test(title) || title === "sphere")
-        && (!intention || intention.includes("represents the arrogance") || intention.includes("write the intention"));
+        && (/^sphere\s*#?\d+$/.test(title) || title === "sphere");
     }
 
     function sphereDisplayData(sphere, index = 0) {
