@@ -181,6 +181,7 @@
     .promo-preview h3 { color: white; margin: 0; }
     .promo-preview p { margin: 0; color: rgba(255,255,255,.86); line-height: 1.5; }
     .promo-links { display: flex; gap: 8px; flex-wrap: wrap; }
+    .preset-actions { display: flex; gap: 8px; flex-wrap: wrap; }
     .promo-pill {
       display: inline-flex;
       min-height: 32px;
@@ -417,11 +418,21 @@
           <h2>Homepage Background</h2>
           <form class="form" id="settingsForm">
             <label>Hero background image URL
-              <input id="heroBackgroundUrl" name="hero_background_url" placeholder="https://example.com/image.jpg">
+              <input id="heroBackgroundUrl" name="hero_background_url" placeholder="assets/backgrounds/chant-sphere-market-bg.png or https://example.com/image.jpg">
+            </label>
+            <div class="preset-actions">
+              <button class="btn small" type="button" data-background-preset="assets/backgrounds/chant-sphere-market-bg.png">Use Solomon Background</button>
+              <button class="btn small" type="button" data-background-preset="none">Use Plain Gradient</button>
+            </div>
+            <label>
+              <select id="heroCardVisible" name="hero_card_visible">
+                <option value="false">Hide floating card overlay</option>
+                <option value="true">Show floating card overlay</option>
+              </select>
             </label>
             <button class="btn primary" type="submit">Save Background</button>
           </form>
-          <div class="status" id="settingsStatus">Use an image URL from Cloudinary, R2, Shopify files, or another public image host.</div>
+          <div class="status" id="settingsStatus">Use the built-in background, a direct public image URL, or an uploaded image path inside the site.</div>
         </aside>
         <div class="panel">
           <h2>Preview</h2>
@@ -456,6 +467,7 @@
       selectedQrUrl: document.getElementById("selectedQrUrl"),
       qrStatus: document.getElementById("qrStatus"),
       heroBackgroundUrl: document.getElementById("heroBackgroundUrl"),
+      heroCardVisible: document.getElementById("heroCardVisible"),
       backgroundPreview: document.getElementById("backgroundPreview"),
       settingsStatus: document.getElementById("settingsStatus"),
       promotionStatus: document.getElementById("promotionStatus"),
@@ -581,9 +593,10 @@
     }
 
     function renderSettings() {
-      const url = state.settings.hero_background_url || "";
+      const url = state.settings.hero_background_url || "assets/backgrounds/chant-sphere-market-bg.png";
       els.heroBackgroundUrl.value = url;
-      els.backgroundPreview.style.setProperty("--preview-bg", url ? `url("${url.replace(/"/g, "%22")}") center / cover` : "linear-gradient(135deg, #3a243b, #ad8155)");
+      els.heroCardVisible.value = state.settings.hero_card_visible || "false";
+      els.backgroundPreview.style.setProperty("--preview-bg", url && url !== "none" ? `url("${url.replace(/"/g, "%22")}") center / cover` : "linear-gradient(135deg, #3a243b, #ad8155)");
     }
 
     function testImageUrl(url) {
@@ -593,15 +606,35 @@
           resolve();
           return;
         }
-        if (!/^https?:\/\//i.test(value)) {
-          reject(new Error("Use a full image URL starting with https://"));
+        if (value === "none") {
+          resolve();
           return;
+        }
+        if (!/^https?:\/\//i.test(value)) {
+          if (!/^(assets\/|\/)/i.test(value)) {
+            reject(new Error("Use a full image URL starting with https://, or a site image path like assets/backgrounds/chant-sphere-market-bg.png"));
+            return;
+          }
         }
         const image = new Image();
         image.onload = () => resolve();
         image.onerror = () => reject(new Error("That URL is not a direct public image. Open the uploaded image and copy its direct image URL."));
         image.src = value;
       });
+    }
+
+    document.querySelectorAll("[data-background-preset]").forEach(button => {
+      button.addEventListener("click", () => {
+        els.heroBackgroundUrl.value = button.dataset.backgroundPreset || "";
+        renderSettingsPreviewFromForm();
+      });
+    });
+
+    els.heroBackgroundUrl.addEventListener("input", renderSettingsPreviewFromForm);
+
+    function renderSettingsPreviewFromForm() {
+      const url = els.heroBackgroundUrl.value.trim();
+      els.backgroundPreview.style.setProperty("--preview-bg", url && url !== "none" ? `url("${url.replace(/"/g, "%22")}") center / cover` : "linear-gradient(135deg, #3a243b, #ad8155)");
     }
 
     function renderPromotion() {

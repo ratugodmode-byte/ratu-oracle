@@ -10,6 +10,7 @@ import {
 
 const allowedKeys = new Set([
   "hero_background_url",
+  "hero_card_visible",
   "promo_title",
   "promo_description",
   "promo_primary_url",
