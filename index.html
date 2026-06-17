@@ -397,7 +397,7 @@
       min-height: 318px;
     }
     .product-art {
-      height: 180px;
+      height: 205px;
       position: relative;
       display: grid;
       place-items: center;
@@ -429,6 +429,16 @@
       display: block;
       padding: 8px;
       box-sizing: border-box;
+    }
+    .product-art.focus-face img {
+      object-fit: cover;
+      object-position: center 56%;
+      padding: 0;
+    }
+    .product-art.show-full img {
+      object-fit: contain;
+      object-position: center;
+      padding: 8px;
     }
     .product-art.has-image .mini-card { display: none; }
     .product-art.love { background: radial-gradient(circle at 28% 25%, #f3a9ba, transparent 80px), linear-gradient(135deg, #7b243e, #f1c0cd); }
@@ -1440,10 +1450,11 @@
         const owners = Number(sphere.owners_count || 1);
         const imageUrl = sphere.image_url || sphereImageUrl(sphere, index);
         sphere._display_image_url = imageUrl;
+        const imageMode = imageUrl && imageUrl.includes("solomon-love-harmony") ? "show-full" : "focus-face";
         const imageMarkup = imageUrl ? `<img src="${escapeHtml(imageUrl)}" alt="${escapeHtml(sphere.title)} card" loading="lazy">` : "";
         return `
           <article class="product" data-category="${sphere.category}" data-sphere-id="${sphere.id}">
-            <div class="product-art ${artClass(sphere.category)} ${imageUrl ? "has-image" : ""}"><div class="heart">&hearts;</div>${imageMarkup}<div class="mini-card"><div class="sigil"></div></div></div>
+            <div class="product-art ${artClass(sphere.category)} ${imageUrl ? `has-image ${imageMode}` : ""}"><div class="heart">&hearts;</div>${imageMarkup}<div class="mini-card"><div class="sigil"></div></div></div>
             <div class="product-body">
               <h3>${escapeHtml(sphere.title)}</h3>
               <span class="tag">${escapeHtml(sphere.category)}</span>
