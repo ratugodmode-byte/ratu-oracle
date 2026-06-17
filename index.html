@@ -1208,7 +1208,7 @@
         id: "preview-protection",
         title: "Spirit Protection Chant Sphere",
         category: "Protection",
-        intention: "For spiritual strength, freedom, and protection from heavy or impure energy.",
+        intention: "For spiritual strength, freedom, and protection from heavy or unwanted energy.",
         status: "preview",
         price_cents: 3200,
         currency: "USD",
@@ -1266,30 +1266,81 @@
       return String(category || "Protection").toLowerCase();
     }
 
-    const defaultSphereImages = [
-      "assets/spheres/solomon-love-harmony.png",
-      "assets/spheres/divine-light-card-10.png",
-      "assets/spheres/unity-card-24.png",
-      "assets/spheres/protection-card-28.png"
-    ];
-
-    function stableImageIndex(sphere) {
-      const key = String(sphere.id || sphere.sphere_id || sphere.title || "");
-      let hash = 0;
-      for (let i = 0; i < key.length; i += 1) {
-        hash = ((hash << 5) - hash + key.charCodeAt(i)) | 0;
+    const sphereArchetypes = [
+      {
+        title: "Solomon Love & Harmony Charm",
+        category: "Love",
+        image_url: "assets/spheres/solomon-love-harmony.png",
+        intention: "For attraction, devotion, reconciliation, mutual respect, and a steady bond between heart, word, and action.",
+        passport_story: "This charm is for love that needs order, tenderness, and honest repair. It joins desire with discipline so affection can become devotion, harmony, and faithful action.",
+        reading_note: "Choose this when the reading points to relationship repair, emotional distance, loyalty, or the need to soften pride."
+      },
+      {
+        title: "Divine Light Chant Sphere",
+        category: "Clarity",
+        image_url: "assets/spheres/divine-light-card-10.png",
+        intention: "For inner light, clean desire, blessing, clear decision, and the courage to lift a situation into its highest path.",
+        passport_story: "This Sphere carries the current of illumination: thought becomes clear, the heart becomes sincere, and the will learns where to move next. It is suited for uncertain moments when guidance must become action.",
+        reading_note: "Choose this when the reading shows confusion, hesitation, a blocked choice, or a need for higher direction."
+      },
+      {
+        title: "Unity Whole Chant Sphere",
+        category: "Healing",
+        image_url: "assets/spheres/unity-card-24.png",
+        intention: "For integration, emotional repair, restored flow, and the return of scattered parts into one peaceful center.",
+        passport_story: "This Sphere helps divided feelings return to agreement. It is for restoring flow between mind, heart, body, and daily choices so the person can stand whole again.",
+        reading_note: "Choose this when the reading shows exhaustion, fragmentation, repeated patterns, or a need to return to balance."
+      },
+      {
+        title: "Spirit Protection Chant Sphere",
+        category: "Protection",
+        image_url: "assets/spheres/protection-card-28.png",
+        intention: "For strong boundaries, release from heavy influence, clean spiritual space, and the freedom to stand steady.",
+        passport_story: "This Sphere strengthens the boundary around the inner flame. It is for clearing what does not belong, closing leaks in attention, and standing firm without fear.",
+        reading_note: "Choose this when the reading points to pressure, envy, heavy surroundings, fear, or energy that needs to be cleared."
       }
-      return Math.abs(hash) % defaultSphereImages.length;
-    }
+    ];
+    const defaultSphereImages = sphereArchetypes.map(item => item.image_url);
 
     function sphereImageUrl(sphere, index = 0) {
       const uploaded = String(sphere.image_url || "").trim();
       if (uploaded) return uploaded;
-      return defaultSphereImages[(stableImageIndex(sphere) + index) % defaultSphereImages.length];
+      return defaultSphereImages[index % defaultSphereImages.length];
+    }
+
+    function isGenericSphere(sphere) {
+      const title = String(sphere.title || "").trim().toLowerCase();
+      const intention = String(sphere.intention || "").trim().toLowerCase();
+      return !String(sphere.image_url || "").trim()
+        && (/^sphere\s*#?\d+$/.test(title) || title === "sphere")
+        && (!intention || intention.includes("represents the arrogance") || intention.includes("write the intention"));
+    }
+
+    function sphereDisplayData(sphere, index = 0) {
+      const archetype = sphereArchetypes[index % sphereArchetypes.length];
+      if (!isGenericSphere(sphere)) {
+        return {
+          ...sphere,
+          image_url: sphereImageUrl(sphere, index),
+          passport_story: sphere.passport_story || archetype.passport_story,
+          reading_note: sphere.reading_note || archetype.reading_note
+        };
+      }
+      return {
+        ...sphere,
+        title: archetype.title,
+        category: archetype.category,
+        intention: archetype.intention,
+        image_url: archetype.image_url,
+        passport_story: archetype.passport_story,
+        reading_note: archetype.reading_note,
+        _source_title: sphere.title
+      };
     }
 
     function renderMarketplace() {
-      const visible = state.spheres.filter(sphere => state.activeCategory === "all" || sphere.category === state.activeCategory);
+      const displaySpheres = state.spheres.map((sphere, index) => sphereDisplayData(sphere, index));
+      const visible = displaySpheres.filter(sphere => state.activeCategory === "all" || sphere.category === state.activeCategory);
       marketGrid.innerHTML = "";
 
       if (!visible.length) {
@@ -1306,7 +1357,7 @@
         const price = money(sphere.listing_price_cents ?? sphere.price_cents, sphere.currency || "USD");
         const experiences = Number(sphere.experiences_count || 0);
         const owners = Number(sphere.owners_count || 1);
-        const imageUrl = sphereImageUrl(sphere, index);
+        const imageUrl = sphere.image_url || sphereImageUrl(sphere, index);
         sphere._display_image_url = imageUrl;
         const imageStyle = imageUrl ? ` style="background-image: url('${escapeHtml(imageUrl).replace(/'/g, "%27")}')"` : "";
         return `
@@ -1330,7 +1381,10 @@
         return;
       }
       experienceSphereSelect.innerHTML = state.spheres
-        .map(sphere => `<option value="${sphere.id}">${escapeHtml(sphere.title)}</option>`)
+        .map((sphere, index) => {
+          const display = sphereDisplayData(sphere, index);
+          return `<option value="${sphere.id}">${escapeHtml(display.title)}</option>`;
+        })
         .join("");
     }
 
@@ -1347,7 +1401,8 @@
     }
 
     async function showSpherePassport(sphereId) {
-      const sphere = state.spheres.find(item => item.id === sphereId);
+      const sphereIndex = state.spheres.findIndex(item => item.id === sphereId);
+      const sphere = sphereIndex >= 0 ? sphereDisplayData(state.spheres[sphereIndex], sphereIndex) : null;
       if (!sphere) {
         showToast("Could not find that Sphere in the loaded marketplace data.");
         return;
@@ -1357,7 +1412,7 @@
       passportStatus.textContent = sphere.status || "active";
       passportCategory.textContent = sphere.category || "Unknown";
       passportIntention.textContent = sphere.intention || "No intention has been written yet.";
-      const imageUrl = sphere._display_image_url || sphereImageUrl(sphere);
+      const imageUrl = sphere._display_image_url || sphere.image_url || sphereImageUrl(sphere, sphereIndex);
       passportCardImage.src = imageUrl;
       passportCardImage.alt = `${sphere.title} card`;
       const qrTarget = `${window.location.origin}/?sphere=${encodeURIComponent(sphere.id)}`;
@@ -1377,7 +1432,7 @@
         const data = await apiFetch(`/.netlify/functions/experiences?sphere_id=${encodeURIComponent(sphere.id)}`);
         const experiences = data.experiences || [];
         if (!experiences.length) {
-          passportStories.innerHTML = "<div class=\"empty-state\" style=\"padding:20px\"><strong>No experiences yet</strong>Be the first to write this Sphere's story.</div>";
+          passportStories.innerHTML = `<div class="empty-state" style="padding:20px"><strong>Reading note</strong>${escapeHtml(sphere.reading_note || previewExperienceNote(sphere))}</div>`;
           return;
         }
         passportStories.innerHTML = experiences.map(experience => {
