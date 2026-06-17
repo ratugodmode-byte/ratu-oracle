@@ -416,8 +416,19 @@
       content: "";
       position: absolute;
       inset: 0;
-      background: linear-gradient(180deg, rgba(24, 14, 22, .04), rgba(24, 14, 22, .28));
+      background: linear-gradient(180deg, rgba(24, 14, 22, .02), rgba(24, 14, 22, .08));
       pointer-events: none;
+    }
+    .product-art img {
+      position: relative;
+      z-index: 1;
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      object-position: center;
+      display: block;
+      padding: 8px;
+      box-sizing: border-box;
     }
     .product-art.has-image .mini-card { display: none; }
     .product-art.love { background: radial-gradient(circle at 28% 25%, #f3a9ba, transparent 80px), linear-gradient(135deg, #7b243e, #f1c0cd); }
@@ -1429,10 +1440,10 @@
         const owners = Number(sphere.owners_count || 1);
         const imageUrl = sphere.image_url || sphereImageUrl(sphere, index);
         sphere._display_image_url = imageUrl;
-        const imageStyle = imageUrl ? ` style="background-image: url('${escapeHtml(imageUrl).replace(/'/g, "%27")}')"` : "";
+        const imageMarkup = imageUrl ? `<img src="${escapeHtml(imageUrl)}" alt="${escapeHtml(sphere.title)} card" loading="lazy">` : "";
         return `
           <article class="product" data-category="${sphere.category}" data-sphere-id="${sphere.id}">
-            <div class="product-art ${artClass(sphere.category)} ${imageUrl ? "has-image" : ""}"${imageStyle}><div class="heart">&hearts;</div><div class="mini-card"><div class="sigil"></div></div></div>
+            <div class="product-art ${artClass(sphere.category)} ${imageUrl ? "has-image" : ""}"><div class="heart">&hearts;</div>${imageMarkup}<div class="mini-card"><div class="sigil"></div></div></div>
             <div class="product-body">
               <h3>${escapeHtml(sphere.title)}</h3>
               <span class="tag">${escapeHtml(sphere.category)}</span>
