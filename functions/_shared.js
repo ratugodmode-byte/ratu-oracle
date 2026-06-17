@@ -106,7 +106,7 @@ export async function ensureSettingsTable(sql) {
 export function getRequiredEnv(name) {
   const value = process.env[name];
   if (!value) {
-    throw new Error(`${name} is not set. Add it in Netlify site settings > Environment variables.`);
+    throw new Error(`${name} is not set. Add it in Vercel Project Settings > Environment Variables.`);
   }
   return value;
 }

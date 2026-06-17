@@ -1,46 +1,39 @@
-import * as adminDeleteExperience from "../functions/admin-delete-experience.js";
-import * as adminDeleteSphere from "../functions/admin-delete-sphere.js";
-import * as adminExperiences from "../functions/admin-experiences.js";
-import * as adminSpheres from "../functions/admin-spheres.js";
-import * as adminStats from "../functions/admin-stats.js";
-import * as authGoogleCallback from "../functions/auth-google-callback.js";
-import * as authGoogleStart from "../functions/auth-google-start.js";
-import * as authLogout from "../functions/auth-logout.js";
-import * as authMe from "../functions/auth-me.js";
-import * as createSphere from "../functions/create-sphere.js";
-import * as experiences from "../functions/experiences.js";
-import * as health from "../functions/health.js";
-import * as marketplace from "../functions/marketplace.js";
-import * as qrCode from "../functions/qr-code.js";
-import * as siteSettings from "../functions/site-settings.js";
-import * as spheres from "../functions/spheres.js";
-
-const functions = {
-  "admin-delete-experience": adminDeleteExperience,
-  "admin-delete-sphere": adminDeleteSphere,
-  "admin-experiences": adminExperiences,
-  "admin-spheres": adminSpheres,
-  "admin-stats": adminStats,
-  "auth-google-callback": authGoogleCallback,
-  "auth-google-start": authGoogleStart,
-  "auth-logout": authLogout,
-  "auth-me": authMe,
-  "create-sphere": createSphere,
-  experiences,
-  health,
-  marketplace,
-  "qr-code": qrCode,
-  "site-settings": siteSettings,
-  spheres
+const functionLoaders = {
+  "admin-delete-experience": () => import("../functions/admin-delete-experience.js"),
+  "admin-delete-sphere": () => import("../functions/admin-delete-sphere.js"),
+  "admin-experiences": () => import("../functions/admin-experiences.js"),
+  "admin-spheres": () => import("../functions/admin-spheres.js"),
+  "admin-stats": () => import("../functions/admin-stats.js"),
+  "auth-google-callback": () => import("../functions/auth-google-callback.js"),
+  "auth-google-start": () => import("../functions/auth-google-start.js"),
+  "auth-logout": () => import("../functions/auth-logout.js"),
+  "auth-me": () => import("../functions/auth-me.js"),
+  "create-sphere": () => import("../functions/create-sphere.js"),
+  experiences: () => import("../functions/experiences.js"),
+  health: () => import("../functions/health.js"),
+  marketplace: () => import("../functions/marketplace.js"),
+  "qr-code": () => import("../functions/qr-code.js"),
+  "site-settings": () => import("../functions/site-settings.js"),
+  spheres: () => import("../functions/spheres.js")
 };
 
+function getFunctionName(req) {
+  const value = req.query.function;
+  return Array.isArray(value) ? value[0] : value;
+}
+
 export default async function handler(req, res) {
-  const functionName = req.query.function;
+  const functionName = getFunctionName(req);
 
   try {
-    const mod = functions[functionName];
-    if (typeof mod.handler !== "function") {
+    const loadFunction = functionLoaders[functionName];
+    if (!loadFunction) {
       return res.status(404).json({ error: "Function not found." });
+    }
+
+    const mod = await loadFunction();
+    if (typeof mod.handler !== "function") {
+      return res.status(404).json({ error: "Function handler not found." });
     }
 
     const queryStringParameters = { ...req.query };
@@ -61,10 +54,16 @@ export default async function handler(req, res) {
     for (const [key, value] of Object.entries(result.headers || {})) {
       res.setHeader(key, value);
     }
+    for (const [key, values] of Object.entries(result.multiValueHeaders || {})) {
+      res.setHeader(key, values);
+    }
 
     res.status(result.statusCode || 200).send(result.body || "");
   } catch (error) {
     console.error(error);
-    res.status(500).json({ error: error.message || "Server error." });
+    res.status(500).json({
+      error: error.message || "Server error.",
+      function: functionName || "unknown"
+    });
   }
 }
