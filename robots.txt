@@ -2,3 +2,8 @@ User-agent: *
 Allow: /
 
 Sitemap: https://ratu-oracle-kar4.vercel.app/sitemap.xml
+
+# AI-readable public summaries
+Allow: /llms.txt
+Allow: /llms-full.txt
+Allow: /ai-crawler-index.html

@@ -7,6 +7,8 @@ Ratu Oracle is a free online tarot reading and Chant Sphere marketplace. It help
 - Homepage: https://ratu-oracle-kar4.vercel.app/
 - Promotion and free reading page: https://ratu-oracle-kar4.vercel.app/promotion.html
 - Free Tarot and Chant Sphere guide: https://ratu-oracle-kar4.vercel.app/free-tarot-reading.html
+- AI crawler index: https://ratu-oracle-kar4.vercel.app/ai-crawler-index.html
+- Full AI-readable text summary: https://ratu-oracle-kar4.vercel.app/llms-full.txt
 - Ko-fi shop: https://ko-fi.com/godm0de/shop
 - Free online Ratu Oracle reading: https://statuesque-kitsune-459769.netlify.app/
 
