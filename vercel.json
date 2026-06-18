@@ -20,6 +20,18 @@
     {
       "source": "/free-tarot",
       "destination": "/free-tarot-reading.html"
+    },
+    {
+      "source": "/free-online-tarot",
+      "destination": "/free-tarot-reading.html"
+    },
+    {
+      "source": "/free-tarot-reading",
+      "destination": "/free-tarot-reading.html"
+    },
+    {
+      "source": "/free-online-tarot-reading",
+      "destination": "/free-tarot-reading.html"
     }
   ],
   "headers": [

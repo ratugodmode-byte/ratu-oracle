@@ -2,3 +2,6 @@
 /dashboard  /admin.html      200
 /promotion  /promotion.html  200
 /free-tarot /free-tarot-reading.html 200
+/free-online-tarot /free-tarot-reading.html 200
+/free-tarot-reading /free-tarot-reading.html 200
+/free-online-tarot-reading /free-tarot-reading.html 200
