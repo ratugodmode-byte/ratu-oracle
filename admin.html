@@ -255,7 +255,7 @@
         </label>
         <button class="btn primary" id="unlockBtn">Unlock Dashboard</button>
       </div>
-      <div class="status" id="loginStatus">Add ADMIN_SECRET in Netlify environment variables, then use it here.</div>
+      <div class="status" id="loginStatus">Add ADMIN_SECRET in Vercel environment variables, then use it here.</div>
     </section>
 
     <section id="adminApp" class="hidden grid">
@@ -269,6 +269,7 @@
       <div class="tabs" role="tablist">
         <button class="tab active" data-tab="spheres">Spheres</button>
         <button class="tab" data-tab="experiences">Experiences</button>
+        <button class="tab" data-tab="pages">Pages</button>
         <button class="tab" data-tab="promotion">Promotion</button>
         <button class="tab" data-tab="settings">Settings</button>
       </div>
@@ -346,6 +347,53 @@
         <div class="panel">
           <h2>Manage Experiences</h2>
           <div class="list" id="experienceList"></div>
+        </div>
+      </section>
+
+      <section class="grid layout admin-tab hidden" id="tab-pages">
+        <aside class="panel">
+          <h2>Editable Public Page</h2>
+          <form class="form" id="pageForm">
+            <label>Page slug
+              <input id="pageSlug" name="slug" value="free-tarot-reading" required>
+            </label>
+            <label>Page title
+              <input id="pageTitle" name="title" placeholder="Free Tarot Reading and Chant Sphere Guidance" required>
+            </label>
+            <label>Short description
+              <textarea id="pageDescription" name="description" placeholder="Explain what this page helps visitors do." required></textarea>
+            </label>
+            <label>Main link
+              <input id="pagePrimaryUrl" name="primary_url" placeholder="https://statuesque-kitsune-459769.netlify.app/">
+            </label>
+            <label>Main button label
+              <input id="pagePrimaryLabel" name="primary_label" placeholder="Start Free Tarot Reading">
+            </label>
+            <label>Keywords for crawlers
+              <textarea id="pageKeywords" name="keywords" placeholder="tarot, free tarot, free tarot reading, kabbalah, solomon's seal"></textarea>
+            </label>
+            <label>Article body
+              <textarea id="pageBody" name="body" placeholder="Write the page article here."></textarea>
+            </label>
+            <div class="row">
+              <button class="btn" type="button" id="fillFreeTarotPage">Use Free Tarot Template</button>
+              <button class="btn primary" type="submit">Save Page</button>
+            </div>
+          </form>
+          <div class="status" id="pageStatus">This saves public page text and metadata. Future pages can use the same page structure.</div>
+        </aside>
+        <div class="panel">
+          <h2>Page Preview</h2>
+          <div class="promo-preview">
+            <h3 id="pagePreviewTitle">Free Tarot Reading and Chant Sphere Guidance</h3>
+            <p id="pagePreviewDescription">Preview the page text here.</p>
+            <div class="promo-links" id="pagePreviewLinks"></div>
+          </div>
+          <div class="keyword-box" id="pagePreviewBody" style="margin-top:14px">Article preview will appear here.</div>
+          <div class="row" style="margin-top:12px">
+            <a class="btn primary" href="/free-tarot-reading.html" target="_blank" rel="noreferrer">Open Free Tarot Page</a>
+            <a class="btn" href="/page.html?slug=free-tarot-reading" target="_blank" rel="noreferrer">Open Generic Page</a>
+          </div>
         </div>
       </section>
 
@@ -489,7 +537,19 @@
       promoPreviewTitle: document.getElementById("promoPreviewTitle"),
       promoPreviewDescription: document.getElementById("promoPreviewDescription"),
       promoPreviewLinks: document.getElementById("promoPreviewLinks"),
-      promoAiOutput: document.getElementById("promoAiOutput")
+      promoAiOutput: document.getElementById("promoAiOutput"),
+      pageStatus: document.getElementById("pageStatus"),
+      pageSlug: document.getElementById("pageSlug"),
+      pageTitle: document.getElementById("pageTitle"),
+      pageDescription: document.getElementById("pageDescription"),
+      pagePrimaryUrl: document.getElementById("pagePrimaryUrl"),
+      pagePrimaryLabel: document.getElementById("pagePrimaryLabel"),
+      pageKeywords: document.getElementById("pageKeywords"),
+      pageBody: document.getElementById("pageBody"),
+      pagePreviewTitle: document.getElementById("pagePreviewTitle"),
+      pagePreviewDescription: document.getElementById("pagePreviewDescription"),
+      pagePreviewLinks: document.getElementById("pagePreviewLinks"),
+      pagePreviewBody: document.getElementById("pagePreviewBody")
     };
 
     function escapeHtml(value) {
@@ -657,6 +717,55 @@
       updatePromotionPreview();
     }
 
+    const freeTarotTemplate = {
+      slug: "free-tarot-reading",
+      title: "Free Tarot Reading and Chant Sphere Guidance",
+      description: "Use the free Ratu Oracle reading to understand the energy around you now, then choose the Chant Sphere, talisman, amulet, or Solomon seal that fits your current need.",
+      primary_url: "https://statuesque-kitsune-459769.netlify.app/",
+      primary_label: "Start Free Tarot Reading",
+      keywords: "tarot, free tarot, free tarot reading, kabbalah, solomon's seal, king solomon's seal, talisman, amulets, customised amulets, customized amulets, customised talisman, customized talisman, activate energies to your bodily needs, chant spheres, magick, magik, real magick, real kabbalah magick, jewish kabbalah, sefirots",
+      body: "Ratu Oracle begins with a free tarot reading so a visitor can pause, ask clearly, and sense what kind of support is needed in the present moment. The reading is not a fixed command. It is a mirror for attention, choice, protection, love, clarity, healing, and prosperity.\n\nAfter the reading, the visitor can explore Chant Spheres: symbolic talisman pages with QR passports, owner stories, and marketplace listings. Each sphere carries an intention. Some are made for harmony and devotion, some for a clear path, some for protection, some for courage, and some for steady abundance.\n\nThe work is inspired by sacred geometry, Solomon-style seals, and the balanced tree of spiritual qualities. The language stays plain and respectful: light, boundary, mercy, strength, beauty, victory, foundation, and presence. No promise replaces medical, legal, or financial care. The purpose is spiritual reflection, energetic focus, and meaningful ritual support.\n\nUse the free reading first. Then choose the sphere whose meaning matches your current energy, your body, your heart, and the action you are ready to take."
+    };
+
+    function getPages() {
+      try {
+        const parsed = JSON.parse(state.settings.content_pages || "[]");
+        return Array.isArray(parsed) ? parsed : [];
+      } catch {
+        return [];
+      }
+    }
+
+    function currentPageFromSettings() {
+      return getPages().find(page => page.slug === "free-tarot-reading") || freeTarotTemplate;
+    }
+
+    function fillPageForm(page = freeTarotTemplate) {
+      els.pageSlug.value = page.slug || "free-tarot-reading";
+      els.pageTitle.value = page.title || "";
+      els.pageDescription.value = page.description || "";
+      els.pagePrimaryUrl.value = page.primary_url || "";
+      els.pagePrimaryLabel.value = page.primary_label || "";
+      els.pageKeywords.value = page.keywords || "";
+      els.pageBody.value = page.body || "";
+      updatePagePreview();
+    }
+
+    function renderPages() {
+      fillPageForm(currentPageFromSettings());
+    }
+
+    function updatePagePreview() {
+      const title = els.pageTitle.value.trim() || "Free Tarot Reading and Chant Sphere Guidance";
+      const description = els.pageDescription.value.trim() || "Use free tarot guidance to choose the Chant Sphere that fits your energy now.";
+      const link = safeLink(els.pagePrimaryUrl.value);
+      const label = els.pagePrimaryLabel.value.trim() || "Open Page";
+      els.pagePreviewTitle.textContent = title;
+      els.pagePreviewDescription.textContent = description;
+      els.pagePreviewLinks.innerHTML = link ? `<a class="promo-pill" href="${escapeHtml(link)}" target="_blank" rel="noreferrer">${escapeHtml(label)}</a>` : "";
+      els.pagePreviewBody.textContent = els.pageBody.value.trim() || "Article preview will appear here.";
+    }
+
     function safeLink(url) {
       const value = String(url || "").trim();
       if (!value) return "";
@@ -688,7 +797,25 @@
     function generatePromotionKeywords() {
       const title = els.promoTitle.value.trim() || "Free Online Tarot Reading";
       const base = [
+        "tarot",
+        "free tarot",
+        "free tarot reading",
         "free online tarot reading",
+        "kabbalah",
+        "solomon's seal",
+        "king solomon's seal",
+        "talisman",
+        "amulets",
+        "customised amulets",
+        "customised talisman",
+        "activate energies to your bodily needs",
+        "chant spheres",
+        "magick",
+        "magik",
+        "real magick",
+        "real kabbalah magick",
+        "jewish kabbalah",
+        "sefirots",
         "online tarot reading free",
         "spiritual guidance online",
         "amulet for protection",
@@ -758,6 +885,7 @@
       renderExperiences();
       renderSettings();
       renderPromotion();
+      renderPages();
       if (publicFallbackMessage) {
         setStatus(els.sphereStatus, publicFallbackMessage, "error");
       }
@@ -866,6 +994,33 @@
 
     document.getElementById("promotionForm").addEventListener("input", updatePromotionPreview);
     document.getElementById("generatePromoAi").addEventListener("click", generatePromotionKeywords);
+
+    document.getElementById("pageForm").addEventListener("input", updatePagePreview);
+    document.getElementById("fillFreeTarotPage").addEventListener("click", () => fillPageForm(freeTarotTemplate));
+
+    document.getElementById("pageForm").addEventListener("submit", async event => {
+      event.preventDefault();
+      const page = Object.fromEntries(new FormData(event.currentTarget).entries());
+      page.slug = String(page.slug || "").trim().toLowerCase().replace(/[^a-z0-9-]+/g, "-").replace(/^-+|-+$/g, "") || "free-tarot-reading";
+      const pages = getPages().filter(item => item.slug !== page.slug);
+      pages.unshift(page);
+      const pageSettings = {
+        content_pages: JSON.stringify(pages),
+        site_keywords: page.keywords || "",
+        site_meta_description: page.description || ""
+      };
+      try {
+        await api("/.netlify/functions/site-settings", {
+          method: "POST",
+          body: JSON.stringify({ settings: pageSettings })
+        });
+        state.settings = { ...state.settings, ...pageSettings };
+        fillPageForm(page);
+        setStatus(els.pageStatus, "Page content and crawler metadata saved.", "ok");
+      } catch (error) {
+        setStatus(els.pageStatus, error.message, "error");
+      }
+    });
 
     document.getElementById("promotionForm").addEventListener("submit", async event => {
       event.preventDefault();

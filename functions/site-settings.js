@@ -23,7 +23,10 @@ const allowedKeys = new Set([
   "promo_meta_title",
   "promo_meta_description",
   "promo_article_title",
-  "promo_article_body"
+  "promo_article_body",
+  "content_pages",
+  "site_keywords",
+  "site_meta_description"
 ]);
 
 export async function handler(event) {

@@ -16,6 +16,10 @@
     {
       "source": "/promotion",
       "destination": "/promotion.html"
+    },
+    {
+      "source": "/free-tarot",
+      "destination": "/free-tarot-reading.html"
     }
   ],
   "headers": [
