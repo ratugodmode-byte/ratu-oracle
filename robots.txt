@@ -8,3 +8,4 @@ Sitemap: https://ratu-oracle-kar4.vercel.app/sitemap-dynamic.xml
 Allow: /llms.txt
 Allow: /llms-full.txt
 Allow: /ai-crawler-index.html
+Allow: /indexnow-key.txt
