@@ -6,6 +6,10 @@
       "destination": "/api/:function"
     },
     {
+      "source": "/sitemap-dynamic.xml",
+      "destination": "/api/sitemap"
+    },
+    {
       "source": "/admin",
       "destination": "/admin.html"
     },
@@ -32,6 +36,22 @@
     {
       "source": "/free-online-tarot-reading",
       "destination": "/free-tarot-reading.html"
+    },
+    {
+      "source": "/spirit-dolls",
+      "destination": "/spirit-dolls-magickal-objects.html"
+    },
+    {
+      "source": "/spirit-doll",
+      "destination": "/spirit-dolls-magickal-objects.html"
+    },
+    {
+      "source": "/magickal-objects",
+      "destination": "/spirit-dolls-magickal-objects.html"
+    },
+    {
+      "source": "/amulets-talismans",
+      "destination": "/spirit-dolls-magickal-objects.html"
     }
   ],
   "headers": [

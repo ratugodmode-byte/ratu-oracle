@@ -2,6 +2,7 @@ User-agent: *
 Allow: /
 
 Sitemap: https://ratu-oracle-kar4.vercel.app/sitemap.xml
+Sitemap: https://ratu-oracle-kar4.vercel.app/sitemap-dynamic.xml
 
 # AI-readable public summaries
 Allow: /llms.txt

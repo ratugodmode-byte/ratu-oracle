@@ -13,6 +13,7 @@ const functionLoaders = {
   health: () => import("../functions/health.js"),
   marketplace: () => import("../functions/marketplace.js"),
   "qr-code": () => import("../functions/qr-code.js"),
+  sitemap: () => import("../functions/sitemap.js"),
   "site-settings": () => import("../functions/site-settings.js"),
   spheres: () => import("../functions/spheres.js")
 };
