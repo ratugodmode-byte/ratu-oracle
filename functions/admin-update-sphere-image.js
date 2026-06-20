@@ -16,8 +16,8 @@ export async function handler(event) {
     const imageUrl = String(body.image_url || "").trim();
 
     if (!id) return json(400, { error: "Sphere id is required." });
-    if (imageUrl && !/^(https?:\/\/|assets\/)/i.test(imageUrl)) {
-      return json(400, { error: "Image URL must be a direct https:// image URL or a site path starting with assets/." });
+    if (imageUrl && !/^(https?:\/\/|assets\/|data:image\/(png|jpe?g|webp|gif);base64,)/i.test(imageUrl)) {
+      return json(400, { error: "Image must be a direct https:// image URL, a site path starting with assets/, or an uploaded image from the admin dashboard." });
     }
 
     const sql = getSql();
