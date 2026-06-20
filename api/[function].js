@@ -4,6 +4,7 @@ const functionLoaders = {
   "admin-experiences": () => import("../functions/admin-experiences.js"),
   "admin-spheres": () => import("../functions/admin-spheres.js"),
   "admin-stats": () => import("../functions/admin-stats.js"),
+  "admin-update-sphere-image": () => import("../functions/admin-update-sphere-image.js"),
   "auth-google-callback": () => import("../functions/auth-google-callback.js"),
   "auth-google-start": () => import("../functions/auth-google-start.js"),
   "auth-logout": () => import("../functions/auth-logout.js"),

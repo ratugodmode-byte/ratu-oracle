@@ -33,21 +33,25 @@ export async function handler(event) {
     const title = String(body.title || "").trim();
     const category = String(body.category || "").trim();
     const intention = String(body.intention || "").trim();
+    const imageUrl = String(body.image_url || "").trim();
     const listingType = listingTypeMap[body.listingType] ?? null;
     const priceCents = toCents(body.price);
 
     if (!title) return json(400, { error: "Sphere name is required." });
     if (!allowedCategories.has(category)) return json(400, { error: "Choose a valid sphere category." });
     if (!intention) return json(400, { error: "Intention is required." });
+    if (imageUrl && !/^(https?:\/\/|assets\/)/i.test(imageUrl)) {
+      return json(400, { error: "Image URL must be a direct https:// image URL or a site path starting with assets/." });
+    }
 
     const sql = getSql();
     const ownerId = await ensureDemoUser(sql);
     const status = body.private === true || !listingType ? "private" : "active";
 
     const spheres = await sql`
-      insert into chant_spheres (owner_id, creator_id, title, category, intention, status, price_cents)
-      values (${ownerId}, ${ownerId}, ${title}, ${category}, ${intention}, ${status}, ${priceCents})
-      returning id, title, category, intention, status, price_cents, currency, created_at
+      insert into chant_spheres (owner_id, creator_id, title, category, intention, status, price_cents, image_url)
+      values (${ownerId}, ${ownerId}, ${title}, ${category}, ${intention}, ${status}, ${priceCents}, ${imageUrl || null})
+      returning id, title, category, intention, status, price_cents, currency, image_url, created_at
     `;
     const sphere = spheres[0];
 

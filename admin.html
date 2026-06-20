@@ -143,6 +143,37 @@
     }
     .item p { margin: 4px 0; color: var(--muted); line-height: 1.45; }
     .item small { color: var(--muted); }
+    .item-main {
+      display: grid;
+      grid-template-columns: 82px 1fr;
+      gap: 12px;
+      align-items: start;
+    }
+    .sphere-thumb {
+      width: 82px;
+      height: 112px;
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      background: linear-gradient(135deg, #2c1d35, #b87939);
+      object-fit: cover;
+      object-position: center;
+    }
+    .sphere-thumb.empty {
+      display: grid;
+      place-items: center;
+      color: white;
+      font-weight: 900;
+      font-size: 11px;
+      text-align: center;
+      padding: 8px;
+    }
+    .image-edit {
+      display: grid;
+      gap: 6px;
+      margin-top: 10px;
+    }
+    .image-edit .row { gap: 8px; }
+    .image-edit input { min-width: min(360px, 100%); }
     .item-actions {
       display: grid;
       gap: 8px;
@@ -305,9 +336,12 @@
               <label>Price
                 <input name="price" type="number" min="0" step="0.01" placeholder="25">
               </label>
+              <label>Picture URL
+                <input name="image_url" placeholder="https://example.com/spirit-doll.jpg or assets/spheres/card.png">
+              </label>
               <button class="btn primary" type="submit">Create Sphere</button>
             </form>
-            <div class="status" id="sphereStatus">Create, list, and generate a passport for a new Chant Sphere.</div>
+            <div class="status" id="sphereStatus">Create, list, add a picture, and generate a passport for a new Chant Sphere or spirit doll.</div>
           </aside>
 
           <aside class="panel">
@@ -619,11 +653,25 @@
 
       els.sphereList.innerHTML = state.spheres.map(sphere => `
         <article class="item">
-          <div>
-            <h3>${escapeHtml(sphere.title)}</h3>
-            <p><strong>${escapeHtml(sphere.category)}</strong> / ${escapeHtml(sphere.status)}</p>
-            <p>${escapeHtml(sphere.intention || "No intention written.")}</p>
-            <small>${money(sphere.price_cents, sphere.currency)} / ${sphere.experiences_count || 0} experiences / ${new Date(sphere.created_at).toLocaleString()}</small>
+          <div class="item-main">
+            ${sphere.image_url
+              ? `<img class="sphere-thumb" src="${escapeHtml(sphere.image_url)}" alt="${escapeHtml(sphere.title)} image" loading="lazy">`
+              : `<div class="sphere-thumb empty">No image</div>`}
+            <div>
+              <h3>${escapeHtml(sphere.title)}</h3>
+              <p><strong>${escapeHtml(sphere.category)}</strong> / ${escapeHtml(sphere.status)}</p>
+              <p>${escapeHtml(sphere.intention || "No intention written.")}</p>
+              <small>${money(sphere.price_cents, sphere.currency)} / ${sphere.experiences_count || 0} experiences / ${new Date(sphere.created_at).toLocaleString()}</small>
+              <div class="image-edit">
+                <label>Picture URL
+                  <input data-image-input="${sphere.id}" value="${escapeHtml(sphere.image_url || "")}" placeholder="https://example.com/spirit-doll.jpg">
+                </label>
+                <div class="row">
+                  <button class="btn small" data-save-image="${sphere.id}">Save Image</button>
+                  <button class="btn small" data-clear-image="${sphere.id}">Clear Image</button>
+                </div>
+              </div>
+            </div>
           </div>
           <div class="item-actions">
             <button class="btn small" data-qr="${sphere.id}">QR</button>
@@ -940,8 +988,21 @@
       const qrButton = event.target.closest("[data-qr]");
       const deleteSphereButton = event.target.closest("[data-delete-sphere]");
       const deleteExperienceButton = event.target.closest("[data-delete-experience]");
+      const saveImageButton = event.target.closest("[data-save-image]");
+      const clearImageButton = event.target.closest("[data-clear-image]");
 
       if (qrButton) showQr(qrButton.dataset.qr);
+
+      if (saveImageButton || clearImageButton) {
+        const id = (saveImageButton || clearImageButton).dataset.saveImage || (saveImageButton || clearImageButton).dataset.clearImage;
+        const input = document.querySelector(`[data-image-input="${CSS.escape(id)}"]`);
+        const imageUrl = clearImageButton ? "" : input?.value.trim();
+        await api("/.netlify/functions/admin-update-sphere-image", {
+          method: "POST",
+          body: JSON.stringify({ id, image_url: imageUrl })
+        });
+        await loadAdmin();
+      }
 
       if (deleteSphereButton) {
         const sphere = state.spheres.find(item => item.id === deleteSphereButton.dataset.deleteSphere);
