@@ -1017,7 +1017,7 @@
           method: "POST",
           body: JSON.stringify(payload)
         });
-        event.currentTarget.reset();
+        form.reset();
         setStatus(els.sphereStatus, "Sphere created. Dashboard refreshed.", "ok");
         await loadAdmin();
       } catch (error) {
