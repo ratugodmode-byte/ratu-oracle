@@ -1,4 +1,4 @@
-import { databaseError, getSql, handleOptions, json, requireMethod } from "./_shared.js";
+import { databaseError, ensureSphereSeoColumns, getSql, handleOptions, json, requireMethod } from "./_shared.js";
 
 export async function handler(event) {
   const options = handleOptions(event);
@@ -9,6 +9,7 @@ export async function handler(event) {
 
   try {
     const sql = getSql();
+    await ensureSphereSeoColumns(sql);
     const rows = await sql`
       select
         s.id,
@@ -19,6 +20,7 @@ export async function handler(event) {
         s.price_cents,
         s.currency,
         s.image_url,
+        s.seo_keywords,
         s.created_at,
         coalesce(experience_counts.count, 0)::int as experiences_count,
         coalesce(listing_counts.count, 0)::int as owners_count,

@@ -81,6 +81,125 @@ export function databaseError(error) {
   });
 }
 
+export const spiritDollKeywords = [
+  "spirit doll",
+  "air spirit",
+  "wind spirit",
+  "elemental spirit",
+  "air elemental",
+  "wind guardian",
+  "sky guardian",
+  "cloud spirit",
+  "storm spirit",
+  "breeze spirit",
+  "fairy doll",
+  "fantasy doll",
+  "magical doll",
+  "enchanted doll",
+  "guardian doll",
+  "spirit guardian",
+  "air fae",
+  "faerie spirit",
+  "nature spirit",
+  "nature guardian",
+  "whimsical doll",
+  "art doll",
+  "collectible doll",
+  "handmade doll",
+  "fantasy collectible",
+  "mystical collectible",
+  "spiritual gift",
+  "energy doll",
+  "healing spirit",
+  "healing energy",
+  "protection spirit",
+  "guardian figure",
+  "spirit guide",
+  "air guide",
+  "wind guide",
+  "elemental guardian",
+  "ethereal being",
+  "celestial spirit",
+  "light spirit",
+  "dream spirit",
+  "good luck charm",
+  "luck spirit",
+  "altar doll",
+  "altar guardian",
+  "home blessing",
+  "sacred doll",
+  "mystic doll",
+  "spirit companion",
+  "soul companion",
+  "fairy guardian",
+  "wind fairy",
+  "forest fairy",
+  "magick doll",
+  "magical companion",
+  "positive energy",
+  "spiritual decor",
+  "fantasy decor",
+  "fairytale doll",
+  "storybook character",
+  "white hair spirit",
+  "air magic",
+  "elemental magic",
+  "guardian collectible",
+  "OOAK doll",
+  "artist doll",
+  "fantasy creature",
+  "mythical creature",
+  "elf doll",
+  "air elf",
+  "nature elf",
+  "spirit art",
+  "folk art doll",
+  "boho decor",
+  "witch decor",
+  "pagan decor",
+  "new age gift",
+  "meditation companion",
+  "mindfulness gift",
+  "energy healing",
+  "manifestation tool",
+  "abundance charm",
+  "luck charm",
+  "spiritual protection",
+  "angelic spirit",
+  "ethereal guardian",
+  "peaceful spirit",
+  "tranquility charm",
+  "calming energy",
+  "collector item",
+  "unique handmade gift",
+  "fantasy artwork",
+  "magic creature",
+  "air kingdom",
+  "wind dancer",
+  "heart healer",
+  "dream walker",
+  "sky traveler",
+  "blessing doll",
+  "energy guardian",
+  "sacred companion"
+];
+
+export function looksLikeSpiritDoll(value) {
+  return /\b(spirit\s*doll|doll|fae|faerie|fairy|guardian|elemental|air\s*spirit|wind\s*spirit|sky\s*guardian|spirit\s*companion|sacred\s*companion)\b/i.test(String(value || ""));
+}
+
+export function mergedSpiritDollKeywords(value = "") {
+  const manual = String(value || "")
+    .split(",")
+    .map(keyword => keyword.trim())
+    .filter(Boolean);
+  return [...new Set([...manual, ...spiritDollKeywords])].join(", ");
+}
+
+export async function ensureSphereSeoColumns(sql) {
+  await sql`alter table chant_spheres add column if not exists seo_keywords text`;
+}
+
 export function requireAdmin(event) {
   const configuredSecret = process.env.ADMIN_SECRET;
   if (!configuredSecret) {

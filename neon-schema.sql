@@ -36,6 +36,7 @@ create table if not exists chant_spheres (
   price_cents integer check (price_cents is null or price_cents >= 0),
   currency text not null default 'USD',
   image_url text,
+  seo_keywords text,
   created_at timestamptz not null default now(),
   updated_at timestamptz not null default now()
 );

@@ -1,6 +1,7 @@
 import {
   databaseError,
   ensureDemoUser,
+  ensureSphereSeoColumns,
   getSql,
   handleOptions,
   json,
@@ -20,6 +21,7 @@ export async function handler(event) {
 
   try {
     const sql = getSql();
+    await ensureSphereSeoColumns(sql);
 
     if (event.httpMethod === "GET") {
       const rows = await sql`
@@ -35,6 +37,7 @@ export async function handler(event) {
           s.intention,
           s.currency,
           s.image_url,
+          s.seo_keywords,
           u.display_name as seller_name
         from marketplace_listings l
         join chant_spheres s on s.id = l.sphere_id

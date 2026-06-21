@@ -1,9 +1,12 @@
 import {
   databaseError,
   ensureDemoUser,
+  ensureSphereSeoColumns,
   getSql,
   handleOptions,
   json,
+  looksLikeSpiritDoll,
+  mergedSpiritDollKeywords,
   readJson,
   requireMethod,
   slugify,
@@ -34,6 +37,7 @@ export async function handler(event) {
     const category = String(body.category || "").trim();
     const intention = String(body.intention || "").trim();
     const imageUrl = String(body.image_url || "").trim();
+    const submittedSeoKeywords = String(body.seo_keywords || "").trim();
     const listingType = listingTypeMap[body.listingType] ?? null;
     const priceCents = toCents(body.price);
 
@@ -45,13 +49,18 @@ export async function handler(event) {
     }
 
     const sql = getSql();
+    await ensureSphereSeoColumns(sql);
     const ownerId = await ensureDemoUser(sql);
     const status = body.private === true || !listingType ? "private" : "active";
+    const shouldTagAsSpiritDoll = looksLikeSpiritDoll(`${title} ${category} ${intention} ${submittedSeoKeywords}`);
+    const seoKeywords = shouldTagAsSpiritDoll
+      ? mergedSpiritDollKeywords(submittedSeoKeywords)
+      : submittedSeoKeywords || null;
 
     const spheres = await sql`
-      insert into chant_spheres (owner_id, creator_id, title, category, intention, status, price_cents, image_url)
-      values (${ownerId}, ${ownerId}, ${title}, ${category}, ${intention}, ${status}, ${priceCents}, ${imageUrl || null})
-      returning id, title, category, intention, status, price_cents, currency, image_url, created_at
+      insert into chant_spheres (owner_id, creator_id, title, category, intention, status, price_cents, image_url, seo_keywords)
+      values (${ownerId}, ${ownerId}, ${title}, ${category}, ${intention}, ${status}, ${priceCents}, ${imageUrl || null}, ${seoKeywords})
+      returning id, title, category, intention, status, price_cents, currency, image_url, seo_keywords, created_at
     `;
     const sphere = spheres[0];
 

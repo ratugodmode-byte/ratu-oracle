@@ -346,6 +346,10 @@
               <label>Upload picture from computer
                 <input name="image_file" type="file" accept="image/png,image/jpeg,image/webp,image/gif">
               </label>
+              <label>SEO keywords
+                <textarea name="seo_keywords" id="sphereSeoKeywords" placeholder="Auto-filled for spirit dolls, fairy dolls, guardian dolls, air spirits, elemental guardians, and mystical collectibles."></textarea>
+              </label>
+              <button class="btn" type="button" id="fillSpiritDollSeo">Use Spirit Doll SEO Tags</button>
               <button class="btn primary" type="submit">Create Sphere</button>
             </form>
             <div class="status" id="sphereStatus">Create, list, add a picture, and generate a passport for a new Chant Sphere or spirit doll.</div>
@@ -534,6 +538,10 @@
   </main>
 
   <script>
+    const spiritDollKeywordBank = [
+      "spirit doll", "air spirit", "wind spirit", "elemental spirit", "air elemental", "wind guardian", "sky guardian", "cloud spirit", "storm spirit", "breeze spirit", "fairy doll", "fantasy doll", "magical doll", "enchanted doll", "guardian doll", "spirit guardian", "air fae", "faerie spirit", "nature spirit", "nature guardian", "whimsical doll", "art doll", "collectible doll", "handmade doll", "fantasy collectible", "mystical collectible", "spiritual gift", "energy doll", "healing spirit", "healing energy", "protection spirit", "guardian figure", "spirit guide", "air guide", "wind guide", "elemental guardian", "ethereal being", "celestial spirit", "light spirit", "dream spirit", "good luck charm", "luck spirit", "altar doll", "altar guardian", "home blessing", "sacred doll", "mystic doll", "spirit companion", "soul companion", "fairy guardian", "wind fairy", "forest fairy", "magick doll", "magical companion", "positive energy", "spiritual decor", "fantasy decor", "fairytale doll", "storybook character", "white hair spirit", "air magic", "elemental magic", "guardian collectible", "OOAK doll", "artist doll", "fantasy creature", "mythical creature", "elf doll", "air elf", "nature elf", "spirit art", "folk art doll", "boho decor", "witch decor", "pagan decor", "new age gift", "meditation companion", "mindfulness gift", "energy healing", "manifestation tool", "abundance charm", "luck charm", "spiritual protection", "angelic spirit", "ethereal guardian", "peaceful spirit", "tranquility charm", "calming energy", "collector item", "unique handmade gift", "fantasy artwork", "magic creature", "air kingdom", "wind dancer", "heart healer", "dream walker", "sky traveler", "blessing doll", "energy guardian", "sacred companion"
+    ];
+
     const state = {
       secret: sessionStorage.getItem("ratuAdminSecret") || "",
       spheres: [],
@@ -601,6 +609,15 @@
         '"': "&quot;",
         "'": "&#039;"
       }[char]));
+    }
+
+    function looksLikeSpiritDollText(value) {
+      return /\b(spirit\s*doll|doll|fae|faerie|fairy|guardian|elemental|air\s*spirit|wind\s*spirit|sky\s*guardian|spirit\s*companion|sacred\s*companion)\b/i.test(String(value || ""));
+    }
+
+    function spiritDollSeoText(existing = "") {
+      const manual = String(existing || "").split(",").map(item => item.trim()).filter(Boolean);
+      return [...new Set([...manual, ...spiritDollKeywordBank])].join(", ");
     }
 
     async function api(path, options = {}) {
@@ -704,6 +721,7 @@
               <h3>${escapeHtml(sphere.title)}</h3>
               <p><strong>${escapeHtml(sphere.category)}</strong> / ${escapeHtml(sphere.status)}</p>
               <p>${escapeHtml(sphere.intention || "No intention written.")}</p>
+              ${sphere.seo_keywords ? `<p><strong>SEO tags:</strong> ${escapeHtml(sphere.seo_keywords)}</p>` : ""}
               <small>${money(sphere.price_cents, sphere.currency)} / ${sphere.experiences_count || 0} experiences / ${new Date(sphere.created_at).toLocaleString()}</small>
               <div class="image-edit">
                 <label>Picture URL
@@ -1010,6 +1028,9 @@
       const form = event.currentTarget;
       const payload = Object.fromEntries(new FormData(form).entries());
       delete payload.image_file;
+      if (!String(payload.seo_keywords || "").trim() && looksLikeSpiritDollText(`${payload.title} ${payload.category} ${payload.intention}`)) {
+        payload.seo_keywords = spiritDollSeoText();
+      }
       try {
         const uploadedImage = await imageFileToDataUrl(form.elements.image_file.files[0]);
         if (uploadedImage) payload.image_url = uploadedImage;
@@ -1023,6 +1044,12 @@
       } catch (error) {
         setStatus(els.sphereStatus, error.message, "error");
       }
+    });
+
+    document.getElementById("fillSpiritDollSeo").addEventListener("click", () => {
+      const field = document.getElementById("sphereSeoKeywords");
+      field.value = spiritDollSeoText(field.value);
+      setStatus(els.sphereStatus, "Spirit Doll SEO keywords added to the create form.", "ok");
     });
 
     document.querySelectorAll("[data-tab]").forEach(button => {
@@ -1155,5 +1182,6 @@
 
     if (state.secret) unlock();
   </script>
+  <script src="/assets/i18n/site-i18n.js" defer></script>
 </body>
 </html>

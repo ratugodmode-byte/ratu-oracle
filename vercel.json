@@ -10,6 +10,54 @@
       "destination": "/api/sitemap"
     },
     {
+      "source": "/id",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/zh",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/ru",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/id/spirit-dolls",
+      "destination": "/spirit-dolls-magickal-objects.html"
+    },
+    {
+      "source": "/zh/spirit-dolls",
+      "destination": "/spirit-dolls-magickal-objects.html"
+    },
+    {
+      "source": "/ru/spirit-dolls",
+      "destination": "/spirit-dolls-magickal-objects.html"
+    },
+    {
+      "source": "/id/spirit-dolls/:slug",
+      "destination": "/spirit-dolls-magickal-objects.html"
+    },
+    {
+      "source": "/zh/spirit-dolls/:slug",
+      "destination": "/spirit-dolls-magickal-objects.html"
+    },
+    {
+      "source": "/ru/spirit-dolls/:slug",
+      "destination": "/spirit-dolls-magickal-objects.html"
+    },
+    {
+      "source": "/id/free-tarot-reading",
+      "destination": "/free-tarot-reading.html"
+    },
+    {
+      "source": "/zh/free-tarot-reading",
+      "destination": "/free-tarot-reading.html"
+    },
+    {
+      "source": "/ru/free-tarot-reading",
+      "destination": "/free-tarot-reading.html"
+    },
+    {
       "source": "/admin",
       "destination": "/admin.html"
     },
