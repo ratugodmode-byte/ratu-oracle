@@ -66,6 +66,23 @@
     "Get updates, stories and special offers.": { id: "Dapatkan pembaruan, kisah, dan penawaran khusus.", zh: "获取更新、故事和特别优惠。", ru: "Получайте новости, истории и специальные предложения." },
     "Your email address": { id: "Alamat email Anda", zh: "你的邮箱地址", ru: "Ваш email" },
     "Buy / Trade": { id: "Beli / Tukar", zh: "购买 / 交换", ru: "Купить / Обменять" },
+    "Experiences": { id: "Pengalaman", zh: "体验", ru: "Впечатления" },
+    "Owners": { id: "Pemilik", zh: "主人", ru: "Владельцы" },
+    "Members": { id: "Anggota", zh: "成员", ru: "Участники" },
+    "Spheres Activated": { id: "Sphere Diaktifkan", zh: "已激活能量球", ru: "Активированные сферы" },
+    "Days Active": { id: "Hari Aktif", zh: "活跃天数", ru: "Дней активно" },
+    "Rating": { id: "Peringkat", zh: "评分", ru: "Рейтинг" },
+    "Created on": { id: "Dibuat pada", zh: "创建于", ru: "Создано" },
+    "Active": { id: "Aktif", zh: "已激活", ru: "Активно" },
+    "View Passport": { id: "Lihat Paspor", zh: "查看护照", ru: "Смотреть паспорт" },
+    "Buy This Sphere": { id: "Beli Sphere Ini", zh: "购买此能量球", ru: "Купить эту сферу" },
+    "Loading latest experiences...": { id: "Memuat pengalaman terbaru...", zh: "正在加载最新体验...", ru: "Загрузка последних впечатлений..." },
+    "Loading experiences...": { id: "Memuat pengalaman...", zh: "正在加载体验...", ru: "Загрузка впечатлений..." },
+    "No Chant Spheres yet": { id: "Belum ada Chant Sphere", zh: "暂无 Chant Sphere", ru: "Пока нет Chant Sphere" },
+    "Create the first Sphere and it will appear in the marketplace after Neon is connected.": { id: "Buat Sphere pertama dan itu akan muncul di pasar setelah Neon terhubung.", zh: "创建第一个 Sphere，Neon 连接后它会显示在市集中。", ru: "Создайте первую сферу, и она появится в маркетплейсе после подключения Neon." },
+    "Create a sphere first": { id: "Buat Sphere dulu", zh: "先创建能量球", ru: "Сначала создайте сферу" },
+    "Load marketplace spheres first": { id: "Muat Sphere pasar dulu", zh: "先加载市集能量球", ru: "Сначала загрузите сферы маркетплейса" },
+    "Featured Chant Spheres are ready. Use the free reading to find which Sphere fits your energy now.": { id: "Chant Sphere pilihan sudah siap. Gunakan bacaan gratis untuk menemukan Sphere yang sesuai dengan energi Anda sekarang.", zh: "精选 Chant Sphere 已准备好。使用免费解读，找到此刻适合你能量的 Sphere。", ru: "Избранные Chant Sphere готовы. Используйте бесплатное чтение, чтобы найти сферу, подходящую вашей энергии сейчас." },
     "Buy Now": { id: "Beli Sekarang", zh: "立即购买", ru: "Купить сейчас" },
     "Make Offer": { id: "Buat Penawaran", zh: "出价", ru: "Сделать предложение" },
     "Trade My Sphere": { id: "Tukar Sphere Saya", zh: "交换我的能量球", ru: "Обменять мою сферу" },
@@ -136,6 +153,19 @@
     });
   });
 
+  const normalizedPhraseIndex = {};
+  function normalizePhrase(value) {
+    return String(value || "")
+      .replace(/[✦★*]+/g, "")
+      .replace(/\s+/g, " ")
+      .trim()
+      .toLowerCase();
+  }
+
+  Object.keys(basePhrases).forEach(english => {
+    normalizedPhraseIndex[normalizePhrase(english)] = english;
+  });
+
   let activeLang = "en";
   let applying = false;
 
@@ -183,9 +213,41 @@
     if (activeLang === "en") return text;
     const trimmed = text.trim();
     if (!trimmed) return text;
-    const translated = translations[activeLang].phrases[trimmed];
+    const counted = translateCountedText(trimmed);
+    if (counted) {
+      const prefix = text.match(/^\s*/)?.[0] || "";
+      const suffix = text.match(/\s*$/)?.[0] || "";
+      return `${prefix}${counted}${suffix}`;
+    }
+    const canonical = normalizedPhraseIndex[normalizePhrase(trimmed)] || trimmed;
+    const translated = translations[activeLang].phrases[canonical];
     if (!translated) return text;
-    return text.replace(trimmed, translated);
+    const prefix = text.match(/^\s*/)?.[0] || "";
+    const suffix = text.match(/\s*$/)?.[0] || "";
+    const decoration = /[✦★*]/.test(trimmed) ? " ✦" : "";
+    return `${prefix}${translated}${decoration}${suffix}`;
+  }
+
+  function translateCountedText(trimmed) {
+    const countLabel = trimmed.match(/^(\d[\d,]*)\+?\s+(Experiences|Owners|Members|Spheres Activated|Days Active)$/i);
+    if (countLabel) {
+      const plus = /\+/.test(trimmed) ? "+" : "";
+      const label = normalizedPhraseIndex[normalizePhrase(countLabel[2])] || countLabel[2];
+      const translated = translations[activeLang].phrases[label];
+      return translated ? `${countLabel[1]}${plus} ${translated}` : "";
+    }
+
+    const loaded = trimmed.match(/^Loaded\s+(\d[\d,]*)\s+Chant\s+Spheres?\s+from\s+Neon\.$/i);
+    if (loaded) {
+      const forms = {
+        id: `Memuat ${loaded[1]} Chant Sphere dari Neon.`,
+        zh: `已从 Neon 加载 ${loaded[1]} 个 Chant Sphere。`,
+        ru: `Загружено ${loaded[1]} Chant Sphere из Neon.`
+      };
+      return forms[activeLang] || "";
+    }
+
+    return "";
   }
 
   function translateTextNodes(root = document.body) {
