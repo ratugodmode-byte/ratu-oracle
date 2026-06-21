@@ -822,8 +822,69 @@
     }
     @media (max-width: 640px) {
       .shell { padding: 0 16px; }
-      .nav-actions { margin-left: auto; }
+      .topbar { position: sticky; }
+      .nav {
+        min-height: auto;
+        gap: 8px;
+        padding: 8px 0 6px;
+        align-items: center;
+      }
+      .brand {
+        flex: 1 1 auto;
+        min-width: 0;
+        gap: 8px;
+      }
+      .brand-mark {
+        width: 34px;
+        height: 34px;
+      }
+      .brand-mark img {
+        width: 32px;
+        height: 32px;
+      }
+      .brand h1 {
+        font-size: 18px;
+        line-height: 1;
+      }
+      .brand p {
+        display: none;
+      }
+      .nav-actions {
+        margin-left: 0;
+        gap: 5px;
+        flex: 0 0 auto;
+      }
+      .icon-btn {
+        width: 32px;
+        height: 32px;
+      }
+      .account-chip {
+        min-height: 32px;
+        padding: 2px 6px;
+      }
       .account-chip span { display: none; }
+      .nav-links {
+        order: 3;
+        flex: 0 0 100%;
+        width: 100%;
+        display: flex;
+        flex-wrap: nowrap;
+        gap: 6px;
+        overflow-x: auto;
+        overflow-y: hidden;
+        justify-content: flex-start;
+        padding: 2px 0 4px;
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: none;
+      }
+      .nav-links::-webkit-scrollbar { display: none; }
+      .nav-links a {
+        flex: 0 0 auto;
+        padding: 7px 9px;
+        font-size: 12px;
+        white-space: nowrap;
+        border-bottom-width: 2px;
+      }
       .hero { min-height: auto; }
       .hero-copy { padding: 42px 0; }
       .hero p.lede { font-size: 16px; }

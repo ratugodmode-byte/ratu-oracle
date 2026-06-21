@@ -6,6 +6,12 @@
     zh: "中文",
     ru: "Русский"
   };
+  const LANG_SHORT_NAMES = {
+    en: "EN",
+    id: "ID",
+    zh: "中文",
+    ru: "RU"
+  };
 
   const basePhrases = {
     "Home": { id: "Beranda", zh: "首页", ru: "Главная" },
@@ -185,15 +191,16 @@
     const style = document.createElement("style");
     style.id = "ratu-i18n-style";
     style.textContent = `
-      .language-switcher{display:flex;align-items:center;gap:8px;max-width:100%}
+      .language-switcher{display:flex;align-items:center;gap:6px;max-width:100%;flex:0 0 auto}
       .language-switcher label{font-size:12px;font-weight:800;color:#3b254d;white-space:nowrap}
-      .language-switcher select{min-height:40px;border:1px solid #dac8b9;border-radius:6px;background:#fffaf4;color:#2b173d;font-weight:800;padding:0 34px 0 10px;max-width:100%}
+      .language-switcher select{min-height:36px;border:1px solid #dac8b9;border-radius:999px;background:#fffaf4;color:#2b173d;font-weight:800;padding:0 28px 0 10px;max-width:142px}
       html[lang="ru"] body,html[lang="zh"] body{overflow-wrap:anywhere}
       body{max-width:100%;overflow-x:hidden}
       @media (max-width:640px){
-        nav,.nav-links,.nav-actions{flex-wrap:wrap;max-width:100%}
-        .language-switcher{width:100%;margin-top:8px}
-        .language-switcher select{width:100%;min-height:44px}
+        nav,.nav-links,.nav-actions{max-width:100%}
+        .language-switcher{width:auto;margin-top:0;gap:0}
+        .language-switcher label{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+        .language-switcher select{width:auto;min-height:36px;max-width:82px;padding:0 20px 0 8px;font-size:12px}
       }
     `;
     document.head.appendChild(style);
@@ -293,7 +300,7 @@
     wrap.innerHTML = `
       <label for="languageSelect">Language</label>
       <select id="languageSelect" aria-label="Language">
-        ${Object.entries(LANG_NAMES).map(([code, name]) => `<option value="${code}">${name}</option>`).join("")}
+        ${Object.entries(LANG_NAMES).map(([code, name]) => `<option value="${code}" data-full="${name}" data-short="${LANG_SHORT_NAMES[code]}">${name}</option>`).join("")}
       </select>
     `;
     const target = document.querySelector(".nav-actions") || document.querySelector(".nav-links") || document.querySelector("nav") || document.body;
@@ -303,7 +310,11 @@
 
   function updateSwitcher() {
     const select = document.getElementById("languageSelect");
-    if (select) select.value = activeLang;
+    if (!select) return;
+    Array.from(select.options).forEach(option => {
+      option.textContent = window.matchMedia("(max-width: 640px)").matches ? option.dataset.short : option.dataset.full;
+    });
+    select.value = activeLang;
   }
 
   function updateSeo() {
