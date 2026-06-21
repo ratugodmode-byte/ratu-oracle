@@ -5,6 +5,7 @@ import {
   getSql,
   handleOptions,
   json,
+  productSeoText,
   readJson,
   requireMethod,
   toCents
@@ -47,7 +48,16 @@ export async function handler(event) {
         limit 60
       `;
 
-      return json(200, { listings: rows });
+      const listings = rows.map((listing) => ({
+        ...listing,
+        seo_keywords: listing.seo_keywords || productSeoText({
+          title: listing.title,
+          category: listing.category,
+          intention: listing.intention
+        })
+      }));
+
+      return json(200, { listings });
     }
 
     const body = await readJson(event);

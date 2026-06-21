@@ -5,8 +5,7 @@ import {
   getSql,
   handleOptions,
   json,
-  looksLikeSpiritDoll,
-  mergedSpiritDollKeywords,
+  productSeoText,
   readJson,
   requireMethod,
   slugify,
@@ -52,10 +51,7 @@ export async function handler(event) {
     await ensureSphereSeoColumns(sql);
     const ownerId = await ensureDemoUser(sql);
     const status = body.private === true || !listingType ? "private" : "active";
-    const shouldTagAsSpiritDoll = looksLikeSpiritDoll(`${title} ${category} ${intention} ${submittedSeoKeywords}`);
-    const seoKeywords = shouldTagAsSpiritDoll
-      ? mergedSpiritDollKeywords(submittedSeoKeywords)
-      : submittedSeoKeywords || null;
+    const seoKeywords = productSeoText({ title, category, intention, submitted: submittedSeoKeywords });
 
     const spheres = await sql`
       insert into chant_spheres (owner_id, creator_id, title, category, intention, status, price_cents, image_url, seo_keywords)

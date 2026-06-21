@@ -1,4 +1,4 @@
-import { databaseError, ensureSphereSeoColumns, getSql, handleOptions, json, requireAdmin, requireMethod } from "./_shared.js";
+import { databaseError, ensureSphereSeoColumns, getSql, handleOptions, json, productSeoText, requireAdmin, requireMethod } from "./_shared.js";
 
 export async function handler(event) {
   const options = handleOptions(event);
@@ -41,7 +41,16 @@ export async function handler(event) {
       order by s.created_at desc
       limit 200
     `;
-    return json(200, { spheres: rows });
+    const spheres = rows.map((sphere) => ({
+      ...sphere,
+      seo_keywords: sphere.seo_keywords || productSeoText({
+        title: sphere.title,
+        category: sphere.category,
+        intention: sphere.intention
+      })
+    }));
+
+    return json(200, { spheres });
   } catch (error) {
     return databaseError(error);
   }

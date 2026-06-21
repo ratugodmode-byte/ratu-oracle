@@ -82,7 +82,13 @@ export function databaseError(error) {
 }
 
 export const spiritDollKeywords = [
+  "one of a kind doll",
+  "one-of-a-kind doll",
+  "one of a kind spirit doll",
+  "one-of-a-kind spirit doll",
+  "OOAK",
   "spirit doll",
+  "OOAK spirit doll",
   "air spirit",
   "wind spirit",
   "elemental spirit",
@@ -184,8 +190,71 @@ export const spiritDollKeywords = [
   "sacred companion"
 ];
 
+export const magickalObjectKeywords = [
+  "khodam",
+  "nilai intrinsik",
+  "benda sakral",
+  "benda magis",
+  "benda sakral magis",
+  "magick",
+  "magik",
+  "kolektor spiritual",
+  "semer mesem",
+  "semer mesem charm",
+  "jenglot",
+  "batara karang",
+  "bulu perindu",
+  "mustika burung cenderawasih",
+  "yoni",
+  "pengisian",
+  "pendamping",
+  "tuah",
+  "makelar pusaka",
+  "ki",
+  "raja sulaiman",
+  "seal of solomon",
+  "king solomon seal",
+  "king solomon's seal",
+  "solomon talisman",
+  "solomon amulet",
+  "segel sulaiman",
+  "cap sulaiman",
+  "jimat sulaiman",
+  "azimat sulaiman",
+  "sceau de salomon",
+  "sceau du roi salomon",
+  "talisman de salomon",
+  "amulette de salomon",
+  "خاتم سليمان",
+  "ختم سليمان",
+  "تعويذة سليمان",
+  "تميمة سليمان",
+  "سليمان"
+];
+
+export const generalCrawlerKeywords = [
+  "Ratu Oracle",
+  "Chant Sphere",
+  "chant spheres",
+  "free online tarot",
+  "free online tarot reading",
+  "free tarot reading",
+  "online tarot reading",
+  "spiritual marketplace",
+  "custom amulet",
+  "custom talisman",
+  "amulet",
+  "talisman",
+  "magickal object",
+  "spiritual object",
+  "energy object",
+  "guardian object",
+  "QR passport",
+  "owner experience"
+];
+
 export function looksLikeSpiritDoll(value) {
-  return /\b(spirit\s*doll|doll|fae|faerie|fairy|guardian|elemental|air\s*spirit|wind\s*spirit|sky\s*guardian|spirit\s*companion|sacred\s*companion)\b/i.test(String(value || ""));
+  return /\b(spirit\s*doll|one[-\s]*of[-\s]*a[-\s]*kind|ooak|doll|fae|faerie|fairy|guardian|elemental|air\s*spirit|wind\s*spirit|sky\s*guardian|spirit\s*companion|sacred\s*companion|khodam|jenglot|mustika|bulu\s*perindu|batara\s*karang|raja\s*sulaiman|seal\s*of\s*solomon|king\s*solomon|sceau\s*de\s*salomon|jimat|azimat|benda\s*sakral|benda\s*magis|pendamping|tuah|yoni)\b|خاتم سليمان|ختم سليمان|تعويذة سليمان|تميمة سليمان/i.test(String(value || ""));
 }
 
 export function mergedSpiritDollKeywords(value = "") {
@@ -193,7 +262,30 @@ export function mergedSpiritDollKeywords(value = "") {
     .split(",")
     .map(keyword => keyword.trim())
     .filter(Boolean);
-  return [...new Set([...manual, ...spiritDollKeywords])].join(", ");
+  return [...new Set([...manual, ...spiritDollKeywords, ...magickalObjectKeywords])].join(", ");
+}
+
+function keywordsFromText(value = "") {
+  return String(value || "")
+    .toLowerCase()
+    .replace(/[^a-z0-9\u00c0-\u024f\u0600-\u06ff\s'-]+/gi, " ")
+    .split(/\s+/)
+    .map(keyword => keyword.trim())
+    .filter(keyword => keyword.length > 2)
+    .slice(0, 40);
+}
+
+export function productSeoText({ title = "", category = "", intention = "", submitted = "" } = {}) {
+  const source = `${title} ${category} ${intention} ${submitted}`;
+  const manual = String(submitted || "")
+    .split(",")
+    .map(keyword => keyword.trim())
+    .filter(Boolean);
+  const productWords = keywordsFromText(source);
+  const topicKeywords = looksLikeSpiritDoll(source)
+    ? [...spiritDollKeywords, ...magickalObjectKeywords]
+    : [];
+  return [...new Set([...manual, ...productWords, ...generalCrawlerKeywords, ...topicKeywords])].join(", ");
 }
 
 export async function ensureSphereSeoColumns(sql) {

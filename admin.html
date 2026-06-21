@@ -541,6 +541,16 @@
     const spiritDollKeywordBank = [
       "spirit doll", "air spirit", "wind spirit", "elemental spirit", "air elemental", "wind guardian", "sky guardian", "cloud spirit", "storm spirit", "breeze spirit", "fairy doll", "fantasy doll", "magical doll", "enchanted doll", "guardian doll", "spirit guardian", "air fae", "faerie spirit", "nature spirit", "nature guardian", "whimsical doll", "art doll", "collectible doll", "handmade doll", "fantasy collectible", "mystical collectible", "spiritual gift", "energy doll", "healing spirit", "healing energy", "protection spirit", "guardian figure", "spirit guide", "air guide", "wind guide", "elemental guardian", "ethereal being", "celestial spirit", "light spirit", "dream spirit", "good luck charm", "luck spirit", "altar doll", "altar guardian", "home blessing", "sacred doll", "mystic doll", "spirit companion", "soul companion", "fairy guardian", "wind fairy", "forest fairy", "magick doll", "magical companion", "positive energy", "spiritual decor", "fantasy decor", "fairytale doll", "storybook character", "white hair spirit", "air magic", "elemental magic", "guardian collectible", "OOAK doll", "artist doll", "fantasy creature", "mythical creature", "elf doll", "air elf", "nature elf", "spirit art", "folk art doll", "boho decor", "witch decor", "pagan decor", "new age gift", "meditation companion", "mindfulness gift", "energy healing", "manifestation tool", "abundance charm", "luck charm", "spiritual protection", "angelic spirit", "ethereal guardian", "peaceful spirit", "tranquility charm", "calming energy", "collector item", "unique handmade gift", "fantasy artwork", "magic creature", "air kingdom", "wind dancer", "heart healer", "dream walker", "sky traveler", "blessing doll", "energy guardian", "sacred companion"
     ];
+    spiritDollKeywordBank.push(
+      "one of a kind doll", "one-of-a-kind doll", "one of a kind spirit doll", "one-of-a-kind spirit doll", "OOAK", "OOAK spirit doll",
+      "khodam", "nilai intrinsik", "benda sakral", "benda magis", "benda sakral magis", "magick", "magik", "kolektor spiritual",
+      "semer mesem", "semer mesem charm", "jenglot", "batara karang", "bulu perindu", "mustika burung cenderawasih",
+      "yoni", "pengisian", "pendamping", "tuah", "makelar pusaka", "ki", "raja sulaiman",
+      "seal of solomon", "king solomon seal", "king solomon's seal", "solomon talisman", "solomon amulet",
+      "segel sulaiman", "cap sulaiman", "jimat sulaiman", "azimat sulaiman",
+      "sceau de salomon", "sceau du roi salomon", "talisman de salomon", "amulette de salomon",
+      "خاتم سليمان", "ختم سليمان", "تعويذة سليمان", "تميمة سليمان", "سليمان"
+    );
 
     const state = {
       secret: sessionStorage.getItem("ratuAdminSecret") || "",
@@ -612,7 +622,7 @@
     }
 
     function looksLikeSpiritDollText(value) {
-      return /\b(spirit\s*doll|doll|fae|faerie|fairy|guardian|elemental|air\s*spirit|wind\s*spirit|sky\s*guardian|spirit\s*companion|sacred\s*companion)\b/i.test(String(value || ""));
+      return /\b(spirit\s*doll|one[-\s]*of[-\s]*a[-\s]*kind|ooak|doll|fae|faerie|fairy|guardian|elemental|air\s*spirit|wind\s*spirit|sky\s*guardian|spirit\s*companion|sacred\s*companion|khodam|jenglot|mustika|bulu\s*perindu|batara\s*karang|raja\s*sulaiman|seal\s*of\s*solomon|king\s*solomon|sceau\s*de\s*salomon|jimat|azimat|benda\s*sakral|benda\s*magis|pendamping|tuah|yoni)\b|خاتم سليمان|ختم سليمان|تعويذة سليمان|تميمة سليمان/i.test(String(value || ""));
     }
 
     function spiritDollSeoText(existing = "") {
