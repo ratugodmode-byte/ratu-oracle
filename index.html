@@ -651,6 +651,34 @@
       background: rgba(255,255,255,.15);
     }
 
+    .discovery-links {
+      display: grid;
+      grid-template-columns: 1.2fr 1fr;
+      gap: 18px;
+      align-items: start;
+      background: rgba(255,255,255,.78);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 20px;
+      box-shadow: var(--shadow);
+    }
+
+    .discovery-links h2 { margin: 0 0 8px; font-size: 24px; }
+    .discovery-links p { margin: 0; color: var(--muted); line-height: 1.65; }
+    .discovery-pill-grid { display: flex; flex-wrap: wrap; gap: 9px; justify-content: flex-end; }
+    .discovery-pill {
+      display: inline-flex;
+      align-items: center;
+      min-height: 40px;
+      padding: 8px 12px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      background: #fff;
+      color: var(--plum);
+      font-weight: 800;
+      font-size: 13px;
+    }
+
     .trust {
       display: grid; grid-template-columns: repeat(4, 1fr);
       gap: 14px;
@@ -819,6 +847,8 @@
       .footer-grid { grid-template-columns: repeat(2, 1fr); }
       .promo-widget { grid-template-columns: 1fr; }
       .promo-widget .promo-actions { justify-content: flex-start; }
+      .discovery-links { grid-template-columns: 1fr; }
+      .discovery-pill-grid { justify-content: flex-start; }
     }
     @media (max-width: 640px) {
       .shell { padding: 0 16px; }
@@ -894,6 +924,8 @@
       .stats { grid-template-columns: repeat(2, 1fr); }
       .stat:nth-child(2) { border-right: 0; }
       .community-stats { grid-template-columns: 1fr; }
+      .discovery-links { padding: 16px; }
+      .discovery-pill { width: 100%; justify-content: center; }
     }
   </style>
 </head>
@@ -1087,6 +1119,23 @@
         <div class="trust-item"><div class="trust-icon"><svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M20 7 12 3 4 7v10l8 4 8-4V7Z"/><path d="m9 12 2 2 4-5"/></svg></div><div><h4>Real Stories</h4><p>Experiences from real people, real journeys.</p></div></div>
         <div class="trust-item"><div class="trust-icon"><svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 3c3 5 3 9 0 14-3-5-3-9 0-14Z"/><path d="M5 11c5 1 7 4 7 8-5-1-7-4-7-8ZM19 11c-5 1-7 4-7 8 5-1 7-4 7-8Z"/></svg></div><div><h4>Energy Respect</h4><p>We honor every intention and every story.</p></div></div>
         <div class="trust-item"><div class="trust-icon"><svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M16 21v-2a4 4 0 0 0-8 0v2"/><circle cx="12" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87M2 21v-2a4 4 0 0 1 3-3.87"/></svg></div><div><h4>Community First</h4><p>We grow and learn together.</p></div></div>
+      </div>
+    </section>
+
+    <section class="shell" id="discover">
+      <div class="discovery-links">
+        <div>
+          <h2>Start with free tarot, then choose the right Chant Sphere</h2>
+          <p>Ratu Oracle helps visitors find free online tarot reading, free tarot guidance, spirit dolls, Solomon-style seals, amulets, talismans, magickal objects, and one of a kind OOAK spiritual collectibles in one connected marketplace.</p>
+        </div>
+        <nav class="discovery-pill-grid" aria-label="Crawler friendly discovery links">
+          <a class="discovery-pill" href="/free-tarot-reading.html">Free Tarot Reading</a>
+          <a class="discovery-pill" href="/free-online-tarot">Free Online Tarot</a>
+          <a class="discovery-pill" href="/spirit-dolls-magickal-objects.html">Spirit Dolls</a>
+          <a class="discovery-pill" href="/amulets-talismans">Amulets and Talismans</a>
+          <a class="discovery-pill" href="/ai-crawler-index.html">AI Crawler Index</a>
+          <a class="discovery-pill" href="/sitemap.xml">Sitemap</a>
+        </nav>
       </div>
     </section>
   </main>

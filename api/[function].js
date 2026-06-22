@@ -12,6 +12,7 @@ const functionLoaders = {
   "create-sphere": () => import("../functions/create-sphere.js"),
   experiences: () => import("../functions/experiences.js"),
   health: () => import("../functions/health.js"),
+  "indexnow-submit": () => import("../functions/indexnow-submit.js"),
   marketplace: () => import("../functions/marketplace.js"),
   "qr-code": () => import("../functions/qr-code.js"),
   sitemap: () => import("../functions/sitemap.js"),

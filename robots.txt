@@ -3,6 +3,7 @@ Allow: /
 
 Sitemap: https://ratu-oracle-kar4.vercel.app/sitemap.xml
 Sitemap: https://ratu-oracle-kar4.vercel.app/sitemap-dynamic.xml
+Sitemap: https://ratu-oracle-kar4.vercel.app/api/sitemap
 
 # AI-readable public summaries
 Allow: /llms.txt

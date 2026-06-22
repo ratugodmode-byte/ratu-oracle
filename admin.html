@@ -528,6 +528,10 @@
             <button class="btn primary" type="submit">Save Background</button>
           </form>
           <div class="status" id="settingsStatus">Use the built-in background, a direct public image URL, or an uploaded image path inside the site.</div>
+          <h2 style="margin-top:18px">Crawler Submission</h2>
+          <p class="copy">After adding products, pages, images, or keywords, submit the public URLs so Bing and IndexNow crawlers can discover them faster.</p>
+          <button class="btn primary" type="button" id="submitCrawlers">Submit URLs to Crawlers</button>
+          <div class="status" id="crawlerStatus">This sends the homepage, free tarot page, shop pages, crawler files, sitemap, and product URLs to IndexNow.</div>
         </aside>
         <div class="panel">
           <h2>Preview</h2>
@@ -579,6 +583,8 @@
       heroCardVisible: document.getElementById("heroCardVisible"),
       backgroundPreview: document.getElementById("backgroundPreview"),
       settingsStatus: document.getElementById("settingsStatus"),
+      submitCrawlers: document.getElementById("submitCrawlers"),
+      crawlerStatus: document.getElementById("crawlerStatus"),
       promotionStatus: document.getElementById("promotionStatus"),
       promoTitle: document.getElementById("promoTitle"),
       promoDescription: document.getElementById("promoDescription"),
@@ -645,8 +651,30 @@
     }
 
     function setStatus(element, message, type = "") {
+      if (!element) return;
       element.textContent = message;
       element.className = `status ${type}`;
+    }
+
+    async function submitCrawlerUrls({ silent = false } = {}) {
+      if (!silent) setStatus(els.crawlerStatus, "Submitting URLs to crawler systems...");
+      try {
+        const data = await api("/.netlify/functions/indexnow-submit", {
+          method: "POST",
+          body: JSON.stringify({})
+        });
+        if (!silent) {
+          setStatus(
+            els.crawlerStatus,
+            `Submitted ${data.submitted || 0} URLs to IndexNow/Bing. Search engines still decide ranking and timing.`,
+            "ok"
+          );
+        }
+        return data;
+      } catch (error) {
+        if (!silent) setStatus(els.crawlerStatus, error.message, "error");
+        throw error;
+      }
     }
 
     function money(cents, currency = "USD") {
@@ -1050,6 +1078,7 @@
         });
         form.reset();
         setStatus(els.sphereStatus, "Sphere created. Dashboard refreshed.", "ok");
+        submitCrawlerUrls({ silent: true }).catch(() => {});
         await loadAdmin();
       } catch (error) {
         setStatus(els.sphereStatus, error.message, "error");
@@ -1169,6 +1198,7 @@
         state.settings = { ...state.settings, ...pageSettings };
         fillPageForm(page);
         setStatus(els.pageStatus, "Page content and crawler metadata saved.", "ok");
+        submitCrawlerUrls({ silent: true }).catch(() => {});
       } catch (error) {
         setStatus(els.pageStatus, error.message, "error");
       }
@@ -1185,9 +1215,14 @@
         state.settings = { ...state.settings, ...promotionSettings };
         renderPromotion();
         setStatus(els.promotionStatus, "Promotion widget and metadata saved.", "ok");
+        submitCrawlerUrls({ silent: true }).catch(() => {});
       } catch (error) {
         setStatus(els.promotionStatus, error.message, "error");
       }
+    });
+
+    els.submitCrawlers.addEventListener("click", () => {
+      submitCrawlerUrls().catch(() => {});
     });
 
     if (state.secret) unlock();

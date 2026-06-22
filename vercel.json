@@ -10,6 +10,10 @@
       "destination": "/api/sitemap"
     },
     {
+      "source": "/submit-to-crawlers",
+      "destination": "/api/indexnow-submit"
+    },
+    {
       "source": "/id",
       "destination": "/index.html"
     },
