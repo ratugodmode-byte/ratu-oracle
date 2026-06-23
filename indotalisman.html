@@ -160,41 +160,6 @@
   </footer>
   <script src="/assets/i18n/site-i18n.js" defer></script>
   <script>
-    const indotalismanFallback = [
-      {
-        title: "Mustika Harmony Talisman",
-        category: "Talisman",
-        intention: "For balanced affection, steady devotion, and a peaceful home atmosphere.",
-        image_url: "assets/spheres/solomon-love-harmony.png",
-        price_cents: 5500,
-        currency: "USD"
-      },
-      {
-        title: "Protection Amulet",
-        category: "Amulet",
-        intention: "For firm boundaries, clear personal space, and calm spiritual protection.",
-        image_url: "assets/spheres/protection-card-28.png",
-        price_cents: 3500,
-        currency: "USD"
-      },
-      {
-        title: "Good Decree Mustika",
-        category: "Mustika",
-        intention: "For support, wise choices, and opening a path toward favorable outcomes.",
-        image_url: "assets/spheres/decree-card-8.png",
-        price_cents: 6800,
-        currency: "USD"
-      },
-      {
-        title: "Success Path Mystical Oil",
-        category: "Mystical Oil",
-        intention: "For confidence, focused action, and graceful movement through new opportunities.",
-        image_url: "assets/spheres/success-path-card-20.png",
-        price_cents: 3200,
-        currency: "USD"
-      }
-    ];
-
     function money(cents, currency = "USD") {
       return new Intl.NumberFormat("en-US", { style: "currency", currency }).format((Number(cents) || 0) / 100);
     }
@@ -209,8 +174,18 @@
       const grid = document.getElementById("indotalismanShop");
       const status = document.getElementById("shopStatus");
       if (!products.length) {
-        products = indotalismanFallback;
-        sourceLabel = "Preview shop shown. Add real Indotalisman products from Admin > Indotalisman.";
+        status.textContent = sourceLabel || "No Indotalisman products yet. Add talismans, amulets, mustika or bezoar stones, mystical oils, spirit dolls, and ritual objects from Admin > Indotalisman.";
+        grid.innerHTML = `
+          <article class="shop-card">
+            <div class="shop-body">
+              <span class="shop-type">Indotalisman shop</span>
+              <h3>No products yet</h3>
+              <p>This page is separate from the Chant Sphere marketplace. Add your Indonesian magick products from the admin dashboard and they will appear here.</p>
+              <a class="btn" href="/admin.html">Open Admin Dashboard</a>
+            </div>
+          </article>
+        `;
+        return;
       }
       status.textContent = sourceLabel;
       grid.innerHTML = products.map(item => `
@@ -237,7 +212,7 @@
         const products = data.products || [];
         renderShop(products, products.length ? `Loaded ${products.length} Indotalisman products from your shop database.` : "");
       } catch (error) {
-        renderShop(indotalismanFallback, "Preview Indotalisman shop shown until live products are added.");
+        renderShop([], "Indotalisman shop is ready. Add products from Admin > Indotalisman.");
       }
     }
 
