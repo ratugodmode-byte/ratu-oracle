@@ -4,8 +4,8 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Indotalisman | Indonesian Talismans, Mustika Stones, Mystical Oils</title>
-  <meta name="description" content="Indotalisman is an online platform for traditional Indonesian and Islamic occult products, including talismans, mustika and bezoar stones, mystical oils, amulets, spirit dolls, and ritual objects.">
-  <meta name="keywords" content="Indotalisman, Indonesian talisman, Islamic occult products, mustika stone, bezoar stone, mystical oil, minyak mistik, amulet, talisman, benda sakral, benda magis, khodam, tuah, yoni, pengisian, pendamping, raja sulaiman, seal of Solomon, spirit doll, Chant Sphere">
+  <meta name="description" content="Indotalisman is a Ratu Oracle shop for Indonesian magick products, including talismans, amulets, mustika and bezoar stones, mystical oils, spirit dolls, and ritual objects.">
+  <meta name="keywords" content="Indotalisman, Indonesian magick shop, Indonesian talisman, Islamic occult products, mustika stone, bezoar stone, benzoa, mystical oil, minyak mistik, amulet, talisman, benda sakral, benda magis, khodam, tuah, yoni, pengisian, pendamping, raja sulaiman, seal of Solomon, spirit doll, Chant Sphere">
   <link rel="canonical" href="https://ratu-oracle-kar4.vercel.app/indotalisman.html">
   <meta property="og:title" content="Indotalisman | Indonesian Talismans and Mystical Objects">
   <meta property="og:description" content="A Ratu Oracle page for traditional Indonesian and Islamic occult products: talismans, mustika stones, mystical oils, amulets, and ritual objects.">
@@ -38,6 +38,21 @@
     .sigil{height:220px;border:1px solid rgba(255,217,142,.45);border-radius:50%;display:grid;place-items:center;margin:auto;aspect-ratio:1;color:#ffd98e;font-size:72px}
     .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin:22px 0 44px}
     .card{background:rgba(255,250,244,.92);border:1px solid var(--line);border-radius:10px;padding:22px;box-shadow:0 14px 34px rgba(84,48,27,.08)}
+    .shop{padding:8px 0 48px}
+    .section-head{display:flex;align-items:flex-end;justify-content:space-between;gap:18px;flex-wrap:wrap;margin-bottom:14px}
+    .eyebrow{margin:0 0 8px;color:var(--gold);font-weight:900;text-transform:uppercase;font-size:12px;letter-spacing:.08em}
+    .shop-note{border:1px solid var(--line);background:#fffaf4;border-radius:8px;padding:10px 12px;color:var(--muted);font-size:13px;margin:0 0 14px}
+    .shop-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+    .shop-card{background:rgba(255,250,244,.96);border:1px solid var(--line);border-radius:10px;overflow:hidden;box-shadow:0 16px 38px rgba(74,40,22,.1);display:flex;flex-direction:column;min-width:0}
+    .shop-art{height:210px;background:linear-gradient(135deg,#24142d,#8c6235);display:grid;place-items:center;overflow:hidden}
+    .shop-art img{width:100%;height:100%;object-fit:cover;object-position:center}
+    .shop-art span{color:#ffd98e;font-size:56px}
+    .shop-body{padding:14px;display:flex;flex:1;flex-direction:column}
+    .shop-type{font-size:11px;text-transform:uppercase;font-weight:900;color:var(--gold);letter-spacing:.05em;margin-bottom:6px}
+    .shop-body h3{font-size:19px;margin-bottom:8px}
+    .shop-body p{font-size:13px;color:var(--muted);margin:0 0 14px}
+    .shop-row{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-top:auto}
+    .shop-row strong{font-size:18px;color:#391854}
     .tag-cloud{display:flex;gap:8px;flex-wrap:wrap;margin-top:18px}
     .tag-cloud span{border:1px solid var(--line);background:#fff;border-radius:999px;padding:7px 10px;font-size:12px;font-weight:800;color:#4b3458}
     .band{padding:42px 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line);background:rgba(255,255,255,.45)}
@@ -45,6 +60,9 @@
     @media (max-width:760px){
       .hero{grid-template-columns:1fr;padding-top:42px}
       .grid{grid-template-columns:1fr}
+      .shop-grid{grid-template-columns:1fr}
+      .shop-art{height:260px}
+      .section-head .btn{width:100%}
       .links{width:100%;gap:6px}
       .links a{padding:8px 7px}
       .visual{min-height:280px}
@@ -56,9 +74,9 @@
     "@type": "WebPage",
     "name": "Indotalisman",
     "url": "https://ratu-oracle-kar4.vercel.app/indotalisman.html",
-    "description": "Online platform for Indonesian and Islamic occult products including talismans, mustika stones, mystical oils, amulets, and ritual objects.",
+    "description": "Online shop for Indonesian magick products including talismans, amulets, mustika and bezoar stones, mystical oils, spirit dolls, and ritual objects.",
     "isPartOf": {"@type":"WebSite","name":"Ratu Oracle","url":"https://ratu-oracle-kar4.vercel.app/"},
-    "about": ["Indonesian talismans","Islamic occult products","mustika stones","mystical oils","amulets","spirit dolls","Chant Sphere"]
+    "about": ["Indonesian magick","Indonesian talismans","Islamic occult products","mustika stones","bezoar stones","mystical oils","amulets","spirit dolls","Chant Sphere"]
   }
   </script>
 </head>
@@ -71,6 +89,8 @@
         <a href="/#marketplace">Marketplace</a>
         <a href="/free-tarot-reading.html">Free Tarot</a>
         <a href="/spirit-dolls-magickal-objects.html">Spirit Dolls</a>
+        <a href="#shop">Shop</a>
+        <a href="/admin.html">Admin</a>
         <a href="mailto:agi.godmode@gmail.com">Contact Us</a>
       </nav>
     </div>
@@ -80,17 +100,30 @@
     <section class="shell hero">
       <div>
         <h1>Indotalisman</h1>
-        <p class="lede">Indotalisman is an online platform focused on traditional Indonesian and Islamic occult products. The catalog includes ritual items such as talismans, mustika and bezoar stones, mystical oils, amulets, spirit dolls, and sacred objects collected for intention, heritage, and spiritual meaning.</p>
+        <p class="lede">Indotalisman is a Ratu Oracle shop focused on traditional Indonesian magick and Islamic occult-inspired products. The catalog includes ritual items such as talismans, amulets, mustika and bezoar stones, mystical oils, spirit dolls, and sacred objects collected for intention, heritage, and spiritual meaning.</p>
         <div class="actions">
-          <a class="btn primary" href="/#marketplace">Explore Marketplace</a>
+          <a class="btn primary" href="#shop">Shop Indotalisman</a>
+          <a class="btn" href="/admin.html">Add Products In Admin</a>
           <a class="btn" href="mailto:agi.godmode@gmail.com">Contact Us</a>
         </div>
       </div>
       <div class="visual" aria-label="Indotalisman symbolic seal artwork">
         <div class="sigil">✦</div>
         <p><strong>Traditional objects, clear intention, careful presentation.</strong></p>
-        <p>Each item should be described with its origin, purpose, story, price, care notes, and ethical spiritual disclaimer.</p>
+        <p>Each item can be added from the admin dashboard with its image, origin, purpose, story, price, care notes, and respectful spiritual disclaimer.</p>
       </div>
+    </section>
+
+    <section class="shell shop" id="shop">
+      <div class="section-head">
+        <div>
+          <p class="eyebrow">Indonesian Magick Shop</p>
+          <h2>Talismans, Amulets, Mustika Stones, Mystical Oils</h2>
+        </div>
+        <a class="btn" href="/admin.html">Add New Product</a>
+      </div>
+      <p class="shop-note" id="shopStatus">Loading Indotalisman products...</p>
+      <div class="shop-grid" id="indotalismanShop" aria-live="polite"></div>
     </section>
 
     <section class="shell">
@@ -116,7 +149,7 @@
         <h2>How It Connects To Ratu Oracle</h2>
         <p>Visitors can start with the free Ratu Oracle tarot reading, understand the energy of the moment, then choose a Chant Sphere, talisman, amulet, spirit doll, mystical oil, or mustika object that matches their intention. This page helps search engines and AI crawlers understand the relationship between free tarot guidance, Indonesian spiritual objects, and the marketplace.</p>
         <div class="tag-cloud" aria-label="Crawler keywords">
-          <span>Indotalisman</span><span>Indonesian talisman</span><span>mustika stone</span><span>bezoar stone</span><span>mystical oil</span><span>minyak mistik</span><span>Islamic occult products</span><span>amulet</span><span>talisman</span><span>benda sakral</span><span>benda magis</span><span>khodam</span><span>yoni</span><span>tuah</span><span>pengisian</span><span>pendamping</span><span>raja sulaiman</span><span>seal of Solomon</span><span>spirit doll</span><span>Chant Sphere</span>
+          <span>Indotalisman</span><span>Indonesian magick shop</span><span>Indonesian talisman</span><span>mustika stone</span><span>bezoar stone</span><span>benzoa</span><span>mystical oil</span><span>minyak mistik</span><span>Islamic occult products</span><span>amulet</span><span>talisman</span><span>benda sakral</span><span>benda magis</span><span>khodam</span><span>yoni</span><span>tuah</span><span>pengisian</span><span>pendamping</span><span>raja sulaiman</span><span>seal of Solomon</span><span>spirit doll</span><span>Chant Sphere</span>
         </div>
       </div>
     </section>
@@ -126,5 +159,96 @@
     <div class="shell">© 2026 Ratu Oracle. Contact: <a href="mailto:agi.godmode@gmail.com">agi.godmode@gmail.com</a></div>
   </footer>
   <script src="/assets/i18n/site-i18n.js" defer></script>
+  <script>
+    const indotalismanFallback = [
+      {
+        title: "Mustika Harmony Talisman",
+        category: "Talisman",
+        intention: "For balanced affection, steady devotion, and a peaceful home atmosphere.",
+        image_url: "assets/spheres/solomon-love-harmony.png",
+        price_cents: 5500,
+        currency: "USD"
+      },
+      {
+        title: "Protection Amulet",
+        category: "Amulet",
+        intention: "For firm boundaries, clear personal space, and calm spiritual protection.",
+        image_url: "assets/spheres/protection-card-28.png",
+        price_cents: 3500,
+        currency: "USD"
+      },
+      {
+        title: "Good Decree Mustika",
+        category: "Mustika",
+        intention: "For support, wise choices, and opening a path toward favorable outcomes.",
+        image_url: "assets/spheres/decree-card-8.png",
+        price_cents: 6800,
+        currency: "USD"
+      },
+      {
+        title: "Success Path Mystical Oil",
+        category: "Mystical Oil",
+        intention: "For confidence, focused action, and graceful movement through new opportunities.",
+        image_url: "assets/spheres/success-path-card-20.png",
+        price_cents: 3200,
+        currency: "USD"
+      }
+    ];
+
+    const shopKeywords = ["indotalisman", "talisman", "amulet", "mustika", "bezoar", "benzoa", "mystical oil", "minyak", "indonesian", "benda sakral", "benda magis", "khodam", "yoni", "tuah"];
+
+    function money(cents, currency = "USD") {
+      return new Intl.NumberFormat("en-US", { style: "currency", currency }).format((Number(cents) || 0) / 100);
+    }
+
+    function escapeHtml(value) {
+      return String(value ?? "").replace(/[&<>"']/g, char => ({
+        "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#039;"
+      }[char]));
+    }
+
+    function isIndotalismanProduct(item) {
+      const text = `${item.title || ""} ${item.category || ""} ${item.intention || ""} ${item.seo_keywords || ""}`.toLowerCase();
+      return shopKeywords.some(keyword => text.includes(keyword));
+    }
+
+    function renderShop(products, sourceLabel) {
+      const grid = document.getElementById("indotalismanShop");
+      const status = document.getElementById("shopStatus");
+      if (!products.length) {
+        products = indotalismanFallback;
+        sourceLabel = "Preview shop shown. Add real Indotalisman products from Admin using category Talisman, Amulet, Mustika, Mystical Oil, or Indotalisman.";
+      }
+      status.textContent = sourceLabel;
+      grid.innerHTML = products.map(item => `
+        <article class="shop-card">
+          <div class="shop-art">${item.image_url ? `<img src="${escapeHtml(item.image_url)}" alt="${escapeHtml(item.title)}">` : "<span>✦</span>"}</div>
+          <div class="shop-body">
+            <span class="shop-type">${escapeHtml(item.category || "Indotalisman")}</span>
+            <h3>${escapeHtml(item.title || "Indotalisman Object")}</h3>
+            <p>${escapeHtml(item.intention || "A spiritual object for intention, focus, and ritual reflection.")}</p>
+            <div class="shop-row">
+              <strong>${money(item.listing_price_cents ?? item.price_cents ?? 0, item.currency || "USD")}</strong>
+              <a class="btn" href="mailto:agi.godmode@gmail.com?subject=${encodeURIComponent("Indotalisman inquiry: " + (item.title || "product"))}">Ask</a>
+            </div>
+          </div>
+        </article>
+      `).join("");
+    }
+
+    async function loadShop() {
+      try {
+        const response = await fetch("/api/spheres");
+        if (!response.ok) throw new Error("Shop API not ready");
+        const data = await response.json();
+        const products = (data.spheres || []).filter(isIndotalismanProduct);
+        renderShop(products, products.length ? `Loaded ${products.length} Indotalisman products from your live database.` : "");
+      } catch (error) {
+        renderShop(indotalismanFallback, "Preview Indotalisman shop shown until live products are added.");
+      }
+    }
+
+    loadShop();
+  </script>
 </body>
 </html>

@@ -14,6 +14,8 @@ const staticPaths = [
   "/spirit-doll",
   "/magickal-objects",
   "/amulets-talismans",
+  "/indotalisman.html",
+  "/indotalisman",
   "/id/spirit-dolls",
   "/zh/spirit-dolls",
   "/ru/spirit-dolls",
