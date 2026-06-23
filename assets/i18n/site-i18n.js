@@ -181,8 +181,6 @@
   }
 
   function initialLanguage() {
-    const stored = localStorage.getItem(STORAGE_KEY);
-    if (stored && translations[stored]) return stored;
     const pathLang = location.pathname.split("/").filter(Boolean)[0];
     return translations[pathLang] ? pathLang : "en";
   }
@@ -294,6 +292,7 @@
   }
 
   function injectSwitcher() {
+    return;
     if (document.getElementById("languageSwitcher")) return;
     const wrap = document.createElement("div");
     wrap.className = "language-switcher";

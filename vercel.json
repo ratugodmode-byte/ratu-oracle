@@ -104,6 +104,10 @@
     {
       "source": "/amulets-talismans",
       "destination": "/spirit-dolls-magickal-objects.html"
+    },
+    {
+      "source": "/indotalisman",
+      "destination": "/indotalisman.html"
     }
   ],
   "headers": [
