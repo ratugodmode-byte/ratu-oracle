@@ -2,9 +2,9 @@ export const ru = {
   nav: {
     home: "Главная",
     marketplace: "Маркет",
-    mySphere: "Моя сфера",
+    mySphere: "Мой Chant Sphere",
     community: "Сообщество",
-    createSphere: "Создать сферу",
+    createSphere: "Создать Chant Sphere",
     freeTarot: "Бесплатное Таро",
     spiritDolls: "Духовные куклы",
     howItWorks: "Как это работает",
@@ -27,10 +27,10 @@ export const ru = {
   button: {
     buyNow: "Купить",
     readMore: "Читать дальше",
-    createMySphere: "Создать мою сферу",
+    createMySphere: "Создать мой Chant Sphere",
     exploreMarketplace: "Открыть маркет",
     loginSignup: "Войти / Регистрация",
-    viewSphere: "Смотреть сферу",
+    viewSphere: "Смотреть Chant Sphere",
     buyTrade: "Купить / Обмен",
     publishExperience: "Опубликовать опыт"
   },
