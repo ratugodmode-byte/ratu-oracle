@@ -304,6 +304,7 @@
       <div class="tabs" role="tablist">
         <button class="tab active" data-tab="spheres">Spheres</button>
         <button class="tab" data-tab="experiences">Experiences</button>
+        <button class="tab" data-tab="indotalisman">Indotalisman</button>
         <button class="tab" data-tab="pages">Pages</button>
         <button class="tab" data-tab="promotion">Promotion</button>
         <button class="tab" data-tab="settings">Settings</button>
@@ -324,11 +325,6 @@
                   <option value="Protection">Protection</option>
                   <option value="Healing">Healing</option>
                   <option value="Clarity">Clarity</option>
-                  <option value="Indotalisman">Indotalisman</option>
-                  <option value="Talisman">Talisman</option>
-                  <option value="Amulet">Amulet</option>
-                  <option value="Mustika">Mustika / Bezoar Stone</option>
-                  <option value="Mystical Oil">Mystical Oil</option>
                 </select>
               </label>
               <label>Intention
@@ -397,6 +393,54 @@
         <div class="panel">
           <h2>Manage Experiences</h2>
           <div class="list" id="experienceList"></div>
+        </div>
+      </section>
+
+      <section class="grid layout admin-tab hidden" id="tab-indotalisman">
+        <aside class="panel">
+          <h2>Add Indotalisman Product</h2>
+          <form class="form" id="indotalismanForm">
+            <label>Product name
+              <input name="title" placeholder="Mustika Harmony Talisman" required>
+            </label>
+            <label>Category
+              <select name="category" required>
+                <option value="Talisman">Talisman</option>
+                <option value="Amulet">Amulet</option>
+                <option value="Mustika / Bezoar Stone">Mustika / Bezoar Stone</option>
+                <option value="Mystical Oil">Mystical Oil</option>
+                <option value="Spirit Doll">Spirit Doll</option>
+                <option value="Ritual Object">Ritual Object</option>
+              </select>
+            </label>
+            <label>Description
+              <textarea name="description" placeholder="Describe the object, origin, care notes, and story."></textarea>
+            </label>
+            <label>Intention
+              <textarea name="intention" placeholder="Write the intention, purpose, and energetic focus."></textarea>
+            </label>
+            <label>Price
+              <input name="price" type="number" min="0" step="0.01" placeholder="55">
+            </label>
+            <label>Picture URL
+              <input name="image_url" placeholder="https://example.com/product.jpg or assets/spheres/product.png">
+            </label>
+            <label>Upload picture from computer
+              <input name="image_file" type="file" accept="image/png,image/jpeg,image/webp,image/gif">
+            </label>
+            <label>SEO keywords
+              <textarea name="seo_keywords" id="indotalismanSeoKeywords" placeholder="talisman, amulet, mustika, bezoar stone, khodam, tuah, seal of Solomon"></textarea>
+            </label>
+            <div class="row">
+              <button class="btn" type="button" id="fillIndotalismanSeo">Use Indotalisman SEO Tags</button>
+              <button class="btn primary" type="submit">Add Product</button>
+            </div>
+          </form>
+          <div class="status" id="indotalismanStatus">These products appear only on indotalisman.html, not the homepage marketplace.</div>
+        </aside>
+        <div class="panel">
+          <h2>Manage Indotalisman Shop</h2>
+          <div class="list" id="indotalismanList"></div>
         </div>
       </section>
 
@@ -565,6 +609,7 @@
       secret: sessionStorage.getItem("ratuAdminSecret") || "",
       spheres: [],
       experiences: [],
+      indotalismanProducts: [],
       settings: {}
     };
 
@@ -581,6 +626,8 @@
       sphereStatus: document.getElementById("sphereStatus"),
       experienceList: document.getElementById("experienceList"),
       experienceSphere: document.getElementById("experienceSphere"),
+      indotalismanList: document.getElementById("indotalismanList"),
+      indotalismanStatus: document.getElementById("indotalismanStatus"),
       selectedQr: document.getElementById("selectedQr"),
       selectedQrUrl: document.getElementById("selectedQrUrl"),
       qrStatus: document.getElementById("qrStatus"),
@@ -809,6 +856,36 @@
       `).join("");
     }
 
+    function renderIndotalismanProducts() {
+      if (!els.indotalismanList) return;
+      if (!state.indotalismanProducts.length) {
+        els.indotalismanList.innerHTML = '<div class="status">No Indotalisman products yet.</div>';
+        return;
+      }
+
+      els.indotalismanList.innerHTML = state.indotalismanProducts.map(product => `
+        <article class="item">
+          <div class="item-main">
+            ${product.image_url
+              ? `<img class="sphere-thumb" src="${escapeHtml(product.image_url)}" alt="${escapeHtml(product.title)} image" loading="lazy">`
+              : `<div class="sphere-thumb empty">No image</div>`}
+            <div>
+              <h3>${escapeHtml(product.title)}</h3>
+              <p><strong>${escapeHtml(product.category || "Indotalisman")}</strong> / ${escapeHtml(product.status || "active")}</p>
+              <p>${escapeHtml(product.intention || product.description || "No description written.")}</p>
+              ${product.description ? `<p>${escapeHtml(product.description)}</p>` : ""}
+              ${product.seo_keywords ? `<p><strong>SEO tags:</strong> ${escapeHtml(product.seo_keywords)}</p>` : ""}
+              <small>${money(product.price_cents, product.currency)} / ${new Date(product.created_at).toLocaleString()}</small>
+            </div>
+          </div>
+          <div class="item-actions">
+            <a class="btn small" href="/indotalisman.html#shop" target="_blank" rel="noreferrer">View Shop</a>
+            <button class="btn danger small" data-delete-indotalisman="${product.id}">Delete</button>
+          </div>
+        </article>
+      `).join("");
+    }
+
     function renderSettings() {
       const url = state.settings.hero_background_url || "assets/backgrounds/chant-sphere-market-bg.png";
       els.heroBackgroundUrl.value = url;
@@ -998,11 +1075,12 @@
     }
 
     async function loadAdmin() {
-      const [statsResult, adminSpheresResult, adminExperiencesResult, settingsResult] = await Promise.allSettled([
+      const [statsResult, adminSpheresResult, adminExperiencesResult, settingsResult, indotalismanResult] = await Promise.allSettled([
         api("/.netlify/functions/admin-stats"),
         api("/.netlify/functions/admin-spheres"),
         api("/.netlify/functions/admin-experiences"),
-        api("/.netlify/functions/site-settings", { headers: { "X-Admin-Secret": state.secret } })
+        api("/.netlify/functions/site-settings", { headers: { "X-Admin-Secret": state.secret } }),
+        api("/.netlify/functions/indotalisman-products")
       ]);
 
       let publicFallbackMessage = "";
@@ -1035,9 +1113,11 @@
         publicFallbackMessage = publicFallbackMessage || "Showing public database data because admin stats is not deployed yet.";
       }
 
+      state.indotalismanProducts = indotalismanResult.status === "fulfilled" ? indotalismanResult.value.products || [] : [];
       state.settings = settingsResult.status === "fulfilled" ? settingsResult.value.settings || {} : {};
       renderSpheres();
       renderExperiences();
+      renderIndotalismanProducts();
       renderSettings();
       renderPromotion();
       renderPages();
@@ -1096,6 +1176,12 @@
       setStatus(els.sphereStatus, "Spirit Doll SEO keywords added to the create form.", "ok");
     });
 
+    document.getElementById("fillIndotalismanSeo").addEventListener("click", () => {
+      const field = document.getElementById("indotalismanSeoKeywords");
+      field.value = spiritDollSeoText(field.value);
+      setStatus(els.indotalismanStatus, "Indotalisman SEO keywords added.", "ok");
+    });
+
     document.querySelectorAll("[data-tab]").forEach(button => {
       button.addEventListener("click", () => {
         document.querySelectorAll("[data-tab]").forEach(tab => tab.classList.remove("active"));
@@ -1109,6 +1195,7 @@
       const qrButton = event.target.closest("[data-qr]");
       const deleteSphereButton = event.target.closest("[data-delete-sphere]");
       const deleteExperienceButton = event.target.closest("[data-delete-experience]");
+      const deleteIndotalismanButton = event.target.closest("[data-delete-indotalisman]");
       const saveImageButton = event.target.closest("[data-save-image]");
       const clearImageButton = event.target.closest("[data-clear-image]");
 
@@ -1146,6 +1233,43 @@
           body: JSON.stringify({ id: deleteExperienceButton.dataset.deleteExperience })
         });
         await loadAdmin();
+      }
+
+      if (deleteIndotalismanButton) {
+        const product = state.indotalismanProducts.find(item => item.id === deleteIndotalismanButton.dataset.deleteIndotalisman);
+        if (!confirm(`Delete "${product?.title || "this Indotalisman product"}"?`)) return;
+        setStatus(els.indotalismanStatus, "Deleting product...");
+        await api("/.netlify/functions/indotalisman-products", {
+          method: "DELETE",
+          body: JSON.stringify({ id: deleteIndotalismanButton.dataset.deleteIndotalisman })
+        });
+        setStatus(els.indotalismanStatus, "Product deleted from Indotalisman shop.", "ok");
+        await loadAdmin();
+      }
+    });
+
+    document.getElementById("indotalismanForm").addEventListener("submit", async event => {
+      event.preventDefault();
+      const form = event.currentTarget;
+      const payload = Object.fromEntries(new FormData(form).entries());
+      delete payload.image_file;
+      if (!String(payload.seo_keywords || "").trim()) {
+        payload.seo_keywords = spiritDollSeoText(`${payload.title}, ${payload.category}, ${payload.description}, ${payload.intention}`);
+      }
+      try {
+        setStatus(els.indotalismanStatus, "Adding Indotalisman product...");
+        const uploadedImage = await imageFileToDataUrl(form.elements.image_file.files[0]);
+        if (uploadedImage) payload.image_url = uploadedImage;
+        await api("/.netlify/functions/indotalisman-products", {
+          method: "POST",
+          body: JSON.stringify(payload)
+        });
+        form.reset();
+        setStatus(els.indotalismanStatus, "Product added. It appears only on indotalisman.html.", "ok");
+        submitCrawlerUrls({ silent: true }).catch(() => {});
+        await loadAdmin();
+      } catch (error) {
+        setStatus(els.indotalismanStatus, error.message, "error");
       }
     });
 

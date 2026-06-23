@@ -4,7 +4,7 @@ import crypto from "node:crypto";
 const headers = {
   "Access-Control-Allow-Origin": "*",
   "Access-Control-Allow-Headers": "Content-Type, X-Admin-Secret",
-  "Access-Control-Allow-Methods": "GET,POST,OPTIONS",
+  "Access-Control-Allow-Methods": "GET,POST,DELETE,OPTIONS",
   "Content-Type": "application/json"
 };
 

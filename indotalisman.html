@@ -195,8 +195,6 @@
       }
     ];
 
-    const shopKeywords = ["indotalisman", "talisman", "amulet", "mustika", "bezoar", "benzoa", "mystical oil", "minyak", "indonesian", "benda sakral", "benda magis", "khodam", "yoni", "tuah"];
-
     function money(cents, currency = "USD") {
       return new Intl.NumberFormat("en-US", { style: "currency", currency }).format((Number(cents) || 0) / 100);
     }
@@ -207,17 +205,12 @@
       }[char]));
     }
 
-    function isIndotalismanProduct(item) {
-      const text = `${item.title || ""} ${item.category || ""} ${item.intention || ""} ${item.seo_keywords || ""}`.toLowerCase();
-      return shopKeywords.some(keyword => text.includes(keyword));
-    }
-
     function renderShop(products, sourceLabel) {
       const grid = document.getElementById("indotalismanShop");
       const status = document.getElementById("shopStatus");
       if (!products.length) {
         products = indotalismanFallback;
-        sourceLabel = "Preview shop shown. Add real Indotalisman products from Admin using category Talisman, Amulet, Mustika, Mystical Oil, or Indotalisman.";
+        sourceLabel = "Preview shop shown. Add real Indotalisman products from Admin > Indotalisman.";
       }
       status.textContent = sourceLabel;
       grid.innerHTML = products.map(item => `
@@ -238,11 +231,11 @@
 
     async function loadShop() {
       try {
-        const response = await fetch("/api/spheres");
+        const response = await fetch("/api/indotalisman-products");
         if (!response.ok) throw new Error("Shop API not ready");
         const data = await response.json();
-        const products = (data.spheres || []).filter(isIndotalismanProduct);
-        renderShop(products, products.length ? `Loaded ${products.length} Indotalisman products from your live database.` : "");
+        const products = data.products || [];
+        renderShop(products, products.length ? `Loaded ${products.length} Indotalisman products from your shop database.` : "");
       } catch (error) {
         renderShop(indotalismanFallback, "Preview Indotalisman shop shown until live products are added.");
       }
