@@ -436,6 +436,7 @@
               <button class="btn primary" type="submit">Add Product</button>
             </div>
           </form>
+          <button class="btn" type="button" id="generateIndotalismanSamples" style="margin-top:10px;width:100%">Generate 8 sample products</button>
           <div class="status" id="indotalismanStatus">These products appear only on indotalisman.html, not the homepage marketplace.</div>
         </aside>
         <div class="panel">
@@ -687,6 +688,96 @@
       const manual = String(existing || "").split(",").map(item => item.trim()).filter(Boolean);
       return [...new Set([...manual, ...spiritDollKeywordBank])].join(", ");
     }
+
+    const indotalismanKeywordBank = [
+      "indotalisman", "barang pusaka", "barang pusaka alami", "barang pusaka asli", "pusaka alami asli", "pusaka berkhodam",
+      "khodam", "pendamping", "tuah", "yoni", "pengisian", "benda sakral", "benda magis", "kolektor spiritual",
+      "keris kecil", "keris semar mesem", "semer mesem", "jenglot", "batara karang", "bulu perindu",
+      "mustika", "batu mustika", "mustika burung cenderawasih", "bezoar stone", "benzoa", "minyak mistik",
+      "minyak pelet", "minyak pengasihan", "amulet", "talisman", "azimat", "jimat", "seal of Solomon",
+      "king solomon seal", "raja sulaiman", "spiritual collector", "Indonesian magick", "Islamic occult object",
+      "natural talisman", "ritual object", "sacred object", "mystical collectible", "rare spiritual item"
+    ];
+
+    function indotalismanSeoText(existing = "") {
+      const manual = String(existing || "").split(",").map(item => item.trim()).filter(Boolean);
+      return [...new Set([...manual, ...indotalismanKeywordBank])].join(", ");
+    }
+
+    const indotalismanSampleProducts = [
+      {
+        title: "Keris Semar Mesem Pusaka Mini",
+        category: "Talisman",
+        description: "A small pusaka-style keris inspired by traditional Indonesian attraction talismans, made for collectors who value symbolic heritage, charm work, and careful display.",
+        intention: "For softening conversations, inviting affection, and keeping social energy warm, respectful, and steady.",
+        price: "75",
+        image_url: "assets/spheres/solomon-love-harmony.png",
+        seo_keywords: "keris semar mesem, semer mesem, pusaka mini, pengasihan, attraction talisman"
+      },
+      {
+        title: "Mustika Bulu Perindu Charm",
+        category: "Mustika / Bezoar Stone",
+        description: "A mustika-inspired charm for collectors of Indonesian love and longing objects, presented as a symbolic spiritual collectible with origin notes and care guidance.",
+        intention: "For drawing remembrance, tenderness, and sincere emotional connection without force or harm.",
+        price: "68",
+        image_url: "assets/spheres/divine-light-card-10.png",
+        seo_keywords: "bulu perindu, mustika cinta, love charm, spiritual attraction, benda magis"
+      },
+      {
+        title: "Jenglot Guardian Relic Display",
+        category: "Ritual Object",
+        description: "A guardian relic display inspired by Indonesian folklore, created for serious collectors of unusual mystical objects and protective altar pieces.",
+        intention: "For boundary, vigilance, and quiet protection around a room, altar, or collection space.",
+        price: "120",
+        image_url: "assets/spheres/protection-card-28.png",
+        seo_keywords: "jenglot, guardian relic, folklore object, protection spirit, altar guardian"
+      },
+      {
+        title: "Batara Karang Protection Stone",
+        category: "Mustika / Bezoar Stone",
+        description: "A stone-style pusaka object inspired by coastal guardian traditions, selected for collectors who like grounded, protective, earth-and-water symbolism.",
+        intention: "For strengthening personal ground, shielding the home, and calming heavy surrounding energy.",
+        price: "88",
+        image_url: "assets/spheres/decree-card-8.png",
+        seo_keywords: "batara karang, protection stone, mustika protection, coastal guardian, yoni"
+      },
+      {
+        title: "Mustika Burung Cenderawasih",
+        category: "Mustika / Bezoar Stone",
+        description: "A rare-bird inspired mustika concept connected with grace, beauty, presence, and elevated personal magnetism in Indonesian mystical collecting.",
+        intention: "For confidence, refined charm, graceful communication, and being seen with dignity.",
+        price: "95",
+        image_url: "assets/spheres/unity-card-24.png",
+        seo_keywords: "mustika burung cenderawasih, beauty charm, grace talisman, magnetism, pusaka alami"
+      },
+      {
+        title: "Minyak Pengasihan Sulaiman",
+        category: "Mystical Oil",
+        description: "A ritual oil concept inspired by harmony, devotion, and wise attraction symbolism, suitable for prayerful focus, object care, and ceremonial use.",
+        intention: "For harmony, clear intention, respectful attraction, and peaceful devotion.",
+        price: "45",
+        image_url: "assets/spheres/success-path-card-20.png",
+        seo_keywords: "minyak pengasihan, minyak sulaiman, love oil, harmony oil, raja sulaiman"
+      },
+      {
+        title: "Khodam Companion Amulet",
+        category: "Amulet",
+        description: "An amulet-style spiritual collectible described in Indonesian tradition as a companion object, prepared for mindful keeping and personal reflection.",
+        intention: "For companionship, courage, inner steadiness, and a sense of protected movement.",
+        price: "82",
+        image_url: "assets/spheres/solomon-love-harmony.png",
+        seo_keywords: "khodam companion, pendamping, amulet, spirit guide, benda sakral"
+      },
+      {
+        title: "Seal of Solomon Road Opener",
+        category: "Talisman",
+        description: "A talisman inspired by classical seal work and Indonesian pusaka collecting, focused on road opening, clarity, and wise choices.",
+        intention: "For removing confusion, choosing the good path, and moving through blocked situations with calm purpose.",
+        price: "64",
+        image_url: "assets/spheres/divine-light-card-10.png",
+        seo_keywords: "seal of Solomon, king solomon seal, road opener, raja sulaiman, talisman"
+      }
+    ];
 
     async function api(path, options = {}) {
       const response = await fetch(path, {
@@ -1178,8 +1269,36 @@
 
     document.getElementById("fillIndotalismanSeo").addEventListener("click", () => {
       const field = document.getElementById("indotalismanSeoKeywords");
-      field.value = spiritDollSeoText(field.value);
+      field.value = indotalismanSeoText(field.value);
       setStatus(els.indotalismanStatus, "Indotalisman SEO keywords added.", "ok");
+    });
+
+    document.getElementById("generateIndotalismanSamples").addEventListener("click", async () => {
+      const existingTitles = new Set(state.indotalismanProducts.map(product => String(product.title || "").toLowerCase()));
+      const productsToCreate = indotalismanSampleProducts.filter(product => !existingTitles.has(product.title.toLowerCase()));
+
+      if (!productsToCreate.length) {
+        setStatus(els.indotalismanStatus, "The 8 Indotalisman sample products already exist.", "ok");
+        return;
+      }
+
+      try {
+        setStatus(els.indotalismanStatus, `Generating ${productsToCreate.length} Indotalisman sample products...`);
+        for (const product of productsToCreate) {
+          await api("/.netlify/functions/indotalisman-products", {
+            method: "POST",
+            body: JSON.stringify({
+              ...product,
+              seo_keywords: indotalismanSeoText(product.seo_keywords)
+            })
+          });
+        }
+        setStatus(els.indotalismanStatus, "Sample Indotalisman products added. They appear only on indotalisman.html.", "ok");
+        submitCrawlerUrls({ silent: true }).catch(() => {});
+        await loadAdmin();
+      } catch (error) {
+        setStatus(els.indotalismanStatus, error.message, "error");
+      }
     });
 
     document.querySelectorAll("[data-tab]").forEach(button => {
@@ -1254,7 +1373,7 @@
       const payload = Object.fromEntries(new FormData(form).entries());
       delete payload.image_file;
       if (!String(payload.seo_keywords || "").trim()) {
-        payload.seo_keywords = spiritDollSeoText(`${payload.title}, ${payload.category}, ${payload.description}, ${payload.intention}`);
+        payload.seo_keywords = indotalismanSeoText(`${payload.title}, ${payload.category}, ${payload.description}, ${payload.intention}`);
       }
       try {
         setStatus(els.indotalismanStatus, "Adding Indotalisman product...");
