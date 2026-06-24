@@ -1,0 +1,366 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Indotalisman Admin | Ratu Oracle</title>
+  <meta name="robots" content="noindex,nofollow">
+  <style>
+    :root{--ink:#261330;--muted:#6f6170;--purple:#532376;--gold:#b8792d;--line:#e8d8c8;--paper:#fffaf4;--danger:#a83232}
+    *{box-sizing:border-box}
+    body{margin:0;color:var(--ink);font-family:Inter,Arial,sans-serif;background:radial-gradient(circle at 10% 0,#fff 0,#f5eadf 36%,#fffaf4 100%);line-height:1.5}
+    .shell{width:min(1180px,calc(100% - 28px));margin:auto}
+    header{position:sticky;top:0;z-index:4;background:rgba(255,250,244,.94);border-bottom:1px solid var(--line);backdrop-filter:blur(12px)}
+    .topbar{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;padding:16px 0}
+    h1,h2,h3{font-family:Georgia,serif;line-height:1.1;margin:0}
+    h1{font-size:clamp(28px,4vw,46px)}
+    h2{font-size:24px;margin-bottom:12px}
+    p{margin:0 0 10px}
+    a{color:inherit}
+    .btn{display:inline-flex;align-items:center;justify-content:center;min-height:40px;padding:0 14px;border:1px solid #b99372;border-radius:7px;background:#fffaf4;color:var(--ink);font-weight:900;text-transform:uppercase;font-size:12px;text-decoration:none;cursor:pointer}
+    .btn.primary{background:linear-gradient(135deg,#4b1d6b,#74359a);color:#fff;border-color:transparent}
+    .btn.danger{background:var(--danger);border-color:var(--danger);color:#fff}
+    .btn.small{min-height:34px;padding:0 10px;font-size:11px}
+    .grid{display:grid;grid-template-columns:360px 1fr;gap:18px;margin:22px auto 48px}
+    .panel{background:rgba(255,250,244,.96);border:1px solid var(--line);border-radius:10px;padding:18px;box-shadow:0 18px 46px rgba(61,37,18,.1)}
+    .login{margin:28px auto;max-width:720px}
+    .hidden{display:none!important}
+    label{display:block;font-size:12px;font-weight:900;margin:0 0 12px}
+    input,select,textarea{width:100%;margin-top:5px;border:1px solid #d9c6b4;border-radius:7px;background:#fff;padding:10px;font:inherit;color:var(--ink)}
+    textarea{min-height:96px;resize:vertical}
+    .row{display:flex;gap:10px;flex-wrap:wrap}
+    .row>*{flex:1}
+    .status{border:1px solid var(--line);background:#fff;padding:10px 12px;border-radius:8px;color:var(--muted);font-size:13px;margin-top:12px}
+    .status.ok{border-color:#b8d8bd;background:#f2fff4;color:#276236}
+    .status.error{border-color:#e6b5b5;background:#fff1f1;color:#9d2a2a}
+    .list{display:grid;gap:12px}
+    .item{display:flex;justify-content:space-between;gap:14px;border:1px solid var(--line);background:#fff;border-radius:10px;padding:12px}
+    .item-main{display:flex;gap:12px;min-width:0}
+    .thumb{width:84px;height:104px;border-radius:7px;object-fit:cover;background:#eee;flex:0 0 auto}
+    .thumb.empty{display:grid;place-items:center;color:var(--muted);font-size:11px;border:1px dashed var(--line)}
+    .item h3{font-size:19px;margin-bottom:4px}
+    .item p,.item small{color:var(--muted);font-size:13px}
+    .actions{display:flex;flex-direction:column;gap:8px;align-items:flex-end}
+    .quick{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin:14px 0}
+    .metric{background:#fff;border:1px solid var(--line);border-radius:8px;padding:12px}
+    .metric strong{display:block;font-size:26px;color:var(--purple)}
+    @media(max-width:760px){
+      .grid{grid-template-columns:1fr}
+      .item{display:block}
+      .item-main{align-items:flex-start}
+      .actions{margin-top:10px;flex-direction:row;align-items:center}
+      .quick{grid-template-columns:1fr 1fr}
+      .btn{width:100%}
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="shell topbar">
+      <div>
+        <h1>Indotalisman Admin</h1>
+        <p>Only talismans, amulets, mustika/bezoar stones, mystical oils, spirit dolls, and Indonesian magick products.</p>
+      </div>
+      <div class="row" style="flex:0 1 360px">
+        <a class="btn" href="/indotalisman.html">View Indotalisman</a>
+        <a class="btn" href="/admin.html">Chant Sphere Admin</a>
+      </div>
+    </div>
+  </header>
+
+  <main class="shell">
+    <section class="panel login" id="loginPanel">
+      <h2>Admin Access</h2>
+      <label>Admin password
+        <input id="secretInput" type="password" autocomplete="current-password">
+      </label>
+      <button class="btn primary" id="unlockButton">Unlock Indotalisman Admin</button>
+      <div class="status" id="loginStatus">Use the same ADMIN_SECRET password as the main admin.</div>
+    </section>
+
+    <section id="adminApp" class="hidden">
+      <div class="quick">
+        <div class="metric"><strong id="statProducts">0</strong>Products</div>
+        <div class="metric"><strong id="statTalismans">0</strong>Talismans</div>
+        <div class="metric"><strong id="statMustika">0</strong>Mustika / stones</div>
+        <div class="metric"><strong id="statOils">0</strong>Oils</div>
+      </div>
+
+      <section class="grid">
+        <aside class="panel">
+          <h2>Add Indotalisman Product</h2>
+          <form id="productForm">
+            <label>Product name
+              <input name="title" placeholder="Keris Semar Mesem Pusaka Mini" required>
+            </label>
+            <label>Category
+              <select name="category" required>
+                <option value="Talisman">Talisman</option>
+                <option value="Amulet">Amulet</option>
+                <option value="Mustika / Bezoar Stone">Mustika / Bezoar Stone</option>
+                <option value="Mystical Oil">Mystical Oil</option>
+                <option value="Spirit Doll">Spirit Doll</option>
+                <option value="Ritual Object">Ritual Object</option>
+              </select>
+            </label>
+            <label>Description
+              <textarea name="description" placeholder="Describe origin, story, care notes, and presentation."></textarea>
+            </label>
+            <label>Intention
+              <textarea name="intention" placeholder="Purpose, khodam/pendamping meaning, tuah, and energetic focus."></textarea>
+            </label>
+            <div class="row">
+              <label>Price
+                <input name="price" type="number" min="0" step="0.01" placeholder="75">
+              </label>
+              <label>Currency
+                <input name="currency" value="USD">
+              </label>
+            </div>
+            <label>Picture URL
+              <input name="image_url" placeholder="https://example.com/product.jpg or assets/spheres/product.png">
+            </label>
+            <label>Upload picture from computer
+              <input name="image_file" type="file" accept="image/png,image/jpeg,image/webp,image/gif">
+            </label>
+            <label>SEO keywords
+              <textarea name="seo_keywords" id="seoKeywords" placeholder="indotalisman, barang pusaka, khodam, mustika, jimat, azimat"></textarea>
+            </label>
+            <div class="row">
+              <button class="btn" type="button" id="fillSeo">Use SEO Tags</button>
+              <button class="btn primary" type="submit">Add Product</button>
+            </div>
+          </form>
+          <button class="btn" type="button" id="generateSamples" style="margin-top:10px;width:100%">Generate 8 Sample Products</button>
+          <div class="status" id="status">Products created here appear only on indotalisman.html.</div>
+        </aside>
+
+        <section class="panel">
+          <h2>Manage Indotalisman Products</h2>
+          <div class="list" id="productList"></div>
+        </section>
+      </section>
+    </section>
+  </main>
+
+  <script>
+    const keywordBank = [
+      "indotalisman", "barang pusaka", "barang pusaka alami", "barang pusaka asli", "pusaka alami asli", "pusaka berkhodam",
+      "khodam", "pendamping", "tuah", "yoni", "pengisian", "benda sakral", "benda magis", "kolektor spiritual",
+      "keris kecil", "keris semar mesem", "semer mesem", "jenglot", "batara karang", "bulu perindu",
+      "mustika", "batu mustika", "mustika burung cenderawasih", "bezoar stone", "benzoa", "minyak mistik",
+      "minyak pelet", "minyak pengasihan", "amulet", "talisman", "azimat", "jimat", "seal of Solomon",
+      "king solomon seal", "raja sulaiman", "spiritual collector", "Indonesian magick", "Islamic occult object",
+      "natural talisman", "ritual object", "sacred object", "mystical collectible", "rare spiritual item"
+    ];
+
+    const samples = [
+      ["Keris Semar Mesem Pusaka Mini","Talisman","A small pusaka-style keris inspired by traditional Indonesian attraction talismans, made for collectors who value symbolic heritage, charm work, and careful display.","For softening conversations, inviting affection, and keeping social energy warm, respectful, and steady.","75","assets/spheres/solomon-love-harmony.png","keris semar mesem, semer mesem, pusaka mini, pengasihan"],
+      ["Mustika Bulu Perindu Charm","Mustika / Bezoar Stone","A mustika-inspired charm for collectors of Indonesian love and longing objects, presented as a symbolic spiritual collectible with origin notes and care guidance.","For drawing remembrance, tenderness, and sincere emotional connection without force or harm.","68","assets/spheres/divine-light-card-10.png","bulu perindu, mustika cinta, love charm, benda magis"],
+      ["Jenglot Guardian Relic Display","Ritual Object","A guardian relic display inspired by Indonesian folklore, created for serious collectors of unusual mystical objects and protective altar pieces.","For boundary, vigilance, and quiet protection around a room, altar, or collection space.","120","assets/spheres/protection-card-28.png","jenglot, guardian relic, folklore object, altar guardian"],
+      ["Batara Karang Protection Stone","Mustika / Bezoar Stone","A stone-style pusaka object inspired by coastal guardian traditions, selected for collectors who like grounded, protective, earth-and-water symbolism.","For strengthening personal ground, shielding the home, and calming heavy surrounding energy.","88","assets/spheres/decree-card-8.png","batara karang, protection stone, mustika protection, yoni"],
+      ["Mustika Burung Cenderawasih","Mustika / Bezoar Stone","A rare-bird inspired mustika concept connected with grace, beauty, presence, and elevated personal magnetism in Indonesian mystical collecting.","For confidence, refined charm, graceful communication, and being seen with dignity.","95","assets/spheres/unity-card-24.png","mustika burung cenderawasih, beauty charm, grace talisman"],
+      ["Minyak Pengasihan Sulaiman","Mystical Oil","A ritual oil concept inspired by harmony, devotion, and wise attraction symbolism, suitable for prayerful focus, object care, and ceremonial use.","For harmony, clear intention, respectful attraction, and peaceful devotion.","45","assets/spheres/success-path-card-20.png","minyak pengasihan, minyak sulaiman, raja sulaiman"],
+      ["Khodam Companion Amulet","Amulet","An amulet-style spiritual collectible described in Indonesian tradition as a companion object, prepared for mindful keeping and personal reflection.","For companionship, courage, inner steadiness, and a sense of protected movement.","82","assets/spheres/solomon-love-harmony.png","khodam companion, pendamping, amulet, benda sakral"],
+      ["Seal of Solomon Road Opener","Talisman","A talisman inspired by classical seal work and Indonesian pusaka collecting, focused on road opening, clarity, and wise choices.","For removing confusion, choosing the good path, and moving through blocked situations with calm purpose.","64","assets/spheres/divine-light-card-10.png","seal of Solomon, king solomon seal, road opener, raja sulaiman"]
+    ].map(([title, category, description, intention, price, image_url, seo_keywords]) => ({ title, category, description, intention, price, image_url, seo_keywords }));
+
+    const state = {
+      secret: sessionStorage.getItem("ratuAdminSecret") || "",
+      products: []
+    };
+
+    const els = {
+      loginPanel: document.getElementById("loginPanel"),
+      adminApp: document.getElementById("adminApp"),
+      secretInput: document.getElementById("secretInput"),
+      loginStatus: document.getElementById("loginStatus"),
+      status: document.getElementById("status"),
+      productList: document.getElementById("productList")
+    };
+
+    els.secretInput.value = state.secret;
+
+    function escapeHtml(value) {
+      return String(value ?? "").replace(/[&<>"']/g, char => ({ "&":"&amp;", "<":"&lt;", ">":"&gt;", '"':"&quot;", "'":"&#039;" }[char]));
+    }
+
+    function seoText(existing = "") {
+      const manual = String(existing || "").split(",").map(item => item.trim()).filter(Boolean);
+      return [...new Set([...manual, ...keywordBank])].join(", ");
+    }
+
+    function setStatus(element, message, type = "") {
+      element.textContent = message;
+      element.className = `status ${type}`;
+    }
+
+    function money(cents, currency = "USD") {
+      return new Intl.NumberFormat("en-US", { style:"currency", currency }).format((Number(cents) || 0) / 100);
+    }
+
+    async function api(path, options = {}) {
+      const response = await fetch(path, {
+        ...options,
+        headers: {
+          "Content-Type": "application/json",
+          "X-Admin-Secret": state.secret,
+          ...(options.headers || {})
+        }
+      });
+      const data = await response.json().catch(() => ({}));
+      if (!response.ok) throw new Error(data.error || `Request failed with status ${response.status}.`);
+      return data;
+    }
+
+    function imageFileToDataUrl(file) {
+      return new Promise((resolve, reject) => {
+        if (!file) return resolve("");
+        if (!file.type.startsWith("image/")) return reject(new Error("Choose a JPG, PNG, WEBP, or GIF image."));
+        const reader = new FileReader();
+        reader.onerror = () => reject(new Error("Could not read that image file."));
+        reader.onload = () => {
+          const image = new Image();
+          image.onerror = () => reject(new Error("Could not prepare that image."));
+          image.onload = () => {
+            const maxSide = 1200;
+            const scale = Math.min(1, maxSide / Math.max(image.width, image.height));
+            const canvas = document.createElement("canvas");
+            canvas.width = Math.max(1, Math.round(image.width * scale));
+            canvas.height = Math.max(1, Math.round(image.height * scale));
+            canvas.getContext("2d").drawImage(image, 0, 0, canvas.width, canvas.height);
+            resolve(canvas.toDataURL("image/jpeg", 0.84));
+          };
+          image.src = reader.result;
+        };
+        reader.readAsDataURL(file);
+      });
+    }
+
+    function renderProducts() {
+      document.getElementById("statProducts").textContent = state.products.length;
+      document.getElementById("statTalismans").textContent = state.products.filter(p => /talisman|amulet/i.test(p.category || "")).length;
+      document.getElementById("statMustika").textContent = state.products.filter(p => /mustika|bezoar/i.test(p.category || "")).length;
+      document.getElementById("statOils").textContent = state.products.filter(p => /oil/i.test(p.category || "")).length;
+
+      if (!state.products.length) {
+        els.productList.innerHTML = '<div class="status">No Indotalisman products yet. Add one or generate the 8 samples.</div>';
+        return;
+      }
+
+      els.productList.innerHTML = state.products.map(product => `
+        <article class="item">
+          <div class="item-main">
+            ${product.image_url ? `<img class="thumb" src="${escapeHtml(product.image_url)}" alt="${escapeHtml(product.title)}">` : '<div class="thumb empty">No image</div>'}
+            <div>
+              <h3>${escapeHtml(product.title)}</h3>
+              <p><strong>${escapeHtml(product.category)}</strong> / ${money(product.price_cents, product.currency)}</p>
+              <p>${escapeHtml(product.intention || product.description || "No intention written.")}</p>
+              <small>${escapeHtml(product.seo_keywords || "")}</small>
+            </div>
+          </div>
+          <div class="actions">
+            <a class="btn small" href="/indotalisman.html#shop" target="_blank" rel="noreferrer">View</a>
+            <button class="btn danger small" data-delete="${product.id}">Delete</button>
+          </div>
+        </article>
+      `).join("");
+    }
+
+    async function loadProducts() {
+      const data = await api("/.netlify/functions/indotalisman-products");
+      state.products = data.products || [];
+      renderProducts();
+    }
+
+    async function unlock() {
+      state.secret = els.secretInput.value.trim();
+      sessionStorage.setItem("ratuAdminSecret", state.secret);
+      try {
+        setStatus(els.loginStatus, "Checking password...");
+        await loadProducts();
+        els.loginPanel.classList.add("hidden");
+        els.adminApp.classList.remove("hidden");
+        setStatus(els.status, "Indotalisman Admin unlocked.", "ok");
+      } catch (error) {
+        setStatus(els.loginStatus, error.message, "error");
+      }
+    }
+
+    document.getElementById("unlockButton").addEventListener("click", unlock);
+    els.secretInput.addEventListener("keydown", event => {
+      if (event.key === "Enter") unlock();
+    });
+
+    document.getElementById("fillSeo").addEventListener("click", () => {
+      const field = document.getElementById("seoKeywords");
+      field.value = seoText(field.value);
+      setStatus(els.status, "Indotalisman SEO tags added.", "ok");
+    });
+
+    document.getElementById("generateSamples").addEventListener("click", async () => {
+      const existing = new Set(state.products.map(product => String(product.title || "").toLowerCase()));
+      const next = samples.filter(product => !existing.has(product.title.toLowerCase()));
+      if (!next.length) {
+        setStatus(els.status, "The 8 sample products already exist.", "ok");
+        return;
+      }
+      try {
+        setStatus(els.status, `Generating ${next.length} sample products...`);
+        for (const product of next) {
+          await api("/.netlify/functions/indotalisman-products", {
+            method: "POST",
+            body: JSON.stringify({ ...product, seo_keywords: seoText(product.seo_keywords) })
+          });
+        }
+        setStatus(els.status, "Sample products added.", "ok");
+        await loadProducts();
+      } catch (error) {
+        setStatus(els.status, error.message, "error");
+      }
+    });
+
+    document.getElementById("productForm").addEventListener("submit", async event => {
+      event.preventDefault();
+      const form = event.currentTarget;
+      const payload = Object.fromEntries(new FormData(form).entries());
+      delete payload.image_file;
+      if (!String(payload.seo_keywords || "").trim()) {
+        payload.seo_keywords = seoText(`${payload.title}, ${payload.category}, ${payload.description}, ${payload.intention}`);
+      }
+      try {
+        setStatus(els.status, "Adding product...");
+        const uploadedImage = await imageFileToDataUrl(form.elements.image_file.files[0]);
+        if (uploadedImage) payload.image_url = uploadedImage;
+        await api("/.netlify/functions/indotalisman-products", {
+          method: "POST",
+          body: JSON.stringify(payload)
+        });
+        form.reset();
+        setStatus(els.status, "Product added to Indotalisman only.", "ok");
+        await loadProducts();
+      } catch (error) {
+        setStatus(els.status, error.message, "error");
+      }
+    });
+
+    document.addEventListener("click", async event => {
+      const button = event.target.closest("[data-delete]");
+      if (!button) return;
+      const product = state.products.find(item => item.id === button.dataset.delete);
+      if (!confirm(`Delete "${product?.title || "this product"}" from Indotalisman?`)) return;
+      try {
+        setStatus(els.status, "Deleting product...");
+        await api("/.netlify/functions/indotalisman-products", {
+          method: "DELETE",
+          body: JSON.stringify({ id: button.dataset.delete })
+        });
+        setStatus(els.status, "Product deleted.", "ok");
+        await loadProducts();
+      } catch (error) {
+        setStatus(els.status, error.message, "error");
+      }
+    });
+  </script>
+</body>
+</html>

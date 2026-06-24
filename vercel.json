@@ -108,6 +108,10 @@
     {
       "source": "/indotalisman",
       "destination": "/indotalisman.html"
+    },
+    {
+      "source": "/indotalisman-admin",
+      "destination": "/indotalisman-admin.html"
     }
   ],
   "headers": [
