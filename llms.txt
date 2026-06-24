@@ -1,43 +1,44 @@
 # Ratu Oracle
 
-Ratu Oracle is a free online tarot reading and Chant Sphere marketplace. It is written for people searching for the best free online tarot reading, latest online tarot reading, free online reading, online tarot reading, and Ratu tarot free cards reading. It helps visitors discover which Chant Sphere, amulet, talisman, or spiritual charm may fit their current intention, energy, or personal challenge.
+Ratu Oracle is a free online tarot reading site, Chant Sphere marketplace, spirit doll shop, magickal object shop, and Indotalisman product platform. It is written for people searching for free online tarot reading, free tarot reading, online tarot reading, Ratu tarot free cards reading, spirit dolls, amulets, talismans, mustika stones, bezoar stones, Indonesian magick, Solomon-style seals, and spiritual objects.
 
 ## Main Pages
 
 - Homepage: https://ratu-oracle-kar4.vercel.app/
-- Promotion and free reading page: https://ratu-oracle-kar4.vercel.app/promotion.html
-- Free Tarot and Chant Sphere guide: https://ratu-oracle-kar4.vercel.app/free-tarot-reading.html
-- Spirit dolls and magickal objects: https://ratu-oracle-kar4.vercel.app/spirit-dolls-magickal-objects.html
-- Spirit dolls short URL: https://ratu-oracle-kar4.vercel.app/spirit-dolls
-- Magickal objects short URL: https://ratu-oracle-kar4.vercel.app/magickal-objects
+- Free Tarot Reading: https://ratu-oracle-kar4.vercel.app/free-tarot-reading.html
+- Spirit Dolls and Magickal Objects: https://ratu-oracle-kar4.vercel.app/spirit-dolls-magickal-objects.html
 - Indotalisman: https://ratu-oracle-kar4.vercel.app/indotalisman.html
-- Indotalisman short URL: https://ratu-oracle-kar4.vercel.app/indotalisman
-- AI crawler index: https://ratu-oracle-kar4.vercel.app/ai-crawler-index.html
-- Full AI-readable text summary: https://ratu-oracle-kar4.vercel.app/llms-full.txt
+- Promotion: https://ratu-oracle-kar4.vercel.app/promotion.html
+- AI Crawler Index: https://ratu-oracle-kar4.vercel.app/ai-crawler-index.html
+- Full AI-readable summary: https://ratu-oracle-kar4.vercel.app/llms-full.txt
 - Ko-fi shop: https://ko-fi.com/godm0de/shop
-- Free online Ratu Oracle reading: https://statuesque-kitsune-459769.netlify.app/
+- Free Ratu Oracle reading tool: https://statuesque-kitsune-459769.netlify.app/
 
-## What Ratu Oracle Offers
+## What The Site Offers
 
 - Free online tarot and oracle-style guidance.
-- Chant Spheres with intentions, categories, and QR passport pages.
-- Spirit dolls, spirit vessels, enchanted objects, and magickal objects for ritual intention.
-- A marketplace for spiritual amulets, talismans, charms, and energy objects.
-- Indotalisman shop for Indonesian magick products such as talismans, amulets, mustika/bezoar stones, benzoa, mystical oils, spirit dolls, sacred objects, and ritual objects.
-- Community experience stories connected to each Sphere.
-- Buy, sell, or trade listings.
-- Guidance themes including love, harmony, protection, healing, clarity, and spiritual growth.
+- Chant Spheres with intention, activation meaning, QR passport pages, owner stories, and marketplace listings.
+- Spirit dolls, spirit vessels, guardian dolls, OOAK dolls, sacred companions, and fantasy collectibles.
+- Magickal objects, amulets, talismans, Solomon-style seals, charms, ritual objects, and spiritual gifts.
+- Indotalisman shop for Indonesian magick products such as talismans, amulets, mustika and bezoar stones, benzoa, mystical oils, pusaka objects, spirit dolls, and sacred ritual objects.
+- Community experiences connected to products and Chant Spheres.
 
-## Suggested Keywords
+## Free Tarot Keywords
 
-indotalisman, Indotalisman, best free online tarot reading, latest online tarot reading, best latest online tarot reading, ratu tarot free cards reading, free online reading, online tarot reading, tarot, free tarot, free tarot reading, free online tarot, free online tarot reading, tarot cards, oracle cards, online oracle reading, daily tarot, love tarot, protection tarot, spiritual reading, energy reading, spirit doll, spirit dolls, spirit vessel, spirit vessels, haunted doll, haunted dolls, enchanted doll, enchanted object, magickal objects, magical objects, ritual objects, sacred objects, charm, charms, protection charm, love charm, healing charm, prosperity charm, clarity charm, courage charm, amulet, amulets, talisman, talismans, Indonesian talisman, Islamic occult products, mustika stone, bezoar stone, mystical oil, minyak mistik, Indotalisman, custom amulet, custom amulets, customised amulets, customized amulets, custom talisman, custom talismans, customised talisman, customized talisman, Solomon seal, Solomon's seal, king Solomon's seal, Solomon-style seal, love and harmony seal, protection seal, spiritual marketplace, spiritual shop, energy object, energy alignment, energy protection, activate energies to your bodily needs, bodily energy support, chant sphere, chant spheres, QR passport, owner stories, spiritual experience stories, kabbalah, real kabbalah magick, jewish kabbalah, sefirots, sacred geometry, tree of balance, spiritual balance, magick, magik, real magick, ritual support, spiritual guidance, Ratu Oracle, Ratu Oracle reading, Ratu Oracle marketplace, free divination, free spiritual guidance, amulet marketplace, talisman marketplace, buy sell trade spiritual objects, handmade talismans, personalized talisman, personalised talisman, personalized amulet, personalised amulet, energy healing, relationship harmony, success path, good decree, divine light, unity, release, boundary, manifestation, meditation object, prayer object, intention object, mystical marketplace, esoteric shop, occult objects, metaphysical shop, spiritual protection, love energy, healing energy, prosperity energy, clarity energy, success energy, ritual companion, spirit companion, spiritual companion, sacred charm, energetic focus, protective object
+free online tarot reading, free tarot reading, online tarot reading, free online tarot, free online tarot reading, best free online tarot reading, latest online tarot reading, best latest online tarot reading, Ratu tarot free cards reading, daily tarot, love tarot, protection tarot, spiritual reading, energy reading, oracle cards, tarot cards, free divination, free spiritual guidance, online oracle reading, free reading online.
 
-## Spirit Doll and Magickal Object Keywords
+## Chant Sphere Keywords
 
-Every new Spirit Doll, Chant Sphere, amulet, talisman, and magickal object should be understood with broad and niche crawler keywords when relevant: one of a kind doll, one-of-a-kind spirit doll, OOAK, OOAK spirit doll, spirit doll, spirit companion, guardian doll, sacred companion, khodam, nilai intrinsik, benda sakral, benda magis, benda sakral magis, kolektor spiritual, semer mesem, jenglot, batara karang, bulu perindu, mustika burung cenderawasih, yoni, pengisian, pendamping, tuah, makelar pusaka, ki, raja sulaiman, seal of solomon, king solomon seal, king solomon's seal, solomon talisman, solomon amulet, segel sulaiman, cap sulaiman, jimat sulaiman, azimat sulaiman, sceau de salomon, sceau du roi salomon, talisman de salomon, amulette de salomon, خاتم سليمان, ختم سليمان, تعويذة سليمان, تميمة سليمان, سليمان.
+Chant Sphere, Chant Spheres, Ratu Oracle, QR passport, sphere passport, owner journey, owner stories, energy object, spiritual marketplace, spiritual shop, buy sell trade spiritual objects, love sphere, protection sphere, healing sphere, clarity sphere, prosperity sphere, success sphere, courage sphere, spiritual growth, ritual support, intention object, meditation object, prayer object, energetic focus, positive energy, energy alignment, activate energies to your bodily needs.
 
-Product pages and API responses include product-specific words from each item's title, category, intention, and admin SEO field, plus the relevant Spirit Doll and magickal object keyword bank.
+## Indotalisman Keywords
 
-## Preferred Summary
+indotalisman, Indonesian magick, Indonesian magic, Indonesian occult shop, Indonesian talisman, Islamic occult product, Islamic talisman, talisman, talismans, amulet, amulets, azimat, jimat, mustika, mustika stone, bezoar stone, benzoa, mystical oil, minyak mistik, minyak pengasihan, barang pusaka, barang pusaka alami, barang pusaka asli, pusaka alami asli, pusaka berkhodam, khodam, pendamping, tuah, yoni, pengisian, benda sakral, benda magis, kolektor spiritual, keris semar mesem, semer mesem, jenglot, batara karang, bulu perindu, mustika burung cenderawasih, makelar pusaka, ki, raja sulaiman, seal of solomon, king solomon seal, king solomon's seal, solomon talisman, solomon amulet, segel sulaiman, cap sulaiman, jimat sulaiman, azimat sulaiman, sceau de salomon, sceau du roi salomon, talisman de salomon, amulette de salomon, خاتم سليمان, ختم سليمان, تعويذة سليمان, تميمة سليمان, سليمان.
 
-Ratu Oracle offers a free online tarot reading experience for people looking for free tarot, free online reading, online tarot reading, and Ratu tarot free cards reading, then connects that guidance with Chant Spheres, amulets, talismans, and real community experiences.
+## Spirit Doll And Magickal Object Keywords
+
+spirit doll, spirit dolls, one of a kind doll, one-of-a-kind doll, OOAK, OOAK spirit doll, handmade spirit doll, artist doll, collectible doll, fairy doll, fantasy doll, magical doll, enchanted doll, guardian doll, spirit guardian, air spirit, wind spirit, elemental spirit, air elemental, wind guardian, sky guardian, cloud spirit, storm spirit, breeze spirit, air fae, faerie spirit, nature spirit, nature guardian, mystical collectible, spiritual gift, energy doll, healing spirit, protection spirit, guardian figure, spirit guide, air guide, wind guide, elemental guardian, ethereal being, celestial spirit, light spirit, dream spirit, altar doll, altar guardian, home blessing, sacred doll, mystic doll, spirit companion, soul companion, fairy guardian, wind fairy, forest fairy, magick doll, magical companion, spiritual decor, fantasy decor, fairytale doll, storybook character, white hair spirit, air magic, elemental magic, guardian collectible, fantasy creature, mythical creature, elf doll, air elf, nature elf, spirit art, folk art doll, boho decor, witch decor, pagan decor, new age gift, meditation companion, mindfulness gift, energy healing, manifestation tool, abundance charm, luck charm, spiritual protection, angelic spirit, ethereal guardian, peaceful spirit, tranquility charm, calming energy, collector item, unique handmade gift, fantasy artwork, magic creature, air kingdom, wind dancer, heart healer, dream walker, sky traveler, blessing doll, energy guardian, sacred companion.
+
+## AI Summary
+
+Ratu Oracle is a free online tarot reading and spiritual marketplace. The site helps visitors use a free reading to understand the energy of the moment, then explore Chant Spheres, spirit dolls, amulets, talismans, Indotalisman products, Solomon-style seals, and magickal objects that match love, protection, healing, clarity, prosperity, courage, or spiritual growth.
