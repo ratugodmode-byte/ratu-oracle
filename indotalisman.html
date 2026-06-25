@@ -37,8 +37,12 @@
     .actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:22px}
     .btn{display:inline-flex;align-items:center;justify-content:center;min-height:44px;padding:0 18px;border-radius:7px;border:1px solid #b99372;background:#fffaf4;font-weight:900;text-decoration:none;text-transform:uppercase;font-size:12px}
     .btn.primary{background:linear-gradient(135deg,#4b1d6b,#74359a);color:white;border-color:transparent}
-    .visual{border:1px solid var(--line);border-radius:12px;background:linear-gradient(135deg,#271532,#7b4a36);min-height:360px;padding:28px;color:#fff;box-shadow:0 24px 60px rgba(51,28,18,.18)}
-    .sigil{height:220px;border:1px solid rgba(255,217,142,.45);border-radius:50%;display:grid;place-items:center;margin:auto;aspect-ratio:1;color:#ffd98e;font-size:72px}
+    .admin-only{display:none!important}
+    .visual{position:relative;border:1px solid var(--line);border-radius:12px;background:linear-gradient(135deg,#271532,#7b4a36);min-height:360px;color:#fff;box-shadow:0 24px 60px rgba(51,28,18,.18);overflow:hidden}
+    .visual img{display:block;width:100%;height:100%;min-height:360px;object-fit:cover;object-position:center}
+    .visual-placeholder{min-height:360px;display:grid;place-items:center;padding:28px;text-align:left}
+    .sigil{height:160px;border:1px solid rgba(255,217,142,.45);border-radius:50%;display:grid;place-items:center;margin:0 auto 20px;aspect-ratio:1;color:#ffd98e;font-size:54px}
+    .visual-caption{position:absolute;left:18px;right:18px;bottom:18px;padding:14px 16px;border:1px solid rgba(255,217,142,.32);border-radius:10px;background:rgba(39,21,50,.72);backdrop-filter:blur(8px)}
     .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin:22px 0 44px}
     .card{background:rgba(255,250,244,.92);border:1px solid var(--line);border-radius:10px;padding:22px;box-shadow:0 14px 34px rgba(84,48,27,.08)}
     .shop{padding:8px 0 48px}
@@ -94,7 +98,7 @@
         <a href="/free-tarot-reading.html">Free Tarot</a>
         <a href="/spirit-dolls-magickal-objects.html">Spirit Dolls</a>
         <a href="#shop">Shop</a>
-        <a href="/indotalisman-admin.html">Admin</a>
+        <a class="admin-only" data-admin-only href="/indotalisman-admin.html">Admin</a>
         <a href="mailto:agi.godmode@gmail.com">Contact Us</a>
       </nav>
     </div>
@@ -107,13 +111,17 @@
         <p class="lede">Indotalisman is a Ratu Oracle shop focused on traditional Indonesian magick and Islamic occult-inspired products. The catalog includes ritual items such as talismans, amulets, mustika and bezoar stones, mystical oils, spirit dolls, and sacred objects collected for intention, heritage, and spiritual meaning.</p>
         <div class="actions">
           <a class="btn primary" href="#shop">Shop Indotalisman</a>
-          <a class="btn" href="/indotalisman-admin.html">Add Products In Admin</a>
+          <a class="btn admin-only" data-admin-only href="/indotalisman-admin.html">Add Products In Admin</a>
           <a class="btn" href="mailto:agi.godmode@gmail.com">Contact Us</a>
         </div>
       </div>
-      <div class="visual" aria-label="Indotalisman symbolic seal artwork">
+      <div class="visual" aria-label="Indotalisman featured image">
+        <img id="indotalismanHeroImage" alt="Indotalisman featured spiritual object" hidden>
+        <div class="visual-placeholder" id="indotalismanHeroPlaceholder">
         <div class="sigil">✦</div>
         <p><strong>Each item can be added from the admin dashboard with its image, origin, purpose, story, price, care notes, and respectful spiritual disclaimer.</strong></p>
+        </div>
+        <p class="visual-caption" id="indotalismanHeroCaption">Traditional Indonesian magick objects, presented with origin, purpose, and careful notes.</p>
       </div>
     </section>
 
@@ -146,7 +154,7 @@
           <p class="eyebrow">Indonesian Magick Shop</p>
           <h2>Talismans, Amulets, Mustika Stones, Mystical Oils</h2>
         </div>
-        <a class="btn" href="/indotalisman-admin.html">Add New Product</a>
+        <a class="btn admin-only" data-admin-only href="/indotalisman-admin.html">Add New Product</a>
       </div>
       <p class="shop-note" id="shopStatus">Loading Indotalisman products...</p>
       <div class="shop-grid" id="indotalismanShop" aria-live="polite"></div>
@@ -211,7 +219,7 @@
               <span class="shop-type">Indotalisman shop</span>
               <h3>No products yet</h3>
               <p>This page is separate from the Chant Sphere marketplace. Add your Indonesian magick products from the admin dashboard and they will appear here.</p>
-              <a class="btn" href="/indotalisman-admin.html">Open Indotalisman Admin</a>
+              <a class="btn admin-only" data-admin-only href="/indotalisman-admin.html">Open Indotalisman Admin</a>
             </div>
           </article>
         `;
@@ -234,6 +242,47 @@
       `).join("");
     }
 
+    function storedAdminSecret() {
+      return sessionStorage.getItem("ratuAdminSecret") || localStorage.getItem("ratuAdminSecret") || "";
+    }
+
+    function showAdminLinksIfUnlocked() {
+      if (!storedAdminSecret()) return;
+      document.querySelectorAll("[data-admin-only]").forEach(link => {
+        link.classList.remove("admin-only");
+      });
+    }
+
+    function applyIndotalismanHeroImage(url) {
+      const image = document.getElementById("indotalismanHeroImage");
+      const placeholder = document.getElementById("indotalismanHeroPlaceholder");
+      const caption = document.getElementById("indotalismanHeroCaption");
+      const value = String(url || "").trim();
+      if (!value) return;
+      image.onload = () => {
+        image.hidden = false;
+        placeholder.hidden = true;
+        caption.hidden = true;
+      };
+      image.onerror = () => {
+        image.hidden = true;
+        placeholder.hidden = false;
+        caption.hidden = false;
+      };
+      image.src = value;
+    }
+
+    async function loadIndotalismanSettings() {
+      try {
+        const response = await fetch("/api/site-settings");
+        if (!response.ok) return;
+        const data = await response.json();
+        applyIndotalismanHeroImage(data.settings?.indotalisman_hero_image_url);
+      } catch (error) {
+        // Keep the built-in fallback panel when settings are unavailable.
+      }
+    }
+
     async function loadShop() {
       try {
         const response = await fetch("/api/indotalisman-products");
@@ -246,6 +295,8 @@
       }
     }
 
+    showAdminLinksIfUnlocked();
+    loadIndotalismanSettings();
     loadShop();
   </script>
 </body>

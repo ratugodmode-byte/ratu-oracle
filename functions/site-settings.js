@@ -11,6 +11,7 @@ import {
 const allowedKeys = new Set([
   "hero_background_url",
   "hero_card_visible",
+  "indotalisman_hero_image_url",
   "promo_title",
   "promo_description",
   "promo_primary_url",
