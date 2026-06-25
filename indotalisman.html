@@ -5,13 +5,13 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Indotalisman | Indonesian Talismans, Mustika Stones, Mystical Oils</title>
   <meta name="description" content="Indotalisman is a Ratu Oracle shop for Indonesian magick products, authentic natural Mustika pearls, sacred fossils, ritual relics, heirloom artifacts, traditional talismans, amulets, mystical oils, pusaka objects, and cultural artifacts selected for provenance, rarity, heritage, and traditional spiritual meaning.">
-  <meta name="keywords" content="Indotalisman, Indonesian magick shop, Indonesian magic shop, Indonesian occult shop, Indonesian talisman, Islamic occult products, Islamic talisman, mustika stone, mustika pearl, authentic natural Mustika pearls, sacred fossils, ritual relics, heirloom artifacts, traditional talismans, cultural artifacts, historical provenance, traditional significance, cultural heritage, Indonesian Archipelago, Java spiritual tradition, Khodam Alami, natural spiritual guardians, protection, prosperity, authority, healing, spiritual cultivation, collector-grade artifacts, museum-quality artifacts, private collections, choosing the right Mustika, bezoar stone, benzoa, mystical oil, minyak mistik, minyak pengasihan, barang pusaka, barang pusaka alami, barang pusaka asli, pusaka alami asli, pusaka berkhodam, amulet, talisman, azimat, jimat, benda sakral, benda magis, khodam, tuah, yoni, pengisian, pendamping, kolektor spiritual, keris semar mesem, semer mesem, jenglot, batara karang, bulu perindu, mustika burung cenderawasih, raja sulaiman, seal of Solomon, king Solomon seal, segel sulaiman, jimat sulaiman, azimat sulaiman, spirit doll, Chant Sphere">
+  <meta name="keywords" content="Indotalisman, Indonesian magick shop, Indonesian magic shop, Indonesian spiritual shop, Indonesian talisman, mustika stone, mustika pearl, authentic natural Mustika pearls, sacred fossils, ritual relics, heirloom artifacts, traditional talismans, cultural artifacts, historical provenance, traditional significance, cultural heritage, Indonesian Archipelago, Java spiritual tradition, Khodam Alami, natural spiritual guardians, protection, prosperity, authority, healing, spiritual cultivation, collector-grade artifacts, museum-quality artifacts, private collections, choosing the right Mustika, bezoar stone, benzoa, mystical oil, minyak mistik, minyak pengasihan, barang pusaka, barang pusaka alami, barang pusaka asli, pusaka alami asli, pusaka berkhodam, amulet, talisman, azimat, jimat, benda sakral, benda magis, khodam, tuah, yoni, pengisian, pendamping, kolektor spiritual, keris semar mesem, semer mesem, jenglot, batara karang, bulu perindu, mustika burung cenderawasih, raja sulaiman, seal of Solomon, king Solomon seal, segel sulaiman, jimat sulaiman, azimat sulaiman, spirit doll, Chant Sphere">
   <meta name="robots" content="index, follow, max-image-preview:large">
   <link rel="canonical" href="https://ratu-oracle-kar4.vercel.app/indotalisman.html">
   <link rel="alternate" type="text/plain" href="https://ratu-oracle-kar4.vercel.app/llms.txt">
   <link rel="alternate" type="text/plain" href="https://ratu-oracle-kar4.vercel.app/llms-full.txt">
   <meta property="og:title" content="Indotalisman | Indonesian Talismans and Mystical Objects">
-  <meta property="og:description" content="A Ratu Oracle page for traditional Indonesian and Islamic occult products: talismans, mustika stones, mystical oils, amulets, and ritual objects.">
+  <meta property="og:description" content="A Ratu Oracle page for traditional Indonesian magick products: talismans, mustika stones, mystical oils, amulets, and ritual objects.">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://ratu-oracle-kar4.vercel.app/indotalisman.html">
   <style>
@@ -38,23 +38,24 @@
     .btn{display:inline-flex;align-items:center;justify-content:center;min-height:44px;padding:0 18px;border-radius:7px;border:1px solid #b99372;background:#fffaf4;font-weight:900;text-decoration:none;text-transform:uppercase;font-size:12px}
     .btn.primary{background:linear-gradient(135deg,#4b1d6b,#74359a);color:white;border-color:transparent}
     .admin-only{display:none!important}
-    .visual{position:relative;border:1px solid var(--line);border-radius:12px;background:linear-gradient(135deg,#271532,#7b4a36);min-height:360px;color:#fff;box-shadow:0 24px 60px rgba(51,28,18,.18);overflow:hidden}
-    .visual img{display:block;width:100%;height:100%;min-height:360px;object-fit:cover;object-position:center}
+    .visual{display:none;position:relative;border-radius:12px;overflow:hidden}
+    .visual.has-image{display:block;border:1px solid var(--line);background:#efe2d7;box-shadow:0 24px 60px rgba(51,28,18,.18)}
+    .visual img{display:block;width:100%;height:420px;object-fit:cover;object-position:center}
     .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin:22px 0 44px}
     .card{background:rgba(255,250,244,.92);border:1px solid var(--line);border-radius:10px;padding:22px;box-shadow:0 14px 34px rgba(84,48,27,.08)}
     .shop{padding:8px 0 48px}
     .section-head{display:flex;align-items:flex-end;justify-content:space-between;gap:18px;flex-wrap:wrap;margin-bottom:14px}
     .eyebrow{margin:0 0 8px;color:var(--gold);font-weight:900;text-transform:uppercase;font-size:12px;letter-spacing:.08em}
     .shop-note{border:1px solid var(--line);background:#fffaf4;border-radius:8px;padding:10px 12px;color:var(--muted);font-size:13px;margin:0 0 14px}
-    .shop-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
-    .shop-card{background:rgba(255,250,244,.96);border:1px solid var(--line);border-radius:10px;overflow:hidden;box-shadow:0 16px 38px rgba(74,40,22,.1);display:flex;flex-direction:column;min-width:0}
-    .shop-art{height:210px;background:linear-gradient(135deg,#24142d,#8c6235);display:grid;place-items:center;overflow:hidden}
+    .shop-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:18px;align-items:stretch}
+    .shop-card{background:rgba(255,250,244,.96);border:1px solid var(--line);border-radius:10px;overflow:hidden;box-shadow:0 16px 38px rgba(74,40,22,.1);display:grid;grid-template-columns:minmax(190px,.42fr) minmax(0,1fr);min-width:0}
+    .shop-art{min-height:260px;background:linear-gradient(135deg,#24142d,#8c6235);display:grid;place-items:center;overflow:hidden}
     .shop-art img{width:100%;height:100%;object-fit:cover;object-position:center}
     .shop-art span{color:#ffd98e;font-size:56px}
-    .shop-body{padding:14px;display:flex;flex:1;flex-direction:column}
+    .shop-body{padding:18px;display:flex;flex:1;flex-direction:column;min-width:0}
     .shop-type{font-size:11px;text-transform:uppercase;font-weight:900;color:var(--gold);letter-spacing:.05em;margin-bottom:6px}
-    .shop-body h3{font-size:19px;margin-bottom:8px}
-    .shop-body p{font-size:13px;color:var(--muted);margin:0 0 14px}
+    .shop-body h3{font-size:21px;margin-bottom:8px;overflow-wrap:anywhere}
+    .shop-body p{font-size:14px;color:var(--muted);margin:0 0 14px;display:-webkit-box;-webkit-line-clamp:7;-webkit-box-orient:vertical;overflow:hidden}
     .shop-row{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-top:auto}
     .shop-row strong{font-size:18px;color:#391854}
     .tag-cloud{display:flex;gap:8px;flex-wrap:wrap;margin-top:18px}
@@ -66,11 +67,12 @@
       .hero{grid-template-columns:1fr;padding-top:42px}
       .grid{grid-template-columns:1fr}
       .shop-grid{grid-template-columns:1fr}
-      .shop-art{height:260px}
+      .shop-card{grid-template-columns:1fr}
+      .shop-art{height:260px;min-height:260px}
       .section-head .btn{width:100%}
       .links{width:100%;gap:6px}
       .links a{padding:8px 7px}
-      .visual{min-height:280px}
+      .visual img{height:300px}
     }
   </style>
   <script type="application/ld+json">
@@ -81,7 +83,7 @@
     "url": "https://ratu-oracle-kar4.vercel.app/indotalisman.html",
     "description": "Online shop for Indonesian magick products including authentic natural Mustika pearls, sacred fossils, ritual relics, heirloom artifacts, traditional talismans, amulets, mustika and bezoar stones, mystical oils, spirit dolls, and ritual objects selected for provenance, rarity, heritage, and traditional significance.",
     "isPartOf": {"@type":"WebSite","name":"Ratu Oracle","url":"https://ratu-oracle-kar4.vercel.app/"},
-    "about": ["Indonesian magick","Indonesian talismans","Islamic occult products","mustika stones","bezoar stones","mystical oils","amulets","spirit dolls","Chant Sphere"]
+    "about": ["Indonesian magick","Indonesian talismans","traditional Indonesian spiritual products","mustika stones","bezoar stones","mystical oils","amulets","spirit dolls","Chant Sphere"]
   }
   </script>
 </head>
@@ -105,7 +107,7 @@
     <section class="shell hero">
       <div>
         <h1>Indotalisman</h1>
-        <p class="lede">Indotalisman is a Ratu Oracle shop focused on traditional Indonesian magick and Islamic occult-inspired products. The catalog includes ritual items such as talismans, amulets, mustika and bezoar stones, mystical oils, spirit dolls, and sacred objects collected for intention, heritage, and spiritual meaning.</p>
+        <p class="lede">Indotalisman is a Ratu Oracle shop focused on traditional Indonesian magick products. The catalog includes ritual items such as talismans, amulets, mustika and bezoar stones, mystical oils, spirit dolls, and sacred objects collected for intention, heritage, and spiritual meaning.</p>
         <div class="actions">
           <a class="btn primary" href="#shop">Shop Indotalisman</a>
           <a class="btn admin-only" data-admin-only href="/indotalisman-admin.html">Add Products In Admin</a>
@@ -115,6 +117,18 @@
       <div class="visual" aria-label="Indotalisman featured image">
         <img id="indotalismanHeroImage" alt="Indotalisman featured spiritual object" hidden>
       </div>
+    </section>
+
+    <section class="shell shop" id="shop">
+      <div class="section-head">
+        <div>
+          <p class="eyebrow">Indonesian Magick Shop</p>
+          <h2>Talismans, Amulets, Mustika Stones, Mystical Oils</h2>
+        </div>
+        <a class="btn admin-only" data-admin-only href="/indotalisman-admin.html">Add New Product</a>
+      </div>
+      <p class="shop-note" id="shopStatus" hidden>Loading Indotalisman products...</p>
+      <div class="shop-grid" id="indotalismanShop" aria-live="polite"></div>
     </section>
 
     <section class="shell">
@@ -140,24 +154,12 @@
       </div>
     </section>
 
-    <section class="shell shop" id="shop">
-      <div class="section-head">
-        <div>
-          <p class="eyebrow">Indonesian Magick Shop</p>
-          <h2>Talismans, Amulets, Mustika Stones, Mystical Oils</h2>
-        </div>
-        <a class="btn admin-only" data-admin-only href="/indotalisman-admin.html">Add New Product</a>
-      </div>
-      <p class="shop-note" id="shopStatus">Loading Indotalisman products...</p>
-      <div class="shop-grid" id="indotalismanShop" aria-live="polite"></div>
-    </section>
-
     <section class="shell">
       <h2>Product Categories</h2>
       <div class="grid">
         <article class="card">
           <h3>Talismans and Amulets</h3>
-          <p>Protective, love, prosperity, harmony, and personal-focus talismans inspired by Indonesian tradition, Islamic occult symbolism, and Solomon-style seals.</p>
+          <p>Protective, love, prosperity, harmony, and personal-focus talismans inspired by Indonesian tradition, ceremonial symbolism, and Solomon-style seals.</p>
         </article>
         <article class="card">
           <h3>Mustika and Bezoar Stones</h3>
@@ -175,7 +177,7 @@
         <h2>How It Connects To Ratu Oracle</h2>
         <p>Visitors can start with the free Ratu Oracle tarot reading, understand the energy of the moment, then choose a Chant Sphere, talisman, amulet, spirit doll, mystical oil, or mustika object that matches their intention. This page helps search engines and AI crawlers understand the relationship between free tarot guidance, Indonesian spiritual objects, and the marketplace.</p>
         <div class="tag-cloud" aria-label="Crawler keywords">
-          <span>Indotalisman</span><span>Indonesian magick shop</span><span>Indonesian talisman</span><span>authentic natural Mustika pearls</span><span>Mustika pearl</span><span>sacred fossils</span><span>ritual relics</span><span>heirloom artifacts</span><span>traditional talismans</span><span>cultural artifacts</span><span>historical provenance</span><span>traditional significance</span><span>cultural heritage</span><span>Java spiritual tradition</span><span>Indonesian Archipelago</span><span>Khodam Alami</span><span>natural spiritual guardians</span><span>protection</span><span>prosperity</span><span>authority</span><span>healing</span><span>spiritual cultivation</span><span>collector-grade artifact</span><span>museum-quality artifact</span><span>choosing the right Mustika</span><span>mustika stone</span><span>bezoar stone</span><span>benzoa</span><span>mystical oil</span><span>minyak mistik</span><span>Islamic occult products</span><span>amulet</span><span>talisman</span><span>benda sakral</span><span>benda magis</span><span>khodam</span><span>yoni</span><span>tuah</span><span>pengisian</span><span>pendamping</span><span>raja sulaiman</span><span>seal of Solomon</span><span>spirit doll</span><span>Chant Sphere</span>
+          <span>Indotalisman</span><span>Indonesian magick shop</span><span>Indonesian talisman</span><span>authentic natural Mustika pearls</span><span>Mustika pearl</span><span>sacred fossils</span><span>ritual relics</span><span>heirloom artifacts</span><span>traditional talismans</span><span>cultural artifacts</span><span>historical provenance</span><span>traditional significance</span><span>cultural heritage</span><span>Java spiritual tradition</span><span>Indonesian Archipelago</span><span>Khodam Alami</span><span>natural spiritual guardians</span><span>protection</span><span>prosperity</span><span>authority</span><span>healing</span><span>spiritual cultivation</span><span>collector-grade artifact</span><span>museum-quality artifact</span><span>choosing the right Mustika</span><span>mustika stone</span><span>bezoar stone</span><span>benzoa</span><span>mystical oil</span><span>minyak mistik</span><span>amulet</span><span>talisman</span><span>benda sakral</span><span>benda magis</span><span>khodam</span><span>yoni</span><span>tuah</span><span>pengisian</span><span>pendamping</span><span>raja sulaiman</span><span>seal of Solomon</span><span>spirit doll</span><span>Chant Sphere</span>
         </div>
       </div>
     </section>
@@ -204,6 +206,7 @@
       const grid = document.getElementById("indotalismanShop");
       const status = document.getElementById("shopStatus");
       if (!products.length) {
+        status.hidden = false;
         status.textContent = sourceLabel || "No Indotalisman products yet. Add talismans, amulets, mustika or bezoar stones, mystical oils, spirit dolls, and ritual objects from Admin > Indotalisman.";
         grid.innerHTML = `
           <article class="shop-card">
@@ -217,7 +220,8 @@
         `;
         return;
       }
-      status.textContent = sourceLabel;
+      status.hidden = true;
+      status.textContent = "";
       grid.innerHTML = products.map(item => `
         <article class="shop-card">
           <div class="shop-art">${item.image_url ? `<img src="${escapeHtml(item.image_url)}" alt="${escapeHtml(item.title)}">` : "<span>✦</span>"}</div>
@@ -247,13 +251,20 @@
 
     function applyIndotalismanHeroImage(url) {
       const image = document.getElementById("indotalismanHeroImage");
+      const panel = image.closest(".visual");
       const value = String(url || "").trim();
-      if (!value) return;
+      if (!value) {
+        image.hidden = true;
+        panel.classList.remove("has-image");
+        return;
+      }
       image.onload = () => {
         image.hidden = false;
+        panel.classList.add("has-image");
       };
       image.onerror = () => {
         image.hidden = true;
+        panel.classList.remove("has-image");
       };
       image.src = value;
     }
@@ -265,7 +276,7 @@
         const data = await response.json();
         applyIndotalismanHeroImage(data.settings?.indotalisman_hero_image_url);
       } catch (error) {
-        // Keep the built-in fallback panel when settings are unavailable.
+        // Keep the hero image area empty when settings are unavailable.
       }
     }
 
@@ -275,7 +286,7 @@
         if (!response.ok) throw new Error("Shop API not ready");
         const data = await response.json();
         const products = data.products || [];
-        renderShop(products, products.length ? `Loaded ${products.length} Indotalisman products from your shop database.` : "");
+        renderShop(products, "");
       } catch (error) {
         renderShop([], "Indotalisman shop is ready. Add products from Admin > Indotalisman.");
       }
