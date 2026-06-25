@@ -40,8 +40,6 @@
     .admin-only{display:none!important}
     .visual{position:relative;border:1px solid var(--line);border-radius:12px;background:linear-gradient(135deg,#271532,#7b4a36);min-height:360px;color:#fff;box-shadow:0 24px 60px rgba(51,28,18,.18);overflow:hidden}
     .visual img{display:block;width:100%;height:100%;min-height:360px;object-fit:cover;object-position:center}
-    .visual-placeholder{min-height:360px;display:grid;place-items:center;padding:28px;text-align:left}
-    .sigil{height:160px;border:1px solid rgba(255,217,142,.45);border-radius:50%;display:grid;place-items:center;margin:0 auto 20px;aspect-ratio:1;color:#ffd98e;font-size:54px}
     .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin:22px 0 44px}
     .card{background:rgba(255,250,244,.92);border:1px solid var(--line);border-radius:10px;padding:22px;box-shadow:0 14px 34px rgba(84,48,27,.08)}
     .shop{padding:8px 0 48px}
@@ -116,9 +114,6 @@
       </div>
       <div class="visual" aria-label="Indotalisman featured image">
         <img id="indotalismanHeroImage" alt="Indotalisman featured spiritual object" hidden>
-        <div class="visual-placeholder" id="indotalismanHeroPlaceholder">
-        <div class="sigil">✦</div>
-        </div>
       </div>
     </section>
 
@@ -252,16 +247,13 @@
 
     function applyIndotalismanHeroImage(url) {
       const image = document.getElementById("indotalismanHeroImage");
-      const placeholder = document.getElementById("indotalismanHeroPlaceholder");
       const value = String(url || "").trim();
       if (!value) return;
       image.onload = () => {
         image.hidden = false;
-        placeholder.hidden = true;
       };
       image.onerror = () => {
         image.hidden = true;
-        placeholder.hidden = false;
       };
       image.src = value;
     }
