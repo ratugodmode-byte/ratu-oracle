@@ -42,7 +42,6 @@
     .visual img{display:block;width:100%;height:100%;min-height:360px;object-fit:cover;object-position:center}
     .visual-placeholder{min-height:360px;display:grid;place-items:center;padding:28px;text-align:left}
     .sigil{height:160px;border:1px solid rgba(255,217,142,.45);border-radius:50%;display:grid;place-items:center;margin:0 auto 20px;aspect-ratio:1;color:#ffd98e;font-size:54px}
-    .visual-caption{position:absolute;left:18px;right:18px;bottom:18px;padding:14px 16px;border:1px solid rgba(255,217,142,.32);border-radius:10px;background:rgba(39,21,50,.72);backdrop-filter:blur(8px)}
     .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin:22px 0 44px}
     .card{background:rgba(255,250,244,.92);border:1px solid var(--line);border-radius:10px;padding:22px;box-shadow:0 14px 34px rgba(84,48,27,.08)}
     .shop{padding:8px 0 48px}
@@ -119,9 +118,7 @@
         <img id="indotalismanHeroImage" alt="Indotalisman featured spiritual object" hidden>
         <div class="visual-placeholder" id="indotalismanHeroPlaceholder">
         <div class="sigil">✦</div>
-        <p><strong>Each item can be added from the admin dashboard with its image, origin, purpose, story, price, care notes, and respectful spiritual disclaimer.</strong></p>
         </div>
-        <p class="visual-caption" id="indotalismanHeroCaption">Traditional Indonesian magick objects, presented with origin, purpose, and careful notes.</p>
       </div>
     </section>
 
@@ -256,18 +253,15 @@
     function applyIndotalismanHeroImage(url) {
       const image = document.getElementById("indotalismanHeroImage");
       const placeholder = document.getElementById("indotalismanHeroPlaceholder");
-      const caption = document.getElementById("indotalismanHeroCaption");
       const value = String(url || "").trim();
       if (!value) return;
       image.onload = () => {
         image.hidden = false;
         placeholder.hidden = true;
-        caption.hidden = true;
       };
       image.onerror = () => {
         image.hidden = true;
         placeholder.hidden = false;
-        caption.hidden = false;
       };
       image.src = value;
     }
