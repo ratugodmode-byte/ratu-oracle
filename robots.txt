@@ -1,32 +1,4 @@
 User-agent: *
 Allow: /
 
-# Known AI and search crawlers are welcome to read public pages.
-# Admin pages and API write endpoints are not linked in the sitemap.
-User-agent: GPTBot
-Allow: /
-
-User-agent: ChatGPT-User
-Allow: /
-
-User-agent: ClaudeBot
-Allow: /
-
-User-agent: PerplexityBot
-Allow: /
-
-User-agent: Googlebot
-Allow: /
-
-User-agent: Bingbot
-Allow: /
-
 Sitemap: https://ratu-oracle-kar4.vercel.app/sitemap.xml
-Sitemap: https://ratu-oracle-kar4.vercel.app/sitemap-dynamic.xml
-Sitemap: https://ratu-oracle-kar4.vercel.app/api/sitemap
-
-# AI-readable public summaries
-Allow: /llms.txt
-Allow: /llms-full.txt
-Allow: /ai-crawler-index.html
-Allow: /indexnow-key.txt
