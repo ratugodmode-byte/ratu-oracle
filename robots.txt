@@ -1,4 +1,36 @@
 User-agent: *
 Allow: /
 
+User-agent: Googlebot
+Allow: /
+
+User-agent: Bingbot
+Allow: /
+
+User-agent: Applebot
+Allow: /
+
+User-agent: GPTBot
+Allow: /
+
+User-agent: OAI-SearchBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: Bravebot
+Allow: /
+
+User-agent: DuckDuckBot
+Allow: /
+
 Sitemap: https://ratu-oracle-kar4.vercel.app/sitemap.xml
+Sitemap: https://ratu-oracle-kar4.vercel.app/sitemap-products.xml
+Sitemap: https://ratu-oracle-kar4.vercel.app/sitemap-index.xml

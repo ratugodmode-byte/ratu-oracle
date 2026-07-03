@@ -112,6 +112,134 @@
     {
       "source": "/indotalisman-admin",
       "destination": "/indotalisman-admin.html"
+    },
+    {
+      "source": "/shop",
+      "destination": "/shop.html"
+    },
+    {
+      "source": "/products",
+      "destination": "/products.html"
+    },
+    {
+      "source": "/products/:slug",
+      "destination": "/products/:slug.html"
+    },
+    {
+      "source": "/chant-spheres",
+      "destination": "/chant-spheres.html"
+    },
+    {
+      "source": "/angel-chant-spheres",
+      "destination": "/angel-chant-spheres.html"
+    },
+    {
+      "source": "/solomon-seal-cards",
+      "destination": "/solomon-seal-cards.html"
+    },
+    {
+      "source": "/love-charm",
+      "destination": "/love-charm.html"
+    },
+    {
+      "source": "/wealth-charm",
+      "destination": "/wealth-charm.html"
+    },
+    {
+      "source": "/protection-charm",
+      "destination": "/protection-charm.html"
+    },
+    {
+      "source": "/spiritual-healing-cards",
+      "destination": "/spiritual-healing-cards.html"
+    },
+    {
+      "source": "/online-oracle-reading",
+      "destination": "/online-oracle-reading.html"
+    },
+    {
+      "source": "/spiritual-card-reading",
+      "destination": "/spiritual-card-reading.html"
+    },
+    {
+      "source": "/energy-reading-online",
+      "destination": "/energy-reading-online.html"
+    },
+    {
+      "source": "/spiritual-protection-charm",
+      "destination": "/spiritual-protection-charm.html"
+    },
+    {
+      "source": "/money-energy-charm",
+      "destination": "/money-energy-charm.html"
+    },
+    {
+      "source": "/abundance-charm",
+      "destination": "/abundance-charm.html"
+    },
+    {
+      "source": "/healing-charm-cards",
+      "destination": "/healing-charm-cards.html"
+    },
+    {
+      "source": "/tarot-charm-cards",
+      "destination": "/tarot-charm-cards.html"
+    },
+    {
+      "source": "/oracle-charm-cards",
+      "destination": "/oracle-charm-cards.html"
+    },
+    {
+      "source": "/personalized-spiritual-charm",
+      "destination": "/personalized-spiritual-charm.html"
+    },
+    {
+      "source": "/custom-talisman-card",
+      "destination": "/custom-talisman-card.html"
+    },
+    {
+      "source": "/energy-alignment-cards",
+      "destination": "/energy-alignment-cards.html"
+    },
+    {
+      "source": "/manifestation-cards",
+      "destination": "/manifestation-cards.html"
+    },
+    {
+      "source": "/spiritual-wealth-card",
+      "destination": "/spiritual-wealth-card.html"
+    },
+    {
+      "source": "/protection-against-evil-eye",
+      "destination": "/protection-against-evil-eye.html"
+    },
+    {
+      "source": "/remove-unseen-blocks",
+      "destination": "/remove-unseen-blocks.html"
+    },
+    {
+      "source": "/spiritual-cleansing-card",
+      "destination": "/spiritual-cleansing-card.html"
+    },
+    {
+      "source": "/angel-wish-card",
+      "destination": "/angel-wish-card.html"
+    },
+    {
+      "source": "/tree-of-life-energy-reading",
+      "destination": "/tree-of-life-energy-reading.html"
+    },
+    {
+      "source": "/emanation-oracle-cards",
+      "destination": "/emanation-oracle-cards.html"
+    },
+    {
+      "source": "/spiritual-marketplace",
+      "destination": "/spiritual-marketplace.html"
+    },
+    {
+      "source": "/buy-spiritual-charms-online",
+      "destination": "/buy-spiritual-charms-online.html"
     }
   ],
   "headers": [
