@@ -33,4 +33,5 @@ Allow: /
 
 Sitemap: https://ratu-oracle-kar4.vercel.app/sitemap.xml
 Sitemap: https://ratu-oracle-kar4.vercel.app/sitemap-products.xml
+Sitemap: https://ratu-oracle-kar4.vercel.app/sitemap-images.xml
 Sitemap: https://ratu-oracle-kar4.vercel.app/sitemap-index.xml

@@ -91,15 +91,15 @@
     },
     {
       "source": "/spirit-dolls",
-      "destination": "/spirit-dolls-magickal-objects.html"
+      "destination": "/spirit-dolls.html"
     },
     {
       "source": "/spirit-doll",
-      "destination": "/spirit-dolls-magickal-objects.html"
+      "destination": "/spirit-doll.html"
     },
     {
       "source": "/magickal-objects",
-      "destination": "/spirit-dolls-magickal-objects.html"
+      "destination": "/magickal-objects.html"
     },
     {
       "source": "/amulets-talismans",
@@ -240,6 +240,74 @@
     {
       "source": "/buy-spiritual-charms-online",
       "destination": "/buy-spiritual-charms-online.html"
+    },
+    {
+      "source": "/spirit-dolls/:slug",
+      "destination": "/spirit-dolls/:slug.html"
+    },
+    {
+      "source": "/handmade-spirit-dolls",
+      "destination": "/handmade-spirit-dolls.html"
+    },
+    {
+      "source": "/guardian-spirit-doll",
+      "destination": "/guardian-spirit-doll.html"
+    },
+    {
+      "source": "/medicine-spirit-doll",
+      "destination": "/medicine-spirit-doll.html"
+    },
+    {
+      "source": "/unique-spirit-dolls",
+      "destination": "/unique-spirit-dolls.html"
+    },
+    {
+      "source": "/asian-spirit-doll",
+      "destination": "/asian-spirit-doll.html"
+    },
+    {
+      "source": "/hoodoo-spirit-doll",
+      "destination": "/hoodoo-spirit-doll.html"
+    },
+    {
+      "source": "/spirit-doll-art",
+      "destination": "/spirit-doll-art.html"
+    },
+    {
+      "source": "/indonesian-talisman",
+      "destination": "/indonesian-talisman.html"
+    },
+    {
+      "source": "/gandhara-buddha-head",
+      "destination": "/gandhara-buddha-head.html"
+    },
+    {
+      "source": "/gandhara-buddha-head-for-sale",
+      "destination": "/gandhara-buddha-head-for-sale.html"
+    },
+    {
+      "source": "/gandhara-buddha-head-replica",
+      "destination": "/gandhara-buddha-head-replica.html"
+    },
+    {
+      "source": "/greek-buddhist-art",
+      "destination": "/greek-buddhist-art.html"
+    },
+    {
+      "source": "/buddha-head-sculpture",
+      "destination": "/buddha-head-sculpture.html"
+    },
+    {
+      "source": "/museum-reproduction-buddha-head",
+      "destination": "/museum-reproduction-buddha-head.html"
+    },
+    {
+      "source": "/spiritual-art-objects",
+      "destination": "/spiritual-art-objects.html"
+    },
+    {
+      "source": "/buddhist-meditation-decor",
+      "destination": "/buddhist-meditation-decor.html"
     }
   ],
   "headers": [
@@ -257,6 +325,10 @@
         {
           "key": "Referrer-Policy",
           "value": "strict-origin-when-cross-origin"
+        },
+        {
+          "key": "X-Robots-Tag",
+          "value": "index, follow, max-image-preview:large"
         }
       ]
     }

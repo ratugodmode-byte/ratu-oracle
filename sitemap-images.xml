@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
+  <url>
+    <loc>https://ratu-oracle-kar4.vercel.app/spirit-dolls/earth-guardian</loc>
+    <image:image>
+      <image:loc>https://ratu-oracle-kar4.vercel.app/assets/spheres/unity-card-24.png</image:loc>
+      <image:title>Earth Guardian Spirit Doll</image:title>
+      <image:caption>Earth guardian spirit doll for grounding and home blessing</image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://ratu-oracle-kar4.vercel.app/spirit-dolls/air-spirit</loc>
+    <image:image>
+      <image:loc>https://ratu-oracle-kar4.vercel.app/assets/spheres/divine-light-card-10.png</image:loc>
+      <image:title>Air Spirit Doll</image:title>
+      <image:caption>Air spirit doll for clarity communication and inspiration</image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://ratu-oracle-kar4.vercel.app/spirit-dolls/fire-guardian</loc>
+    <image:image>
+      <image:loc>https://ratu-oracle-kar4.vercel.app/assets/spheres/decree-card-8.png</image:loc>
+      <image:title>Fire Guardian Spirit Doll</image:title>
+      <image:caption>Fire guardian spirit doll for confidence action and protection</image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://ratu-oracle-kar4.vercel.app/spirit-dolls/water-guardian</loc>
+    <image:image>
+      <image:loc>https://ratu-oracle-kar4.vercel.app/assets/spheres/success-path-card-20.png</image:loc>
+      <image:title>Water Guardian Spirit Doll</image:title>
+      <image:caption>Water guardian spirit doll for emotional healing renewal and release</image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://ratu-oracle-kar4.vercel.app/spirit-dolls/gandhara-buddha-head</loc>
+    <image:image>
+      <image:loc>https://ratu-oracle-kar4.vercel.app/assets/products/gandhara-buddha-head-greek-buddhist-art.svg</image:loc>
+      <image:title>Gandhara Buddha Head</image:title>
+      <image:caption>Gandhara-style Buddha head Greek-Buddhist inspired spiritual art object</image:caption>
+    </image:image>
+  </url>
+</urlset>

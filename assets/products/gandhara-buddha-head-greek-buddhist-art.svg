@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 1200" role="img" aria-label="Gandhara style Buddha head Greek Buddhist inspired spiritual art object">
+  <defs>
+    <radialGradient id="stone" cx="50%" cy="38%" r="65%">
+      <stop offset="0%" stop-color="#d5c4a9"/>
+      <stop offset="55%" stop-color="#8f7e67"/>
+      <stop offset="100%" stop-color="#3d342d"/>
+    </radialGradient>
+    <linearGradient id="bg" x1="0" x2="1">
+      <stop offset="0%" stop-color="#fff8ec"/>
+      <stop offset="100%" stop-color="#312235"/>
+    </linearGradient>
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="18" stdDeviation="24" flood-color="#2b1f17" flood-opacity=".35"/>
+    </filter>
+  </defs>
+  <rect width="900" height="1200" fill="url(#bg)"/>
+  <circle cx="450" cy="460" r="310" fill="none" stroke="#d8b66d" stroke-width="10" opacity=".35"/>
+  <g filter="url(#shadow)">
+    <path d="M450 160c-145 0-250 116-250 280 0 98 40 192 104 253 34 33 50 80 35 125l-55 166h332l-55-166c-15-45 1-92 35-125 64-61 104-155 104-253 0-164-105-280-250-280z" fill="url(#stone)" stroke="#ead8b9" stroke-width="8"/>
+    <path d="M292 391c35-106 116-169 157-169 44 0 126 63 160 169-42-31-96-49-160-49s-117 18-157 49z" fill="#3b312b" opacity=".55"/>
+    <path d="M315 335c52-81 103-102 135-102s84 21 136 102" fill="none" stroke="#efe0c5" stroke-width="18" stroke-linecap="round" opacity=".35"/>
+    <path d="M340 500c45 22 85 22 119 0M443 500c34 22 74 22 119 0" fill="none" stroke="#332821" stroke-width="14" stroke-linecap="round"/>
+    <path d="M450 520c-8 44-13 72-2 91" fill="none" stroke="#3d3028" stroke-width="12" stroke-linecap="round"/>
+    <path d="M369 690c52 38 110 38 162 0" fill="none" stroke="#3d3028" stroke-width="13" stroke-linecap="round"/>
+    <ellipse cx="450" cy="424" rx="37" ry="22" fill="none" stroke="#d7c09c" stroke-width="7" opacity=".55"/>
+    <path d="M230 444c-44 25-62 91-21 130M670 444c44 25 62 91 21 130" fill="none" stroke="#7f6f5c" stroke-width="24" stroke-linecap="round"/>
+  </g>
+  <text x="450" y="1050" text-anchor="middle" font-family="Georgia,serif" font-size="48" fill="#ffe5a2">Gandhara-Style Buddha Head</text>
+  <text x="450" y="1110" text-anchor="middle" font-family="Arial,sans-serif" font-size="24" fill="#fff8ec">Greek-Buddhist inspired spiritual art object</text>
+</svg>
