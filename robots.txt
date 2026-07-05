@@ -34,6 +34,27 @@ Allow: /
 User-agent: DuckDuckBot
 Allow: /
 
+User-agent: Claude-SearchBot
+Allow: /
+
+User-agent: Meta-ExternalAgent
+Allow: /
+
+User-agent: Meta External Agent
+Allow: /
+
+User-agent: Amazonbot
+Allow: /
+
+User-agent: Bytespider
+Allow: /
+
+User-agent: CCBot
+Allow: /
+
+User-agent: Common Crawl
+Allow: /
+
 Sitemap: https://ratu-oracle-kar4.vercel.app/sitemap.xml
 Sitemap: https://ratu-oracle-kar4.vercel.app/sitemap-products.xml
 Sitemap: https://ratu-oracle-kar4.vercel.app/sitemap-images.xml

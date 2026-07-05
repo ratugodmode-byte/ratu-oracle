@@ -3,33 +3,33 @@
   <url>
     <loc>https://ratu-oracle-kar4.vercel.app/spirit-dolls/earth-guardian</loc>
     <image:image>
-      <image:loc>https://ratu-oracle-kar4.vercel.app/assets/spheres/unity-card-24.png</image:loc>
+      <image:loc>https://ratu-oracle-kar4.vercel.app/assets/spirit-dolls/earth-spirit-doll.png</image:loc>
       <image:title>Earth Guardian Spirit Doll</image:title>
-      <image:caption>Earth guardian spirit doll for grounding and home blessing</image:caption>
+      <image:caption>Earth Guardian Spirit Doll, Earth Spirit Companion, fantasy doll, guardian spirit, collectible spirit doll, and Chant Sphere product image.</image:caption>
     </image:image>
   </url>
   <url>
     <loc>https://ratu-oracle-kar4.vercel.app/spirit-dolls/air-spirit</loc>
     <image:image>
-      <image:loc>https://ratu-oracle-kar4.vercel.app/assets/spheres/divine-light-card-10.png</image:loc>
+      <image:loc>https://ratu-oracle-kar4.vercel.app/assets/spirit-dolls/air-spirit-doll.png</image:loc>
       <image:title>Air Spirit Doll</image:title>
-      <image:caption>Air spirit doll for clarity communication and inspiration</image:caption>
+      <image:caption>Air Spirit Doll, Air Spirit Companion, fantasy doll, guardian spirit, collectible spirit doll, and Chant Sphere product image.</image:caption>
     </image:image>
   </url>
   <url>
     <loc>https://ratu-oracle-kar4.vercel.app/spirit-dolls/fire-guardian</loc>
     <image:image>
-      <image:loc>https://ratu-oracle-kar4.vercel.app/assets/spheres/decree-card-8.png</image:loc>
+      <image:loc>https://ratu-oracle-kar4.vercel.app/assets/spirit-dolls/fire-spirit-doll.png</image:loc>
       <image:title>Fire Guardian Spirit Doll</image:title>
-      <image:caption>Fire guardian spirit doll for confidence action and protection</image:caption>
+      <image:caption>Fire Guardian Spirit Doll, Fire Spirit Companion, fantasy doll, guardian spirit, collectible spirit doll, and Chant Sphere product image.</image:caption>
     </image:image>
   </url>
   <url>
     <loc>https://ratu-oracle-kar4.vercel.app/spirit-dolls/water-guardian</loc>
     <image:image>
-      <image:loc>https://ratu-oracle-kar4.vercel.app/assets/spheres/success-path-card-20.png</image:loc>
+      <image:loc>https://ratu-oracle-kar4.vercel.app/assets/spirit-dolls/water-spirit-doll.png</image:loc>
       <image:title>Water Guardian Spirit Doll</image:title>
-      <image:caption>Water guardian spirit doll for emotional healing renewal and release</image:caption>
+      <image:caption>Water Guardian Spirit Doll, Water Spirit Companion, fantasy doll, guardian spirit, collectible spirit doll, and Chant Sphere product image.</image:caption>
     </image:image>
   </url>
   <url>
@@ -46,6 +46,14 @@
       <image:loc>https://ratu-oracle-kar4.vercel.app/assets/products/gandhara-buddha-head-real.jpg</image:loc>
       <image:title>Avalokiteshvara Gandhara Style Statue</image:title>
       <image:caption>Avalokiteshvara Gandhara Style Statue, Bodhisattva of Compassion, Buddhist inspired sculpture for meditation, home altar, spiritual decor, and Ratu Oracle Chant Sphere collection.</image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://ratu-oracle-kar4.vercel.app/emanation-guardian-head-gandhara-style-statue</loc>
+    <image:image>
+      <image:loc>https://ratu-oracle-kar4.vercel.app/assets/products/emanation-guardian-head-gandhara-style-statue-ratu-oracle.jpg</image:loc>
+      <image:title>Emanation Guardian Head - Gandhara Style Statue</image:title>
+      <image:caption>A Gandhara-inspired Chant Sphere statue for meditation, wisdom, mental clarity, and spiritual home decor.</image:caption>
     </image:image>
   </url>
 </urlset>

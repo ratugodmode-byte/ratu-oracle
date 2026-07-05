@@ -260,6 +260,10 @@
       "destination": "/buy-spiritual-charms-online.html"
     },
     {
+      "source": "/emanation-guardian-head-gandhara-style-statue",
+      "destination": "/emanation-guardian-head-gandhara-style-statue.html"
+    },
+    {
       "source": "/spirit-dolls/:slug",
       "destination": "/spirit-dolls/:slug.html"
     },
