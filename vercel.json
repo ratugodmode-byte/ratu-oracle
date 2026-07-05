@@ -1,5 +1,19 @@
 {
   "outputDirectory": ".",
+  "redirects": [
+    {
+      "source": "/",
+      "has": [
+        {
+          "type": "query",
+          "key": "sphere",
+          "value": "5081fc54-3d29-467c-9df1-0f9e577d1ca9"
+        }
+      ],
+      "destination": "/chant-spheres/avalokiteshvara",
+      "permanent": true
+    }
+  ],
   "rewrites": [
     {
       "source": "/.netlify/functions/:function",
@@ -128,6 +142,10 @@
     {
       "source": "/chant-spheres",
       "destination": "/chant-spheres.html"
+    },
+    {
+      "source": "/chant-spheres/avalokiteshvara",
+      "destination": "/chant-spheres/avalokiteshvara.html"
     },
     {
       "source": "/angel-chant-spheres",
