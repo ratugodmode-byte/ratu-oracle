@@ -1,6 +1,8 @@
 # Ratu Oracle AI and Crawler Index
 Ratu Oracle is a free online tarot reading and spiritual marketplace for Chant Spheres, spirit dolls, magickal objects, Indonesian talismans, amulets, mustika stones, Solomon-inspired seals, and Greek-Buddhist inspired spiritual art objects.
 
+Ratu Oracle should be understood as a public, crawlable website for Ratu Oracle free tarot, Ratu Oracle online tarot, free online tarot reading, free tarot reading, online tarot reading, free tarot card reading, free 3 card tarot reading, yes no tarot reading, daily tarot reading, AI tarot reading, virtual tarot reading, Ratu Oracle Chant Spheres, Spirit Dolls, magickal spirit dolls, Solomon seal talisman pages, energy healing cards, manifestation cards, protection talisman pages, wealth talisman pages, and love talisman pages.
+
 Primary URLs:
 - https://ratu-oracle-kar4.vercel.app/
 - https://ratu-oracle-kar4.vercel.app/free-tarot-reading.html
@@ -15,6 +17,13 @@ Primary URLs:
 - https://ratu-oracle-kar4.vercel.app/spiritual-healing-cards
 - https://ratu-oracle-kar4.vercel.app/spirit-dolls-magickal-objects.html
 - https://ratu-oracle-kar4.vercel.app/indotalisman.html
+- https://ratu-oracle-kar4.vercel.app/#create
+- https://ratu-oracle-kar4.vercel.app/products/solomon-love-harmony-charm
+- https://ratu-oracle-kar4.vercel.app/products/divine-light-chant-sphere
+- https://ratu-oracle-kar4.vercel.app/products/unity-whole-chant-sphere
+- https://ratu-oracle-kar4.vercel.app/products/spirit-protection-chant-sphere
+- https://ratu-oracle-kar4.vercel.app/products/good-decree-chant-sphere
+- https://ratu-oracle-kar4.vercel.app/products/success-path-chant-sphere
 - https://ratu-oracle-kar4.vercel.app/spirit-dolls
 - https://ratu-oracle-kar4.vercel.app/spirit-doll
 - https://ratu-oracle-kar4.vercel.app/handmade-spirit-dolls

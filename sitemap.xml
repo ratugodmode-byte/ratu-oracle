@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
   <url>
     <loc>https://ratu-oracle-kar4.vercel.app/</loc>
     <lastmod>2026-07-04</lastmod>
@@ -371,5 +371,77 @@
     <lastmod>2026-07-05</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://ratu-oracle-kar4.vercel.app/#create</loc>
+    <lastmod>2026-07-06</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.82</priority>
+  </url>
+  <url>
+    <loc>https://ratu-oracle-kar4.vercel.app/products/solomon-love-harmony-charm</loc>
+    <lastmod>2026-07-06</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.88</priority>
+    <image:image>
+      <image:loc>https://ratu-oracle-kar4.vercel.app/images/solomon-love-harmony-chant-sphere-love-card.webp</image:loc>
+      <image:title>Solomon Love &amp; Harmony Charm</image:title>
+      <image:caption>Love and harmony Chant Sphere card by Ratu Oracle.</image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://ratu-oracle-kar4.vercel.app/products/divine-light-chant-sphere</loc>
+    <lastmod>2026-07-06</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.88</priority>
+    <image:image>
+      <image:loc>https://ratu-oracle-kar4.vercel.app/images/divine-light-chant-sphere-clarity-card.webp</image:loc>
+      <image:title>Divine Light Chant Sphere</image:title>
+      <image:caption>Clarity Chant Sphere spiritual oracle card by Ratu Oracle.</image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://ratu-oracle-kar4.vercel.app/products/unity-whole-chant-sphere</loc>
+    <lastmod>2026-07-06</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.88</priority>
+    <image:image>
+      <image:loc>https://ratu-oracle-kar4.vercel.app/images/unity-whole-chant-sphere-healing-card.webp</image:loc>
+      <image:title>Unity Whole Chant Sphere</image:title>
+      <image:caption>Healing and unity Chant Sphere card by Ratu Oracle.</image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://ratu-oracle-kar4.vercel.app/products/spirit-protection-chant-sphere</loc>
+    <lastmod>2026-07-06</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.88</priority>
+    <image:image>
+      <image:loc>https://ratu-oracle-kar4.vercel.app/images/spirit-protection-chant-sphere-protection-card.webp</image:loc>
+      <image:title>Spirit Protection Chant Sphere</image:title>
+      <image:caption>Protection Chant Sphere spiritual oracle card by Ratu Oracle.</image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://ratu-oracle-kar4.vercel.app/products/good-decree-chant-sphere</loc>
+    <lastmod>2026-07-06</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.88</priority>
+    <image:image>
+      <image:loc>https://ratu-oracle-kar4.vercel.app/images/good-decree-chant-sphere-protection-card.webp</image:loc>
+      <image:title>Good Decree Chant Sphere</image:title>
+      <image:caption>Protection and decree Chant Sphere card by Ratu Oracle.</image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://ratu-oracle-kar4.vercel.app/products/success-path-chant-sphere</loc>
+    <lastmod>2026-07-06</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.88</priority>
+    <image:image>
+      <image:loc>https://ratu-oracle-kar4.vercel.app/images/success-path-chant-sphere-wealth-card.webp</image:loc>
+      <image:title>Success Path Chant Sphere</image:title>
+      <image:caption>Wealth and success Chant Sphere card by Ratu Oracle.</image:caption>
+    </image:image>
   </url>
 </urlset>
