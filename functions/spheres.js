@@ -1,4 +1,4 @@
-import { databaseError, ensureSphereSeoColumns, getSql, handleOptions, json, productSeoText, requireMethod } from "./_shared.js";
+import { databaseError, getSql, handleOptions, json, productSeoText, requireMethod } from "./_shared.js";
 
 const MAX_PUBLIC_IMAGE_URL_LENGTH = 900;
 
@@ -23,7 +23,6 @@ export async function handler(event) {
 
   try {
     const sql = getSql();
-    await ensureSphereSeoColumns(sql);
     const rows = await sql`
       select
         s.id,
