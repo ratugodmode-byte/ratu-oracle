@@ -1522,10 +1522,20 @@
     };
 
     async function apiFetch(path, options = {}) {
-      const response = await fetch(path, {
-        headers: { "Content-Type": "application/json", ...(options.headers || {}) },
-        ...options
-      });
+      const timeout = Number(options.timeout || 4500);
+      const controller = new AbortController();
+      const timer = window.setTimeout(() => controller.abort(), timeout);
+      const { timeout: _timeout, ...fetchOptions } = options;
+      let response;
+      try {
+        response = await fetch(path, {
+          headers: { "Content-Type": "application/json", ...(options.headers || {}) },
+          signal: controller.signal,
+          ...fetchOptions
+        });
+      } finally {
+        window.clearTimeout(timer);
+      }
       let data = {};
       try {
         data = await response.json();
@@ -1651,7 +1661,19 @@
       "good-decree-chant-sphere-protection-card.webp": "assets/spheres/decree-card-8.webp",
       "decree-card-8.png": "assets/spheres/decree-card-8.webp",
       "success-path-chant-sphere-wealth-card.webp": "assets/spheres/success-path-card-20.webp",
-      "success-path-card-20.png": "assets/spheres/success-path-card-20.webp"
+      "success-path-card-20.png": "assets/spheres/success-path-card-20.webp",
+      "air-spirit-doll.png": "assets/spirit-dolls/air-spirit-doll.webp",
+      "chant-sphere-air-spirit.png": "assets/spirit-dolls/chant-sphere-air-spirit.webp",
+      "chant-sphere-earth-spirit.png": "assets/spirit-dolls/chant-sphere-earth-spirit.webp",
+      "chant-sphere-fire-spirit.png": "assets/spirit-dolls/chant-sphere-fire-spirit.webp",
+      "chant-sphere-water-spirit.png": "assets/spirit-dolls/chant-sphere-water-spirit.webp",
+      "earth-spirit-doll.png": "assets/spirit-dolls/earth-spirit-doll.webp",
+      "fire-spirit-doll.png": "assets/spirit-dolls/fire-spirit-doll.webp",
+      "spirit-companion-air.png": "assets/spirit-dolls/spirit-companion-air.webp",
+      "spirit-companion-earth.png": "assets/spirit-dolls/spirit-companion-earth.webp",
+      "spirit-companion-fire.png": "assets/spirit-dolls/spirit-companion-fire.webp",
+      "spirit-companion-water.png": "assets/spirit-dolls/spirit-companion-water.webp",
+      "water-spirit-doll.png": "assets/spirit-dolls/water-spirit-doll.webp"
     };
 
     function normalizeSphereImageUrl(value) {
@@ -1769,7 +1791,8 @@
         sphere._display_image_url = imageUrl;
         const imageMode = imageUrl ? "show-full" : "";
         const imageSeo = sphereImageSeo(sphere);
-        const imageMarkup = imageUrl ? `<img src="${escapeHtml(imageUrl)}" alt="${escapeHtml(imageSeo.alt)}" title="${escapeHtml(imageSeo.title)}" width="${imageSeo.width}" height="${imageSeo.height}" loading="lazy" decoding="async" fetchpriority="low">` : "";
+        const eager = index < 3;
+        const imageMarkup = imageUrl ? `<img src="${escapeHtml(imageUrl)}" alt="${escapeHtml(imageSeo.alt)}" title="${escapeHtml(imageSeo.title)}" width="${imageSeo.width}" height="${imageSeo.height}" loading="${eager ? "eager" : "lazy"}" decoding="async" fetchpriority="${eager ? "auto" : "low"}">` : "";
         return `
           <article class="product" data-category="${sphere.category}" data-sphere-id="${sphere.id}">
             <div class="product-art ${artClass(sphere.category)} ${imageUrl ? `has-image ${imageMode}` : ""}"><div class="heart">&hearts;</div>${imageMarkup}<div class="mini-card"><div class="sigil"></div></div></div>
@@ -1984,9 +2007,13 @@
 
     async function loadDatabaseData() {
       try {
-        await apiFetch("/.netlify/functions/health");
-        setApiStatus("Connected to Neon. Loading live marketplace data...");
-        const data = await apiFetch("/.netlify/functions/spheres");
+        setApiStatus("Loading live marketplace data...");
+        const [sphereResult, storyResult] = await Promise.allSettled([
+          apiFetch("/.netlify/functions/spheres", { timeout: 3500 }),
+          apiFetch("/.netlify/functions/experiences", { timeout: 3500 })
+        ]);
+        if (sphereResult.status !== "fulfilled") throw sphereResult.reason;
+        const data = sphereResult.value;
         state.spheres = data.spheres || [];
         renderMarketplace();
         renderExperienceOptions();
@@ -1997,11 +2024,12 @@
         } else {
           setApiStatus(`Loaded ${state.spheres.length} Chant Sphere${state.spheres.length === 1 ? "" : "s"} from Neon.`);
         }
-        const storyData = await apiFetch("/.netlify/functions/experiences");
-        renderStories(storyData.experiences || []);
+        if (storyResult.status === "fulfilled") {
+          renderStories(storyResult.value.experiences || []);
+        }
       } catch (error) {
         console.warn("Live marketplace data could not be loaded", error);
-        state.spheres = fallbackSpheres;
+        if (!state.spheres.length) state.spheres = fallbackSpheres;
         renderMarketplace();
         renderExperienceOptions();
         renderStories([]);
@@ -2194,10 +2222,14 @@
       });
     });
 
+    state.spheres = fallbackSpheres;
+    renderMarketplace();
+    renderExperienceOptions();
+    renderStories([]);
     loadDemoAccount();
-    loadSession();
     loadSiteSettings();
     loadDatabaseData();
+    window.setTimeout(loadSession, 1200);
   </script>
   <script src="/assets/i18n/site-i18n.js" defer></script>
 </body>
