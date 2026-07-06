@@ -8,10 +8,10 @@ const headers = {
   "Content-Type": "application/json"
 };
 
-export function json(statusCode, body) {
+export function json(statusCode, body, extraHeaders = {}) {
   return {
     statusCode,
-    headers,
+    headers: { ...headers, ...extraHeaders },
     body: JSON.stringify(body)
   };
 }

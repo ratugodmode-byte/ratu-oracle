@@ -1,5 +1,19 @@
 import { databaseError, ensureSphereSeoColumns, getSql, handleOptions, json, productSeoText, requireMethod } from "./_shared.js";
 
+const MAX_PUBLIC_IMAGE_URL_LENGTH = 900;
+
+function compactText(value, maxLength) {
+  return String(value || "").replace(/\s+/g, " ").trim().slice(0, maxLength);
+}
+
+function publicImageUrl(value) {
+  const url = String(value || "").trim();
+  if (!url) return "";
+  if (url.startsWith("data:")) return "";
+  if (url.length > MAX_PUBLIC_IMAGE_URL_LENGTH) return "";
+  return url;
+}
+
 export async function handler(event) {
   const options = handleOptions(event);
   if (options) return options;
@@ -47,19 +61,28 @@ export async function handler(event) {
         limit 1
       ) latest_listing on true
       order by s.created_at desc
-      limit 60
     `;
 
-    const spheres = rows.map((sphere) => ({
-      ...sphere,
-      seo_keywords: sphere.seo_keywords || productSeoText({
+    const spheres = rows.map((sphere) => {
+      const seoKeywords = sphere.seo_keywords || productSeoText({
         title: sphere.title,
         category: sphere.category,
         intention: sphere.intention
-      })
-    }));
+      });
 
-    return json(200, { spheres });
+      return {
+        ...sphere,
+        title: compactText(sphere.title, 140),
+        category: compactText(sphere.category, 80),
+        intention: compactText(sphere.intention, 700),
+        image_url: publicImageUrl(sphere.image_url),
+        seo_keywords: compactText(seoKeywords, 900)
+      };
+    });
+
+    return json(200, { spheres }, {
+      "Cache-Control": "public, max-age=30, s-maxage=300, stale-while-revalidate=86400"
+    });
   } catch (error) {
     return databaseError(error);
   }
