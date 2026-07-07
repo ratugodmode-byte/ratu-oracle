@@ -1682,7 +1682,7 @@
       {
         title: "Aurelia Fire Spirit Companion",
         category: "Wealth",
-        image_url: "assets/spirit-dolls/chant-sphere-fire-spirit.webp",
+        image_url: "assets/spirit-dolls/spirit-companion-fire.webp",
         intention: "For courage, momentum, creative heat, and confidence when a path needs movement.",
         passport_story: "Aurelia carries the bright force of a fire companion: warm enough to inspire, steady enough to focus. This Spirit Doll is suited for new work, bold decisions, creative fire, and the will to keep going.",
         reading_note: "Choose this when the reading asks for brave action, confidence, passion, or a stronger life-force.",
@@ -1726,7 +1726,7 @@
       {
         title: "Terum Earth Spirit Companion",
         category: "Protection",
-        image_url: "assets/spirit-dolls/chant-sphere-earth-spirit.webp",
+        image_url: "assets/spirit-dolls/spirit-companion-earth.webp",
         intention: "For grounding, protection, patience, stability, and the strength to remain rooted.",
         passport_story: "Terum carries the grounded presence of earth: slow, patient, protective, and practical. This Spirit Doll is suited for homes, workspaces, and decisions that need stability instead of speed.",
         reading_note: "Choose this when the reading asks for grounding, patience, boundaries, or protection of home and body.",
@@ -1737,7 +1737,7 @@
       {
         title: "Zephyriel Air Spirit Companion",
         category: "Love",
-        image_url: "assets/spirit-dolls/chant-sphere-air-spirit.webp",
+        image_url: "assets/spirit-dolls/spirit-companion-air.webp",
         intention: "For open communication, blessing, gentle movement, lightness, and emotional renewal.",
         passport_story: "Zephyriel carries the breath of air: messages, movement, mental clarity, and a lighter heart. This companion is suited for clearing heaviness, opening communication, and inviting graceful change.",
         reading_note: "Choose this when the reading points to conversation, travel, release, or a need to breathe again.",
@@ -1747,10 +1747,10 @@
       }
     ];
     const localSphereImageRules = [
-      { pattern: /aurelia|fire spirit|spirit companion fire|chant-sphere-fire/i, image_url: "assets/spirit-dolls/chant-sphere-fire-spirit.webp" },
-      { pattern: /zephyriel|air spirit|wind spirit|spirit companion air|chant-sphere-air/i, image_url: "assets/spirit-dolls/chant-sphere-air-spirit.webp" },
-      { pattern: /terum|earth spirit|spirit companion earth|chant-sphere-earth/i, image_url: "assets/spirit-dolls/chant-sphere-earth-spirit.webp" },
-      { pattern: /water spirit|spirit companion water|chant-sphere-water/i, image_url: "assets/spirit-dolls/chant-sphere-water-spirit.webp" },
+      { pattern: /aurelia|fire spirit|spirit companion fire|chant-sphere-fire/i, image_url: "assets/spirit-dolls/spirit-companion-fire.webp" },
+      { pattern: /zephyriel|air spirit|wind spirit|spirit companion air|chant-sphere-air/i, image_url: "assets/spirit-dolls/spirit-companion-air.webp" },
+      { pattern: /terum|earth spirit|spirit companion earth|chant-sphere-earth/i, image_url: "assets/spirit-dolls/spirit-companion-earth.webp" },
+      { pattern: /water spirit|spirit companion water|chant-sphere-water/i, image_url: "assets/spirit-dolls/spirit-companion-water.webp" },
       { pattern: /avalokiteshvara|avalokitesvara|emanation guardian/i, image_url: "assets/products/emanation-guardian-head-gandhara-style-statue-ratu-oracle.jpg" },
       { pattern: /gandhara buddha head|buddha head/i, image_url: "assets/products/gandhara-buddha-head-real.jpg" },
       { pattern: /solomon|love.*harmony/i, image_url: "assets/spheres/solomon-love-harmony.webp" },
@@ -1841,26 +1841,27 @@
     function displaySphereCollection() {
       const base = state.spheres.length ? state.spheres : fallbackSpheres;
       const visibleBase = base.map((sphere, index) => sphereDisplayData(sphere, index));
-      const usedTitles = new Set(visibleBase.map(sphere => String(sphere.title || "").trim().toLowerCase()));
-      const supplements = [...featuredMarketplaceSpheres, ...sphereArchetypes]
+      const curated = [...featuredMarketplaceSpheres, ...sphereArchetypes].map((item, index) => ({
+        id: `preview-${sphereSlug(item.title)}`,
+        title: item.title,
+        category: item.category,
+        intention: item.intention,
+        status: "preview",
+        price_cents: item.price_cents ?? (item.category === "Love" ? 3500 : 3200),
+        currency: "USD",
+        image_url: item.image_url,
+        passport_story: item.passport_story,
+        reading_note: item.reading_note,
+        experiences: item.experiences || [],
+        experiences_count: item.experiences_count ?? (item.experiences || []).length,
+        owners_count: item.owners_count || 1,
+        _supplement_index: index
+      }));
+      const usedTitles = new Set(curated.map(sphere => String(sphere.title || "").trim().toLowerCase()));
+      const databaseExtras = visibleBase
         .filter(item => !usedTitles.has(item.title.toLowerCase()))
-        .map((item, index) => ({
-          id: `preview-${sphereSlug(item.title)}`,
-          title: item.title,
-          category: item.category,
-          intention: item.intention,
-          status: "preview",
-          price_cents: item.price_cents ?? (item.category === "Love" ? 3500 : 3200),
-          currency: "USD",
-          image_url: item.image_url,
-          passport_story: item.passport_story,
-          reading_note: item.reading_note,
-          experiences: item.experiences || [],
-          experiences_count: item.experiences_count ?? (item.experiences || []).length,
-          owners_count: item.owners_count || 1,
-          _supplement_index: index
-        }));
-      return [...visibleBase, ...supplements];
+        .filter(item => !isGenericSphere(item));
+      return [...curated, ...databaseExtras];
     }
 
     function renderMarketplace() {
