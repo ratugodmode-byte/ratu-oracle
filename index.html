@@ -1668,20 +1668,114 @@
       "chant-sphere-fire-spirit.png": "assets/spirit-dolls/chant-sphere-fire-spirit.webp",
       "chant-sphere-water-spirit.png": "assets/spirit-dolls/chant-sphere-water-spirit.webp",
       "earth-spirit-doll.png": "assets/spirit-dolls/earth-spirit-doll.webp",
+      "emanation-guardian-head-gandhara-style-statue-ratu-oracle.jpg": "assets/products/emanation-guardian-head-gandhara-style-statue-ratu-oracle.jpg",
       "fire-spirit-doll.png": "assets/spirit-dolls/fire-spirit-doll.webp",
+      "gandhara-buddha-head-real.jpg": "assets/products/gandhara-buddha-head-real.jpg",
+      "gandhara-buddha-head-greek-buddhist-art.svg": "assets/products/gandhara-buddha-head-real.jpg",
       "spirit-companion-air.png": "assets/spirit-dolls/spirit-companion-air.webp",
       "spirit-companion-earth.png": "assets/spirit-dolls/spirit-companion-earth.webp",
       "spirit-companion-fire.png": "assets/spirit-dolls/spirit-companion-fire.webp",
       "spirit-companion-water.png": "assets/spirit-dolls/spirit-companion-water.webp",
       "water-spirit-doll.png": "assets/spirit-dolls/water-spirit-doll.webp"
     };
+    const featuredMarketplaceSpheres = [
+      {
+        title: "Aurelia Fire Spirit Companion",
+        category: "Wealth",
+        image_url: "assets/spirit-dolls/chant-sphere-fire-spirit.webp",
+        intention: "For courage, momentum, creative heat, and confidence when a path needs movement.",
+        passport_story: "Aurelia carries the bright force of a fire companion: warm enough to inspire, steady enough to focus. This Spirit Doll is suited for new work, bold decisions, creative fire, and the will to keep going.",
+        reading_note: "Choose this when the reading asks for brave action, confidence, passion, or a stronger life-force.",
+        price_cents: 16899,
+        experiences_count: 1,
+        owners_count: 1
+      },
+      {
+        title: "Emanation Guardian Head - Gandhara Style Statue",
+        category: "Protection",
+        image_url: "assets/products/emanation-guardian-head-gandhara-style-statue-ratu-oracle.jpg",
+        intention: "For disciplined presence, quiet protection, contemplation, and a calm center of awareness.",
+        passport_story: "This Gandhara-style guardian piece is presented as a spiritual art object for meditation spaces, home altars, and collectors who value symbolic stillness, inner order, and contemplative beauty.",
+        reading_note: "Choose this when the reading points to silence, study, discipline, and restoring dignity to the mind.",
+        price_cents: 188800,
+        experiences_count: 0,
+        owners_count: 1
+      },
+      {
+        title: "Avalokiteshvara",
+        category: "Love",
+        image_url: "assets/products/emanation-guardian-head-gandhara-style-statue-ratu-oracle.jpg",
+        intention: "For compassion, mercy, emotional balance, protection, meditation, and inner peace.",
+        passport_story: "Avalokiteshvara is connected here with compassion and wise mercy. This piece is suited for sacred spaces, meditation rooms, and moments when tenderness must become strength.",
+        reading_note: "Choose this when the reading asks for compassion, forgiveness, careful speech, or softening the heart without losing wisdom.",
+        price_cents: null,
+        experiences_count: 0,
+        owners_count: 1
+      },
+      {
+        title: "Gandhara Buddha Head",
+        category: "Clarity",
+        image_url: "assets/products/gandhara-buddha-head-real.jpg",
+        intention: "For clarity, contemplation, higher awareness, and steady inner balance.",
+        passport_story: "The Gandhara Buddha Head serves as a symbol of stillness, refined attention, and depth of insight. It is suited for meditation, study, and spaces where thought needs to become calm.",
+        reading_note: "Choose this when the reading points to overthinking, distraction, or the need for a clean and disciplined mind.",
+        price_cents: 81800,
+        experiences_count: 0,
+        owners_count: 1
+      },
+      {
+        title: "Terum Earth Spirit Companion",
+        category: "Protection",
+        image_url: "assets/spirit-dolls/chant-sphere-earth-spirit.webp",
+        intention: "For grounding, protection, patience, stability, and the strength to remain rooted.",
+        passport_story: "Terum carries the grounded presence of earth: slow, patient, protective, and practical. This Spirit Doll is suited for homes, workspaces, and decisions that need stability instead of speed.",
+        reading_note: "Choose this when the reading asks for grounding, patience, boundaries, or protection of home and body.",
+        price_cents: 16700,
+        experiences_count: 1,
+        owners_count: 1
+      },
+      {
+        title: "Zephyriel Air Spirit Companion",
+        category: "Love",
+        image_url: "assets/spirit-dolls/chant-sphere-air-spirit.webp",
+        intention: "For open communication, blessing, gentle movement, lightness, and emotional renewal.",
+        passport_story: "Zephyriel carries the breath of air: messages, movement, mental clarity, and a lighter heart. This companion is suited for clearing heaviness, opening communication, and inviting graceful change.",
+        reading_note: "Choose this when the reading points to conversation, travel, release, or a need to breathe again.",
+        price_cents: 15000,
+        experiences_count: 1,
+        owners_count: 1
+      }
+    ];
+    const localSphereImageRules = [
+      { pattern: /aurelia|fire spirit|spirit companion fire|chant-sphere-fire/i, image_url: "assets/spirit-dolls/chant-sphere-fire-spirit.webp" },
+      { pattern: /zephyriel|air spirit|wind spirit|spirit companion air|chant-sphere-air/i, image_url: "assets/spirit-dolls/chant-sphere-air-spirit.webp" },
+      { pattern: /terum|earth spirit|spirit companion earth|chant-sphere-earth/i, image_url: "assets/spirit-dolls/chant-sphere-earth-spirit.webp" },
+      { pattern: /water spirit|spirit companion water|chant-sphere-water/i, image_url: "assets/spirit-dolls/chant-sphere-water-spirit.webp" },
+      { pattern: /avalokiteshvara|avalokitesvara|emanation guardian/i, image_url: "assets/products/emanation-guardian-head-gandhara-style-statue-ratu-oracle.jpg" },
+      { pattern: /gandhara buddha head|buddha head/i, image_url: "assets/products/gandhara-buddha-head-real.jpg" },
+      { pattern: /solomon|love.*harmony/i, image_url: "assets/spheres/solomon-love-harmony.webp" },
+      { pattern: /divine light/i, image_url: "assets/spheres/divine-light-card-10.webp" },
+      { pattern: /unity whole|unity/i, image_url: "assets/spheres/unity-card-24.webp" },
+      { pattern: /spirit protection|protection chant/i, image_url: "assets/spheres/protection-card-28.webp" },
+      { pattern: /good decree|decree/i, image_url: "assets/spheres/decree-card-8.webp" },
+      { pattern: /success path|success/i, image_url: "assets/spheres/success-path-card-20.webp" }
+    ];
 
     function normalizeSphereImageUrl(value) {
       const imageUrl = String(value || "").trim();
       if (!imageUrl) return "";
+      if (imageUrl.startsWith("data:")) return "";
       const cleanPath = imageUrl.split("?")[0].split("#")[0];
       const fileName = cleanPath.split("/").filter(Boolean).pop();
+      if (legacySphereImageMap[fileName]) return legacySphereImageMap[fileName];
+      if (/^\/?images\//i.test(cleanPath)) return "";
       return legacySphereImageMap[fileName] || imageUrl;
+    }
+
+    function localImageForSphere(sphere) {
+      const text = `${sphere.title || ""} ${sphere.category || ""} ${sphere.intention || ""} ${sphere.image_url || ""}`.toLowerCase();
+      const match = localSphereImageRules.find(rule => rule.pattern.test(text));
+      return match ? match.image_url : "";
     }
 
     function archetypeForSphere(sphere, index = 0) {
@@ -1694,6 +1788,8 @@
     }
 
     function sphereImageUrl(sphere, index = 0) {
+      const localMatch = localImageForSphere(sphere);
+      if (localMatch) return localMatch;
       const uploaded = normalizeSphereImageUrl(sphere.image_url);
       if (uploaded) return uploaded;
       return archetypeForSphere(sphere, index).image_url;
@@ -1701,8 +1797,7 @@
 
     function isGenericSphere(sphere) {
       const title = String(sphere.title || "").trim().toLowerCase();
-      return !String(sphere.image_url || "").trim()
-        && (/^sphere\s*#?\d+$/.test(title) || title === "sphere");
+      return /^sphere\s*#?\d+$/.test(title) || title === "sphere";
     }
 
     function sphereDisplayData(sphere, index = 0) {
@@ -1747,22 +1842,22 @@
       const base = state.spheres.length ? state.spheres : fallbackSpheres;
       const visibleBase = base.map((sphere, index) => sphereDisplayData(sphere, index));
       const usedTitles = new Set(visibleBase.map(sphere => String(sphere.title || "").trim().toLowerCase()));
-      const supplements = sphereArchetypes
-        .filter(archetype => !usedTitles.has(archetype.title.toLowerCase()))
-        .map((archetype, index) => ({
-          id: `preview-${sphereSlug(archetype.title)}`,
-          title: archetype.title,
-          category: archetype.category,
-          intention: archetype.intention,
+      const supplements = [...featuredMarketplaceSpheres, ...sphereArchetypes]
+        .filter(item => !usedTitles.has(item.title.toLowerCase()))
+        .map((item, index) => ({
+          id: `preview-${sphereSlug(item.title)}`,
+          title: item.title,
+          category: item.category,
+          intention: item.intention,
           status: "preview",
-          price_cents: archetype.category === "Love" ? 3500 : 3200,
+          price_cents: item.price_cents ?? (item.category === "Love" ? 3500 : 3200),
           currency: "USD",
-          image_url: archetype.image_url,
-          passport_story: archetype.passport_story,
-          reading_note: archetype.reading_note,
-          experiences: archetype.experiences || [],
-          experiences_count: (archetype.experiences || []).length,
-          owners_count: 1,
+          image_url: item.image_url,
+          passport_story: item.passport_story,
+          reading_note: item.reading_note,
+          experiences: item.experiences || [],
+          experiences_count: item.experiences_count ?? (item.experiences || []).length,
+          owners_count: item.owners_count || 1,
           _supplement_index: index
         }));
       return [...visibleBase, ...supplements];
