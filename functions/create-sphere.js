@@ -12,7 +12,20 @@ import {
   toCents
 } from "./_shared.js";
 
-const allowedCategories = new Set(["Love", "Wealth", "Protection", "Healing", "Clarity"]);
+const allowedCategories = new Set([
+  "Love",
+  "Wealth",
+  "Protection",
+  "Healing",
+  "Clarity",
+  "Spirit Doll",
+  "Spiritual Art",
+  "Statue",
+  "Talisman",
+  "Amulet",
+  "Magickal Object",
+  "Indonesian Talisman"
+]);
 const listingTypeMap = {
   "Keep private": null,
   Sell: "sell",
@@ -40,8 +53,8 @@ export async function handler(event) {
     const listingType = listingTypeMap[body.listingType] ?? null;
     const priceCents = toCents(body.price);
 
-    if (!title) return json(400, { error: "Sphere name is required." });
-    if (!allowedCategories.has(category)) return json(400, { error: "Choose a valid sphere category." });
+    if (!title) return json(400, { error: "Product name is required." });
+    if (!allowedCategories.has(category)) return json(400, { error: "Choose a valid product category." });
     if (!intention) return json(400, { error: "Intention is required." });
     if (imageUrl && !/^(https?:\/\/|assets\/|data:image\/(png|jpe?g|webp|gif);base64,)/i.test(imageUrl)) {
       return json(400, { error: "Image must be a direct https:// image URL, a site path starting with assets/, or an uploaded image from the admin dashboard." });

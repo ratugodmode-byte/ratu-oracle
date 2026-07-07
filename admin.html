@@ -272,7 +272,7 @@
     <div class="shell nav">
       <div>
         <h1>Ratu Oracle Admin Dashboard</h1>
-        <p class="sub">Manage Chant Spheres, experiences, QR codes, and homepage settings.</p>
+        <p class="sub">Manage marketplace products, Chant Spheres, experiences, QR codes, and homepage settings.</p>
       </div>
       <div class="row">
         <a class="btn" href="/">View Site</a>
@@ -295,14 +295,14 @@
 
     <section id="adminApp" class="hidden grid">
       <div class="grid stats">
-        <div class="panel stat"><strong id="statSpheres">0</strong><span>Chant Spheres</span></div>
+        <div class="panel stat"><strong id="statSpheres">0</strong><span>Products</span></div>
         <div class="panel stat"><strong id="statExperiences">0</strong><span>Experiences</span></div>
         <div class="panel stat"><strong id="statListings">0</strong><span>Open Listings</span></div>
         <div class="panel stat"><strong id="statUsers">0</strong><span>Users</span></div>
       </div>
 
       <div class="tabs" role="tablist">
-        <button class="tab active" data-tab="spheres">Spheres</button>
+        <button class="tab active" data-tab="spheres">Products</button>
         <button class="tab" data-tab="experiences">Experiences</button>
         <button class="tab" data-tab="indotalisman">Indotalisman</button>
         <button class="tab" data-tab="pages">Pages</button>
@@ -313,10 +313,10 @@
       <section class="grid layout admin-tab" id="tab-spheres">
         <div class="grid">
           <aside class="panel">
-            <h2>Create Chant Sphere</h2>
+            <h2>Create Marketplace Product</h2>
             <form class="form" id="sphereForm">
-              <label>Sphere name
-                <input name="title" placeholder="Love Sphere #247" required>
+              <label>Product name
+                <input name="title" placeholder="Air Spirit Doll, Avalokiteshvara, Divine Light Chant Sphere" required>
               </label>
               <label>Category
                 <select name="category" required>
@@ -325,10 +325,17 @@
                   <option value="Protection">Protection</option>
                   <option value="Healing">Healing</option>
                   <option value="Clarity">Clarity</option>
+                  <option value="Spirit Doll">Spirit Doll</option>
+                  <option value="Spiritual Art">Spiritual Art</option>
+                  <option value="Statue">Statue</option>
+                  <option value="Talisman">Talisman</option>
+                  <option value="Amulet">Amulet</option>
+                  <option value="Magickal Object">Magickal Object</option>
+                  <option value="Indonesian Talisman">Indonesian Talisman</option>
                 </select>
               </label>
               <label>Intention
-                <textarea name="intention" placeholder="Write the intention for this sphere..." required></textarea>
+                <textarea name="intention" placeholder="Write the intention, story, or meaning for this product..." required></textarea>
               </label>
               <label>Listing type
                 <select name="listingType">
@@ -351,21 +358,21 @@
                 <textarea name="seo_keywords" id="sphereSeoKeywords" placeholder="Auto-filled for spirit dolls, fairy dolls, guardian dolls, air spirits, elemental guardians, and mystical collectibles."></textarea>
               </label>
               <button class="btn" type="button" id="fillSpiritDollSeo">Use Spirit Doll SEO Tags</button>
-              <button class="btn primary" type="submit">Create Sphere</button>
+              <button class="btn primary" type="submit">Create Product</button>
             </form>
-            <div class="status" id="sphereStatus">Create, list, add a picture, and generate a passport for a new Chant Sphere or spirit doll.</div>
+            <div class="status" id="sphereStatus">Create, list, add a picture, and generate a passport for any marketplace product.</div>
           </aside>
 
           <aside class="panel">
             <h2>QR Generator</h2>
-            <p class="sub">Select a sphere from the list to preview its QR code.</p>
-            <div class="status" id="qrStatus">No sphere selected.</div>
+            <p class="sub">Select a product from the list to preview its QR code.</p>
+            <div class="status" id="qrStatus">No product selected.</div>
             <div style="margin-top:14px"><img class="qr" id="selectedQr" alt="Selected sphere QR"></div>
             <p class="sub" id="selectedQrUrl"></p>
           </aside>
         </div>
         <div class="panel">
-          <h2>Manage Chant Spheres</h2>
+          <h2>Manage Marketplace Products</h2>
           <div class="list" id="sphereList"></div>
         </div>
       </section>
@@ -883,8 +890,8 @@
 
     function renderSpheres() {
       if (!state.spheres.length) {
-        els.sphereList.innerHTML = '<div class="status">No spheres yet.</div>';
-        els.experienceSphere.innerHTML = '<option value="">No spheres available</option>';
+        els.sphereList.innerHTML = '<div class="status">No marketplace products yet.</div>';
+        els.experienceSphere.innerHTML = '<option value="">No products available</option>';
         return;
       }
 
@@ -1238,7 +1245,7 @@
 
     document.getElementById("sphereForm").addEventListener("submit", async event => {
       event.preventDefault();
-      setStatus(els.sphereStatus, "Creating sphere...");
+      setStatus(els.sphereStatus, "Creating product...");
       const form = event.currentTarget;
       const payload = Object.fromEntries(new FormData(form).entries());
       delete payload.image_file;
@@ -1253,7 +1260,7 @@
           body: JSON.stringify(payload)
         });
         form.reset();
-        setStatus(els.sphereStatus, "Sphere created. Dashboard refreshed.", "ok");
+        setStatus(els.sphereStatus, "Product created. Dashboard refreshed.", "ok");
         submitCrawlerUrls({ silent: true }).catch(() => {});
         await loadAdmin();
       } catch (error) {
@@ -1337,7 +1344,7 @@
 
       if (deleteSphereButton) {
         const sphere = state.spheres.find(item => item.id === deleteSphereButton.dataset.deleteSphere);
-        if (!confirm(`Delete "${sphere?.title || "this sphere"}"? This also removes its listings, passport, and experiences.`)) return;
+        if (!confirm(`Delete "${sphere?.title || "this product"}"? This also removes its listings, passport, and experiences.`)) return;
         await api("/.netlify/functions/admin-delete-sphere", {
           method: "POST",
           body: JSON.stringify({ id: deleteSphereButton.dataset.deleteSphere })
