@@ -15,8 +15,10 @@ const functionLoaders = {
   "indotalisman-products": () => import("../functions/indotalisman-products.js"),
   "indexnow-submit": () => import("../functions/indexnow-submit.js"),
   marketplace: () => import("../functions/marketplace.js"),
+  "public-page": () => import("../functions/public-page.js"),
   "qr-code": () => import("../functions/qr-code.js"),
   sitemap: () => import("../functions/sitemap.js"),
+  "sitemap-pages": () => import("../functions/sitemap-pages.js"),
   "site-settings": () => import("../functions/site-settings.js"),
   spheres: () => import("../functions/spheres.js")
 };

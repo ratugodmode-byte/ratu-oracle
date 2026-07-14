@@ -24,6 +24,10 @@
       "destination": "/api/sitemap"
     },
     {
+      "source": "/sitemap-pages.xml",
+      "destination": "/api/sitemap-pages"
+    },
+    {
       "source": "/submit-to-crawlers",
       "destination": "/api/indexnow-submit"
     },
@@ -330,6 +334,10 @@
     {
       "source": "/buddhist-meditation-decor",
       "destination": "/buddhist-meditation-decor.html"
+    },
+    {
+      "source": "/:slug",
+      "destination": "/api/public-page?slug=:slug"
     }
   ],
   "headers": [

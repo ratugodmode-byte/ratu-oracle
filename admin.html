@@ -494,7 +494,7 @@
           <div class="keyword-box" id="pagePreviewBody" style="margin-top:14px">Article preview will appear here.</div>
           <div class="row" style="margin-top:12px">
             <a class="btn primary" href="/free-tarot-reading.html" target="_blank" rel="noreferrer">Open Free Tarot Page</a>
-            <a class="btn" href="/page.html?slug=free-tarot-reading" target="_blank" rel="noreferrer">Open Generic Page</a>
+            <a class="btn" id="openGenericPage" href="/free-tarot-reading" target="_blank" rel="noreferrer">Open Public Slug</a>
           </div>
         </div>
       </section>
@@ -674,7 +674,8 @@
       pagePreviewTitle: document.getElementById("pagePreviewTitle"),
       pagePreviewDescription: document.getElementById("pagePreviewDescription"),
       pagePreviewLinks: document.getElementById("pagePreviewLinks"),
-      pagePreviewBody: document.getElementById("pagePreviewBody")
+      pagePreviewBody: document.getElementById("pagePreviewBody"),
+      openGenericPage: document.getElementById("openGenericPage")
     };
 
     function escapeHtml(value) {
@@ -1057,10 +1058,27 @@
       body: "Ratu Oracle begins with a free tarot reading so a visitor can pause, ask clearly, and sense what kind of support is needed in the present moment. The reading is not a fixed command. It is a mirror for attention, choice, protection, love, clarity, healing, and prosperity.\n\nAfter the reading, the visitor can explore Chant Spheres: symbolic talisman pages with QR passports, owner stories, and marketplace listings. Each sphere carries an intention. Some are made for harmony and devotion, some for a clear path, some for protection, some for courage, and some for steady abundance.\n\nThe work is inspired by sacred geometry, Solomon-style seals, and the balanced tree of spiritual qualities. The language stays plain and respectful: light, boundary, mercy, strength, beauty, victory, foundation, and presence. No promise replaces medical, legal, or financial care. The purpose is spiritual reflection, energetic focus, and meaningful ritual support.\n\nUse the free reading first. Then choose the sphere whose meaning matches your current energy, your body, your heart, and the action you are ready to take."
     };
 
+    function normalizePageSlug(value) {
+      return String(value || "")
+        .trim()
+        .toLowerCase()
+        .replace(/\.html$/i, "")
+        .replace(/[^a-z0-9-]+/g, "-")
+        .replace(/^-+|-+$/g, "") || "free-tarot-reading";
+    }
+
+    function setPublicPageLink(value) {
+      if (els.openGenericPage) {
+        els.openGenericPage.href = `/${normalizePageSlug(value)}`;
+      }
+    }
+
     function getPages() {
       try {
         const parsed = JSON.parse(state.settings.content_pages || "[]");
-        return Array.isArray(parsed) ? parsed : [];
+        return Array.isArray(parsed)
+          ? parsed.map(page => ({ ...page, slug: normalizePageSlug(page.slug || page.title) }))
+          : [];
       } catch {
         return [];
       }
@@ -1071,13 +1089,15 @@
     }
 
     function fillPageForm(page = freeTarotTemplate) {
-      els.pageSlug.value = page.slug || "free-tarot-reading";
+      const slug = normalizePageSlug(page.slug || page.title || "free-tarot-reading");
+      els.pageSlug.value = slug;
       els.pageTitle.value = page.title || "";
       els.pageDescription.value = page.description || "";
       els.pagePrimaryUrl.value = page.primary_url || "";
       els.pagePrimaryLabel.value = page.primary_label || "";
       els.pageKeywords.value = page.keywords || "";
       els.pageBody.value = page.body || "";
+      setPublicPageLink(slug);
       updatePagePreview();
     }
 
@@ -1431,13 +1451,16 @@
     document.getElementById("promotionForm").addEventListener("input", updatePromotionPreview);
     document.getElementById("generatePromoAi").addEventListener("click", generatePromotionKeywords);
 
-    document.getElementById("pageForm").addEventListener("input", updatePagePreview);
+    document.getElementById("pageForm").addEventListener("input", () => {
+      setPublicPageLink(els.pageSlug.value);
+      updatePagePreview();
+    });
     document.getElementById("fillFreeTarotPage").addEventListener("click", () => fillPageForm(freeTarotTemplate));
 
     document.getElementById("pageForm").addEventListener("submit", async event => {
       event.preventDefault();
       const page = Object.fromEntries(new FormData(event.currentTarget).entries());
-      page.slug = String(page.slug || "").trim().toLowerCase().replace(/[^a-z0-9-]+/g, "-").replace(/^-+|-+$/g, "") || "free-tarot-reading";
+      page.slug = normalizePageSlug(page.slug);
       const pages = getPages().filter(item => item.slug !== page.slug);
       pages.unshift(page);
       const pageSettings = {
