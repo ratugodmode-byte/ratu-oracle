@@ -1843,6 +1843,8 @@
     function displaySphereCollection() {
       const base = state.spheres.length ? state.spheres : fallbackSpheres;
       const visibleBase = base.map((sphere, index) => sphereDisplayData(sphere, index));
+      if (state.spheres.length) return visibleBase;
+
       const curated = [...featuredMarketplaceSpheres, ...sphereArchetypes].map((item, index) => ({
         id: `preview-${sphereSlug(item.title)}`,
         title: item.title,
@@ -1859,11 +1861,7 @@
         owners_count: item.owners_count || 1,
         _supplement_index: index
       }));
-      const usedTitles = new Set(curated.map(sphere => String(sphere.title || "").trim().toLowerCase()));
-      const databaseExtras = visibleBase
-        .filter(item => !usedTitles.has(item.title.toLowerCase()))
-        .filter(item => !isGenericSphere(item));
-      return [...curated, ...databaseExtras];
+      return curated;
     }
 
     function renderMarketplace() {
