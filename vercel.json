@@ -20,6 +20,10 @@
       "destination": "/api/:function"
     },
     {
+      "source": "/marketplace",
+      "destination": "/marketplace.html"
+    },
+    {
       "source": "/sitemap-dynamic.xml",
       "destination": "/api/sitemap"
     },
