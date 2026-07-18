@@ -28,7 +28,7 @@ Allow: /
 User-agent: ClaudeBot
 Allow: /
 
-User-agent: Google-Extended
+User-agent: Claude-SearchBot
 Allow: /
 
 User-agent: Bravebot
@@ -37,29 +37,12 @@ Allow: /
 User-agent: DuckDuckBot
 Allow: /
 
-User-agent: Claude-SearchBot
-Allow: /
-
-User-agent: Meta-ExternalAgent
-Allow: /
-
-User-agent: Meta External Agent
-Allow: /
-
-User-agent: Amazonbot
-Allow: /
-
-User-agent: Bytespider
+User-agent: Google-Extended
 Allow: /
 
 User-agent: CCBot
 Allow: /
 
-User-agent: Common Crawl
-Allow: /
-
 Sitemap: https://ratu-oracle-kar4.vercel.app/sitemap.xml
 Sitemap: https://ratu-oracle-kar4.vercel.app/sitemap-products.xml
 Sitemap: https://ratu-oracle-kar4.vercel.app/sitemap-images.xml
-Sitemap: https://ratu-oracle-kar4.vercel.app/sitemap-index.xml
-Sitemap: https://ratu-oracle-kar4.vercel.app/sitemap-pages.xml

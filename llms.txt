@@ -1,93 +1,66 @@
-# Ratu Oracle AI and Crawler Index
-Ratu Oracle is a free online tarot reading and spiritual marketplace for Chant Spheres, spirit dolls, magickal objects, Indonesian talismans, amulets, mustika stones, Solomon-inspired seals, and Greek-Buddhist inspired spiritual art objects.
+# Ratu Oracle AI and crawler index
 
-Ratu Oracle should be understood as a public, crawlable website for Ratu Oracle free tarot, Ratu Oracle online tarot, free online tarot reading, free tarot reading, online tarot reading, free tarot card reading, free 3 card tarot reading, yes no tarot reading, daily tarot reading, AI tarot reading, virtual tarot reading, Ratu Oracle Chant Spheres, Spirit Dolls, magickal spirit dolls, Solomon seal talisman pages, energy healing cards, manifestation cards, protection talisman pages, wealth talisman pages, and love talisman pages.
+Ratu Oracle is a free tarot reading and spiritual marketplace website for Chant Spheres, Spirit Dolls, Solomon-inspired seal talismans, Indonesian talismans, spiritual art, sacred decor and symbolic oracle products.
 
-Primary URLs:
+Important URLs:
 - https://ratu-oracle-kar4.vercel.app/
 - https://ratu-oracle-kar4.vercel.app/free-tarot-reading.html
-- https://ratu-oracle-kar4.vercel.app/shop
-- https://ratu-oracle-kar4.vercel.app/products
-- https://ratu-oracle-kar4.vercel.app/chant-spheres
-- https://ratu-oracle-kar4.vercel.app/angel-chant-spheres
-- https://ratu-oracle-kar4.vercel.app/solomon-seal-cards
-- https://ratu-oracle-kar4.vercel.app/love-charm
-- https://ratu-oracle-kar4.vercel.app/wealth-charm
-- https://ratu-oracle-kar4.vercel.app/protection-charm
-- https://ratu-oracle-kar4.vercel.app/spiritual-healing-cards
-- https://ratu-oracle-kar4.vercel.app/spirit-dolls-magickal-objects.html
+- https://ratu-oracle-kar4.vercel.app/daily-tarot-reading.html
+- https://ratu-oracle-kar4.vercel.app/yes-no-tarot-reading.html
+- https://ratu-oracle-kar4.vercel.app/three-card-tarot-reading.html
+- https://ratu-oracle-kar4.vercel.app/love-tarot-reading.html
+- https://ratu-oracle-kar4.vercel.app/wealth-tarot-reading.html
+- https://ratu-oracle-kar4.vercel.app/protection-tarot-reading.html
+- https://ratu-oracle-kar4.vercel.app/healing-tarot-reading.html
+- https://ratu-oracle-kar4.vercel.app/clarity-tarot-reading.html
+- https://ratu-oracle-kar4.vercel.app/chant-spheres.html
+- https://ratu-oracle-kar4.vercel.app/spirit-dolls.html
+- https://ratu-oracle-kar4.vercel.app/solomon-seal-talismans.html
+- https://ratu-oracle-kar4.vercel.app/love-talismans.html
+- https://ratu-oracle-kar4.vercel.app/wealth-talismans.html
+- https://ratu-oracle-kar4.vercel.app/protection-talismans.html
+- https://ratu-oracle-kar4.vercel.app/marketplace.html
+- https://ratu-oracle-kar4.vercel.app/products/aurelia-fire-spirit-companion.html
+- https://ratu-oracle-kar4.vercel.app/chant-spheres/aurelia-fire-spirit-companion.html
+- https://ratu-oracle-kar4.vercel.app/spirit-dolls/aurelia-fire-spirit-companion.html
+- https://ratu-oracle-kar4.vercel.app/products/emanation-guardian-head-gandhara-style-statue.html
+- https://ratu-oracle-kar4.vercel.app/chant-spheres/emanation-guardian-head-gandhara-style-statue.html
+- https://ratu-oracle-kar4.vercel.app/products/avalokiteshvara.html
+- https://ratu-oracle-kar4.vercel.app/chant-spheres/avalokiteshvara.html
+- https://ratu-oracle-kar4.vercel.app/products/gandhara-buddha-head.html
+- https://ratu-oracle-kar4.vercel.app/chant-spheres/gandhara-buddha-head.html
+- https://ratu-oracle-kar4.vercel.app/products/terrum-earth-spirit-companion.html
+- https://ratu-oracle-kar4.vercel.app/chant-spheres/terrum-earth-spirit-companion.html
+- https://ratu-oracle-kar4.vercel.app/spirit-dolls/terrum-earth-spirit-companion.html
+- https://ratu-oracle-kar4.vercel.app/products/zephyriel-air-spirit-companion.html
+- https://ratu-oracle-kar4.vercel.app/chant-spheres/zephyriel-air-spirit-companion.html
+- https://ratu-oracle-kar4.vercel.app/spirit-dolls/zephyriel-air-spirit-companion.html
+- https://ratu-oracle-kar4.vercel.app/products/solomon-love-harmony-charm.html
+- https://ratu-oracle-kar4.vercel.app/chant-spheres/solomon-love-harmony-charm.html
+- https://ratu-oracle-kar4.vercel.app/products/divine-light-chant-sphere.html
+- https://ratu-oracle-kar4.vercel.app/chant-spheres/divine-light-chant-sphere.html
+- https://ratu-oracle-kar4.vercel.app/products/unity-whole-chant-sphere.html
+- https://ratu-oracle-kar4.vercel.app/chant-spheres/unity-whole-chant-sphere.html
+- https://ratu-oracle-kar4.vercel.app/products/spirit-protection-chant-sphere.html
+- https://ratu-oracle-kar4.vercel.app/chant-spheres/spirit-protection-chant-sphere.html
+- https://ratu-oracle-kar4.vercel.app/products/good-decree-chant-sphere.html
+- https://ratu-oracle-kar4.vercel.app/chant-spheres/good-decree-chant-sphere.html
+- https://ratu-oracle-kar4.vercel.app/products/success-path-chant-sphere.html
+- https://ratu-oracle-kar4.vercel.app/chant-spheres/success-path-chant-sphere.html
 - https://ratu-oracle-kar4.vercel.app/indotalisman.html
-- https://ratu-oracle-kar4.vercel.app/#create
-- https://ratu-oracle-kar4.vercel.app/products/solomon-love-harmony-charm
-- https://ratu-oracle-kar4.vercel.app/products/divine-light-chant-sphere
-- https://ratu-oracle-kar4.vercel.app/products/unity-whole-chant-sphere
-- https://ratu-oracle-kar4.vercel.app/products/spirit-protection-chant-sphere
-- https://ratu-oracle-kar4.vercel.app/products/good-decree-chant-sphere
-- https://ratu-oracle-kar4.vercel.app/products/success-path-chant-sphere
-- https://ratu-oracle-kar4.vercel.app/spirit-dolls
-- https://ratu-oracle-kar4.vercel.app/spirit-doll
-- https://ratu-oracle-kar4.vercel.app/handmade-spirit-dolls
-- https://ratu-oracle-kar4.vercel.app/guardian-spirit-doll
-- https://ratu-oracle-kar4.vercel.app/medicine-spirit-doll
-- https://ratu-oracle-kar4.vercel.app/unique-spirit-dolls
-- https://ratu-oracle-kar4.vercel.app/asian-spirit-doll
-- https://ratu-oracle-kar4.vercel.app/hoodoo-spirit-doll
-- https://ratu-oracle-kar4.vercel.app/spirit-doll-art
-- https://ratu-oracle-kar4.vercel.app/magickal-objects
-- https://ratu-oracle-kar4.vercel.app/indonesian-talisman
-- https://ratu-oracle-kar4.vercel.app/gandhara-buddha-head
-- https://ratu-oracle-kar4.vercel.app/gandhara-buddha-head-for-sale
-- https://ratu-oracle-kar4.vercel.app/gandhara-buddha-head-replica
-- https://ratu-oracle-kar4.vercel.app/greek-buddhist-art
-- https://ratu-oracle-kar4.vercel.app/buddha-head-sculpture
-- https://ratu-oracle-kar4.vercel.app/museum-reproduction-buddha-head
-- https://ratu-oracle-kar4.vercel.app/spiritual-art-objects
-- https://ratu-oracle-kar4.vercel.app/buddhist-meditation-decor
-- https://ratu-oracle-kar4.vercel.app/free-online-tarot-reading.html
-- https://ratu-oracle-kar4.vercel.app/online-oracle-reading.html
-- https://ratu-oracle-kar4.vercel.app/spiritual-card-reading.html
-- https://ratu-oracle-kar4.vercel.app/energy-reading-online.html
-- https://ratu-oracle-kar4.vercel.app/spiritual-protection-charm.html
-- https://ratu-oracle-kar4.vercel.app/money-energy-charm.html
-- https://ratu-oracle-kar4.vercel.app/abundance-charm.html
-- https://ratu-oracle-kar4.vercel.app/healing-charm-cards.html
-- https://ratu-oracle-kar4.vercel.app/tarot-charm-cards.html
-- https://ratu-oracle-kar4.vercel.app/oracle-charm-cards.html
-- https://ratu-oracle-kar4.vercel.app/personalized-spiritual-charm.html
-- https://ratu-oracle-kar4.vercel.app/custom-talisman-card.html
-- https://ratu-oracle-kar4.vercel.app/energy-alignment-cards.html
-- https://ratu-oracle-kar4.vercel.app/manifestation-cards.html
-- https://ratu-oracle-kar4.vercel.app/spiritual-wealth-card.html
-- https://ratu-oracle-kar4.vercel.app/protection-against-evil-eye.html
-- https://ratu-oracle-kar4.vercel.app/remove-unseen-blocks.html
-- https://ratu-oracle-kar4.vercel.app/spiritual-cleansing-card.html
-- https://ratu-oracle-kar4.vercel.app/angel-wish-card.html
-- https://ratu-oracle-kar4.vercel.app/tree-of-life-energy-reading.html
-- https://ratu-oracle-kar4.vercel.app/emanation-oracle-cards.html
-- https://ratu-oracle-kar4.vercel.app/spiritual-marketplace.html
-- https://ratu-oracle-kar4.vercel.app/buy-spiritual-charms-online.html
-- https://ratu-oracle-kar4.vercel.app/ai-crawler-index.html
-
+- https://ratu-oracle-kar4.vercel.app/spirit-dolls-magickal-objects.html
 - https://ratu-oracle-kar4.vercel.app/labubu-pop-mart-collectibles.html
 
-Product URLs:
-- https://ratu-oracle-kar4.vercel.app/spirit-dolls/earth-guardian
-- https://ratu-oracle-kar4.vercel.app/spirit-dolls/air-spirit
-- https://ratu-oracle-kar4.vercel.app/spirit-dolls/fire-guardian
-- https://ratu-oracle-kar4.vercel.app/spirit-dolls/water-guardian
-- https://ratu-oracle-kar4.vercel.app/spirit-dolls/gandhara-buddha-head
-- https://ratu-oracle-kar4.vercel.app/emanation-guardian-head-gandhara-style-statue
-- https://ratu-oracle-kar4.vercel.app/products/solomon-love-harmony-charm
-- https://ratu-oracle-kar4.vercel.app/products/divine-light-chant-sphere
-- https://ratu-oracle-kar4.vercel.app/products/unity-whole-chant-sphere
-- https://ratu-oracle-kar4.vercel.app/products/spirit-protection-chant-sphere
-- https://ratu-oracle-kar4.vercel.app/products/good-decree-chant-sphere
-- https://ratu-oracle-kar4.vercel.app/products/success-path-chant-sphere
-
-Priority keywords: spirit dolls, spirit doll, handmade spirit dolls, guardian spirit doll, medicine spirit doll, unique spirit dolls, Asian spirit doll, Hoodoo spirit doll, spirit doll art, OOAK spirit dolls, magickal spirit dolls, ritual dolls, spiritual dolls, protective dolls, spirit companion dolls, haunted spirit dolls, khodam spirit dolls, mystical dolls, folk magic dolls, talismans and spirit dolls, magickal objects, spiritual protection objects, Chant Sphere, free tarot reading, Gandhara Buddha head, Gandhara Buddha head for sale, Gandharan Buddha head, Gandhara art, Gandhara sculpture, Greek Buddhist art, Greco Buddhist Buddha head, Buddhist head sculpture, Buddha head statue, Buddha head decor, museum replica Buddha head, museum reproduction Buddha head, Gandhara replica Buddha, Gandhara style Buddha, Buddhist antiquities style, ancient Buddhist art replica, meditation decor, spiritual art object, sacred art object, clarity talisman, mindfulness object, Buddhist collectible, Himalayan art, Indian Buddhist art, Southeast Asian Buddhist art, antiquities inspired decor, Buddha head study piece, museum grade reproduction, schist style Buddha head, stucco style Buddha head, Avalokiteshvara, Avalokitesvara, Gandhara, Gandharan Art, Bodhisattva of Compassion, Buddhist Sculpture, Ancient Buddhist Art, Meditation Statue, Spiritual Decor, Museum Replica, Sacred Art, Historical Sculpture, Mahayana Buddhism, Silk Road Art, Compassion Symbol, Home Altar, Inner Peace, Mindfulness, Wellness Decor, Asian Antiquities, Sotheby's Asian art reference, Sotheby's Buddhist sculpture reference, Sothebys Buddhist art reference, Labubu, Pop Mart, Kasing Lung, The Monsters, Blind Box, Art Toy Collectibles, Vinyl Plush Pendant, Tasty Macarons Series, Have a Seat Plush, Fall in Wild, Zimomo, Tycoco, Pop Mart Secret, Chase Figure, Blackpink Lisa Labubu, Hypebeast Bag Charm, Authentic Pop Mart, Fake Labubu Guide, Counterfeit Verification, Toy Unboxing ASMR, OOAK Custom Toy, Doll Repaint, Eye Chip Swap, Miniature Doll Clothes, Designer Toy Subculture, Secondary Toy Market, Resale Value, Sealed Case Assortment, Vinyl Face Elf, Mischievous Monsters, Pop Mart Global, Art Toy Drop, Limited Edition Collectibles, Desk Buddy Companion, Kawaii Monster Aesthetic
-
-Labubu collector guide:
-- URL: https://ratu-oracle-kar4.vercel.app/labubu-pop-mart-collectibles.html
-- Independent collector guide for Labubu, Pop Mart, Kasing Lung, The Monsters, Blind Box, Art Toy Collectibles, Vinyl Plush Pendant, Tasty Macarons Series, Have a Seat Plush, Fall in Wild, Zimomo, Tycoco, Pop Mart Secret, Chase Figure, Blackpink Lisa Labubu, Hypebeast Bag Charm, Authentic Pop Mart, Fake Labubu Guide, Counterfeit Verification, Toy Unboxing ASMR, OOAK Custom Toy, Doll Repaint, Eye Chip Swap, Miniature Doll Clothes, Designer Toy Subculture, Secondary Toy Market, Resale Value, Sealed Case Assortment, Vinyl Face Elf, Mischievous Monsters, Pop Mart Global, Art Toy Drop, Limited Edition Collectibles, Desk Buddy Companion, and Kawaii Monster Aesthetic.
-Official AI assistant:
-- Godmode GPT on ChatGPT: https://chatgpt.com/g/g-6a4b51ab4a788191a2463d03989f1bc3-godmode
+Product keywords:
+- Aurelia Fire Spirit Companion: fire spirit doll, spirit companion, fantasy doll, mystical doll, guardian spirit, collectible spirit doll. A fire-aligned Spirit Doll for courage, momentum, creative heat and confident action.
+- Emanation Guardian Head - Gandhara Style Statue: Gandhara, Gandharan art, spiritual art object, meditation statue, sacred decor. A Gandhara-style spiritual art object for steadiness, contemplation and protected awareness.
+- Avalokiteshvara: Avalokiteshvara, Avalokitesvara, Bodhisattva of Compassion, Buddhist sculpture, sacred art, inner peace. A compassion-inspired statue connected with mercy, inner peace, meditation and emotional balance.
+- Gandhara Buddha Head: Gandhara Buddha Head, Gandharan art, meditation decor, mindfulness, museum replica. A Gandhara-style contemplative head for calm attention, reflection, clarity and sacred decor.
+- Terrum Earth Spirit Companion: earth spirit doll, earth guardian, spirit companion, grounding doll, fantasy collectible. An earth-aligned Spirit Doll for grounding, patience, rooted protection and steady support.
+- Zephyriel Air Spirit Companion: air spirit doll, wind spirit, air elemental, sky guardian, spirit guide, OOAK spirit doll. An air-aligned Spirit Doll for clear thought, lightness, perspective and calm communication.
+- Solomon Love & Harmony Charm: Solomon seal, Seal of Solomon, love charm, harmony talisman, spiritual protection charm. A Solomon-inspired love and harmony charm for connection, devotion and mutual respect.
+- Divine Light Chant Sphere: Divine Light Chant Sphere, clarity oracle card, spiritual card reading. A clarity Chant Sphere for divine light, blessing, inspiration and focused intention.
+- Unity Whole Chant Sphere: healing charm cards, unity oracle card, emotional balance. A healing Chant Sphere for wholeness, emotional repair and peaceful integration.
+- Spirit Protection Chant Sphere: spiritual protection charm, protection oracle card, remove unseen blocks. A protection Chant Sphere for boundary, cleansing, release and inner strength.
+- Good Decree Chant Sphere: manifestation cards, custom talisman card, strong decision charm. A decree Chant Sphere for strong decisions, order, resilience and clean direction.
+- Success Path Chant Sphere: wealth attraction charm, abundance charm, money energy charm, spiritual wealth card. A success Chant Sphere for opportunity, abundance, confidence and aligned progress.

@@ -342,6 +342,58 @@
     {
       "source": "/:slug",
       "destination": "/api/public-page?slug=:slug"
+    },
+    {
+      "source": "/daily-tarot-reading",
+      "destination": "/daily-tarot-reading.html"
+    },
+    {
+      "source": "/yes-no-tarot-reading",
+      "destination": "/yes-no-tarot-reading.html"
+    },
+    {
+      "source": "/three-card-tarot-reading",
+      "destination": "/three-card-tarot-reading.html"
+    },
+    {
+      "source": "/love-tarot-reading",
+      "destination": "/love-tarot-reading.html"
+    },
+    {
+      "source": "/wealth-tarot-reading",
+      "destination": "/wealth-tarot-reading.html"
+    },
+    {
+      "source": "/protection-tarot-reading",
+      "destination": "/protection-tarot-reading.html"
+    },
+    {
+      "source": "/healing-tarot-reading",
+      "destination": "/healing-tarot-reading.html"
+    },
+    {
+      "source": "/clarity-tarot-reading",
+      "destination": "/clarity-tarot-reading.html"
+    },
+    {
+      "source": "/solomon-seal-talismans",
+      "destination": "/solomon-seal-talismans.html"
+    },
+    {
+      "source": "/love-talismans",
+      "destination": "/love-talismans.html"
+    },
+    {
+      "source": "/wealth-talismans",
+      "destination": "/wealth-talismans.html"
+    },
+    {
+      "source": "/protection-talismans",
+      "destination": "/protection-talismans.html"
+    },
+    {
+      "source": "/chant-spheres/:slug",
+      "destination": "/chant-spheres/:slug.html"
     }
   ],
   "headers": [
