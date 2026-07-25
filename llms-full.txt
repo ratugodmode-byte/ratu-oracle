@@ -67,3 +67,18 @@ Product keywords:
 
 
 Buyer journey: free tarot reading, daily tarot reading, yes no tarot reading, love tarot reading, wealth tarot reading, protection tarot reading, healing tarot reading, clarity tarot reading, Chant Spheres, Spirit Dolls, spiritual marketplace, talismans, amulets, mustika, khodam, Solomon seal, Seal of Solomon, OOAK spirit doll, fantasy collectible.
+
+SEO_GROWTH_PACK_START
+Ratu Oracle crawlable traffic pages added 2026-07-25:
+- https://ratu-oracle-kar4.vercel.app/free-tarot-reading-love.html :: Free Love Tarot Reading Online | Ratu Oracle :: Try a free love tarot reading online with Ratu Oracle for relationship clarity, emotional guidance, attraction energy, protection and next-step insight.
+- https://ratu-oracle-kar4.vercel.app/free-tarot-reading-money.html :: Free Money Tarot Reading Online | Ratu Oracle :: Use Ratu Oracle for a free money tarot reading online for prosperity, confidence, choices, abundance blocks, career timing and wealth energy.
+- https://ratu-oracle-kar4.vercel.app/daily-free-tarot-reading.html :: Daily Free Tarot Reading | Ratu Oracle :: Start the day with a daily free tarot reading from Ratu Oracle for clarity, protection, love, money, spiritual balance and practical focus.
+- https://ratu-oracle-kar4.vercel.app/yes-no-tarot-reading-online.html :: Yes No Tarot Reading Online | Ratu Oracle :: Ask a yes or no tarot question online with Ratu Oracle for quick symbolic guidance, decision clarity, timing, protection and next steps.
+- https://ratu-oracle-kar4.vercel.app/online-tarot-reading-guide.html :: Online Tarot Reading Guide | Ratu Oracle :: Learn how to use online tarot reading with Ratu Oracle, including free tarot, daily readings, yes no questions, Chant Spheres and spiritual objects.
+- https://ratu-oracle-kar4.vercel.app/chant-spheres-love-protection-wealth.html :: Chant Spheres for Love Protection Wealth | Ratu Oracle :: Explore Chant Spheres for love, protection, wealth, healing, clarity and spiritual alignment with QR passports, stories and marketplace listings.
+- https://ratu-oracle-kar4.vercel.app/spirit-dolls-for-sale.html :: Spirit Dolls for Sale | Ratu Oracle :: Browse spirit dolls for sale, OOAK spirit companions, guardian dolls, elemental dolls, fantasy collectibles and spiritual art objects by Ratu Oracle.
+- https://ratu-oracle-kar4.vercel.app/indonesian-talismans-mustika-guide.html :: Indonesian Talismans and Mustika Guide | Ratu Oracle :: Learn about Indonesian talismans, mustika stones, bezoar pearls, sacred relics, spiritual heritage, amulets and Indotalisman products.
+- https://ratu-oracle-kar4.vercel.app/spiritual-products-buyers-guide.html :: Spiritual Products Buyers Guide | Ratu Oracle :: A buyer guide for Chant Spheres, spirit dolls, Indonesian talismans, amulets, Solomon-inspired seals, oracle cards and spiritual collectibles.
+- https://ratu-oracle-kar4.vercel.app/ratu-oracle-spiritual-marketplace-guide.html :: Ratu Oracle Spiritual Marketplace Guide :: Discover Ratu Oracle as a spiritual marketplace for free tarot reading, Chant Spheres, spirit dolls, Indotalisman, amulets and sacred art.
+Core internal destinations: free tarot reading (https://ratu-oracle-kar4.vercel.app/free-tarot-reading.html); Chant Sphere marketplace (https://ratu-oracle-kar4.vercel.app/#marketplace); spirit dolls (https://ratu-oracle-kar4.vercel.app/spirit-dolls.html); magickal objects (https://ratu-oracle-kar4.vercel.app/spirit-dolls-magickal-objects.html); Indotalisman (https://ratu-oracle-kar4.vercel.app/indotalisman.html); Chant Spheres (https://ratu-oracle-kar4.vercel.app/chant-spheres.html); shop (https://ratu-oracle-kar4.vercel.app/shop.html); contact Ratu Oracle (mailto:agi.godmode@gmail.com)
+SEO_GROWTH_PACK_END

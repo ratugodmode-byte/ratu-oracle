@@ -40,7 +40,28 @@ Allow: /
 User-agent: Google-Extended
 Allow: /
 
+User-agent: Meta-ExternalAgent
+Allow: /
+
+User-agent: Amazonbot
+Allow: /
+
+User-agent: Bytespider
+Allow: /
+
 User-agent: CCBot
+Allow: /
+
+User-agent: Common Crawl
+Allow: /
+
+User-agent: Pinterestbot
+Allow: /
+
+User-agent: facebookexternalhit
+Allow: /
+
+User-agent: ia_archiver
 Allow: /
 
 Sitemap: https://ratu-oracle-kar4.vercel.app/sitemap.xml
